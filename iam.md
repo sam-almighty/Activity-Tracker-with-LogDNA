@@ -88,7 +88,7 @@ Use the following table to identify the platform role that you can grant a user 
 | `Delete a service instance`                                             | Administrator </br>Editor                            | 
 | `Create a service ID`                                                   | Administrator </br>Editor                            |
 | `View details of a service instance`                                    | Administrator </br>Editor </br>Operator </br>Viewer  | 
-| `View service instances in the Observability Logging dashboard`         | Administrator </br>Editor </br>Operator </br>Viewer  | 
+| `View service instances in the Observability Activity Tracker dashboard`   | Administrator </br>Editor </br>Operator </br>Viewer  | 
 {: caption="Table 1. IAM user roles and actions" caption-side="top"}
 
 
@@ -100,17 +100,13 @@ Use the following table to identify the service roles that you can grant a user 
 
 | Actions                                                                 | {{site.data.keyword.cloud_notm}} Service Roles     | 
 |-------------------------------------------------------------------------|------------------------------------------------------|
-| `Manage ingestion keys`                                                 | Manager                                              |
-| `Manage service keys`                                                   | Manager                                              |
-| `Archive logs`                                                          | Manager                                              |
-| `Define exclusion rules`                                                | Manager                                              |
+| `Archive events`                                                        | Manager                                              |
 | `Configure alerts`                                                      | Manager </br>Reader                                  | 
 | `Filter and search data`                                                | Manager </br>Reader                                  |
 | `Create views`                                                          | Manager </br>Reader                                  |
-| `Manage views`                                                          | Manager </br>Reader                                  |
-| `Export log data`                                                       | Manager </br>Reader                                  |
+| `Export events`                                                         | Manager </br>Reader                                  |
 | `Configure user preferences in the LogDNA web UI`                       | Manager </br>Reader                                  |
-| `View logs through the LogDNA web UI`                                   | Manager </br>Reader                                  | 
+| `View events through the LogDNA web UI`                                 | Manager </br>Reader                                  | 
 {: caption="Table 2. IAM user roles and actions" caption-side="top"}
 
 
