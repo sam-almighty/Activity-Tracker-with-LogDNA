@@ -171,53 +171,24 @@ Complete the following steps to add the user to the access group:
 
 
 
-## Step 3. Learn about the structure of an event
+## Step 3. Generate {{site.data.keyword.at_full_notm}} events
 {: #gs_step3}
 
-Events comply with the **Cloud Auditing Data Federation (CADF) standard**. The CADF standard defines a full event model that includes the information that is needed to certify, manage, and audit security of applications in cloud environments.
-
-The CADF event model includes the following components:
-
-| Component | Description |
-|------------|----------------------------|
-| `Action`   | The action is the operation or activity that an initiator performs, attempts to perform, or is waiting to complete. |
-| `Initiator`| The initiator is the resource that makes an API call and generates a CADF event. The event that is triggered depends on the action that is requested by the API call. |
-| `Observer` | The observer is the resource that creates and stores a CADF record from information available in a CADF event. |
-| `Outcome`  | The outcome is the status of the action against the target. |
-| `Target`   | The target is the resource against which the action is performed, attempted to perform, or is pending to complete. |
-{: caption="Table 2. Components that are available in a CADF event model" caption-side="top"} 
-
-[Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-event#event).
+Complete the following steps to generate an event when you create an access group:
 
 
-## Step 4. Generate {{site.data.keyword.at_full_notm}} events
+1. From the [{{site.data.keyword.cloud_notm}} catalog ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog){:new_window}, select **Manage** &gt; **Security and Identity**.
+
+2. Select **Access groups**.
+
+3. Select **Create**. Then, enter a name for the access group.
+
+4. Click **Create**.
+
+An access group is created.
+
+## Step 4. Launch the web UI 
 {: #gs_step4}
-
-Complete the following steps to generate an event when an instance of the {{site.data.keyword.cloudcerts_short}} service is provisioned:
-
-
-1. From the [{{site.data.keyword.cloud_notm}} catalog ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog){:new_window}, select the category **Security and Identity**.
-
-2. Select the {{site.data.keyword.cloudcerts_short}} service.
-
-3. Enter a name for the service instance.
-
-4. Select the region where you plan to provision the instance.
-
-5. Select a resource group. 
-
-    By default, the **Default** resource group is set.
-
-    **Note:** If you are not able to select a resource group, check that you have editing permissions on the resource group where you want to provision the instance.
-
-6. Select the `Free` service plan. 
-
-7. Click **Create**.
-
-An instance of the {{site.data.keyword.cloudcerts_short}} service is created.
-
-## Step 5. Launch the web UI 
-{: #gs_step5}
 
 Complete the following steps to launch the web UI:
 
@@ -236,8 +207,10 @@ Complete the following steps to launch the web UI:
 The web UI opens. 
 
 
-## Step 6. Viewing events
-{: #gs_step6}
+
+
+## Step 5. Viewing events
+{: #gs_step5}
 
 
 The {{site.data.keyword.at_full_notm}} service captures activity data that is related to API calls and other actions that are made to selected cloud services in the {{site.data.keyword.cloud_notm}}. 
@@ -266,6 +239,25 @@ When you finish exploring the event, click **Close** to close the line.
 [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md).
 
 
+
+
+## Step 6. Learn about the structure of an event
+{: #gs_step6}
+
+Events comply with the **Cloud Auditing Data Federation (CADF) standard**. The CADF standard defines a full event model that includes the information that is needed to certify, manage, and audit security of applications in cloud environments.
+
+The CADF event model includes the following components:
+
+| Component | Description |
+|------------|----------------------------|
+| `Action`   | The action is the operation or activity that an initiator performs, attempts to perform, or is waiting to complete. |
+| `Initiator`| The initiator is the resource that makes an API call and generates a CADF event. The event that is triggered depends on the action that is requested by the API call. |
+| `Observer` | The observer is the resource that creates and stores a CADF record from information available in a CADF event. |
+| `Outcome`  | The outcome is the status of the action against the target. |
+| `Target`   | The target is the resource against which the action is performed, attempted to perform, or is pending to complete. |
+{: caption="Table 2. Components that are available in a CADF event model" caption-side="top"} 
+
+[Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-event#event).
 
 ## Next steps
 {: #gs_next_steps}
