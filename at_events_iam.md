@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-15"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, IAM events
 
@@ -54,6 +54,17 @@ The following table lists the actions that generate an event:
 {: caption="Table 1. Manage access groups actions" caption-side="top"} 
 
 
+## Managing policies events
+{: #at_events_iam_policies}
+
+The following table lists the actions that generate an event:
+
+| Action | Description |
+|----------|---------|
+| `iam-am.policy.create` | An event is generated when an initiator adds a policy to a user or access group. |
+| `iam-am.policy.delete` | An event is generated when an initiator modifies permissions to a policy of a user or access group.|
+| `iam-am.policy.update` | An event is generated when an initiator deletes a policy that is assigned to a user or access group. |
+{: caption="Table 5. Managing policy actions" caption-side="top"} 
 
 
 ## Viewing events
