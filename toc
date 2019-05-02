@@ -9,6 +9,18 @@ IBM Cloud Activity Tracker with LogDNA
     event.md
     cloud_services.md
     iam.md
+        
+    {: .topicgroup}
+    Internal adopters
+        ibm-internal-only/overview.md
+        ibm-internal-only/event_definition.md
+        ibm-internal-only/enable-AT.md
+        ibm-internal-only/enable-ST.md
+        ibm-internal-only/partner_news.md
+        ibm-internal-only/supertenant.md
+        ibm-internal-only/kube.md
+        ibm-internal-only/best_practices.md
+        ibm-internal-only/documentation.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -32,9 +44,9 @@ IBM Cloud Activity Tracker with LogDNA
 
     {: .topicgroup}
     Events
+        at_events_iam.md
         at_events_acc_mgt.md
         at_events_rc.md
-        at_events_iam.md
 
     [LogDNA Product Page](https://logdna.com/)
     [LogDNA Blog](https://blog.logdna.com/)
