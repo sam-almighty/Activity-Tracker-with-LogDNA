@@ -9,6 +9,7 @@ IBM Cloud Activity Tracker with LogDNA
     event.md
     cloud_services.md
     iam.md
+    {: .navgroup-end}
 
     {: .navgroup id="howto"}
     provision.md
