@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-30"
+lastupdated: "2019-05-21"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, IAM events
 
@@ -28,12 +28,13 @@ subcollection: logdnaat
 As a security officer, auditor, or manager, you can use the {{site.data.keyword.at_full_notm}} service to track how users and applications interact with the {{site.data.keyword.iamlong}} (IAM) service in {{site.data.keyword.cloud_notm}}. 
 {:shortdesc}
 
-The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud_notm}}. To get started monitoring your user's actions, see [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started#getting-started). 
+IAM enables you to securely authenticate users for both platform services and control access to resources consistently across {{site.data.keyword.cloud_notm}}. [Learn more](/docs/iam?topic=iam-iamoverview).
 
-An initiator can be a user, a service, or an application.
-{: tip}
 
-## Managing access groups events
+The {{site.data.keyword.at_full_notm}} service records user-initiated activities that change the state of a service in {{site.data.keyword.cloud_notm}}. To get started monitoring your user's actions, see [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started#getting-started). An initiator can be a user, a service, or an application.
+
+
+## Access groups events
 {: #at_events_iam_access}
 
 The following table lists the actions that generate an event:
@@ -55,7 +56,7 @@ The following table lists the actions that generate an event:
 
 
 
-## Managing policies events
+## Policy events
 {: #at_events_iam_policies}
 
 The following table lists the actions that generate an event:
@@ -68,18 +69,63 @@ The following table lists the actions that generate an event:
 {: caption="Table 5. Managing policy actions" caption-side="top"} 
 
 
+
+## Service ID events
+{: #at_events_iam_serviceids}
+
+The following table lists the actions that generate an event:
+
+| Action | Description |
+|----------|---------|
+| `iam-identity.account-serviceid.create` | An event is generated when an initiator creates a service ID.  | 
+| `iam-identity.account-serviceid.update` | An event is generated when an initiator renames a service ID or modifies its description. | 
+| `iam-identity.account-serviceid.delete` | An event is generated when an initiator deletes a service ID. | 
+{: caption="Table 2. Working with service IDs actions" caption-side="top"} 
+
+
+## API key events
+{: #at_events_iam_apikeys}
+
+The following table lists the actions that generate an event:
+
+| Action | Description |
+|----------|---------|
+| `iam-identity.user-apikey.create`      | An event is generated when an initiator creates an API key. | 
+| `iam-identity.user-apikey.update`      | An event is generated when an initiator renames an API key or modifies its description. |  
+| `iam-identity.user-apikey.delete`      | An event is generated when an initiator deletes an API key. |  
+| `iam-identity.serviceid-apikey.create` | An event is generated when an initiator creates an API key for a service ID. |  
+| `iam-identity.serviceid-apikey.delete` | An event is generated when an initiator deletes an API key for a service ID. |  
+{: caption="Table 3. Working with API keys actions" caption-side="top"} 
+
+
+## Login events
+{: #at_events_iam_login}
+
+The following table lists the actions that generate an event:
+
+| Action                                   | Description |
+|------------------------------------------|---------|
+| `iam-identity.user-apikey.login`         | An event is generated when a user logs in to the {{site.data.keyword.cloud_notm}} by using an API key. |  
+| `iam-identity.serviceid-apikey.login`    | An event is generated when an initiator logs in to the {{site.data.keyword.cloud_notm}} by using an API key that is associated with a service ID. |  
+| `iam-identity.user-identitycookie.login` | This is an event that is generated when an initiator requests an identity cookie to run an action. |
+| `iam-identity.user-refreshtoken.login`   | This is an event that is generated when the initiator logs in to the IBM Cloud , or when an initiator that has already logged in to the IBM Cloud requests a new refresh token to run an action. |
+{: caption="Table 4. User login actions" caption-side="top"} 
+
+
 ## Viewing events
 {: #at_events_iam_ui}
 
-Events are available in the **US-South** region. 
-
-To view these events, you must [provision an instance](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-provision#provision) of the {{site.data.keyword.at_full_notm}} service in the **US-South** region. Then, you must [open the {{site.data.keyword.at_full_notm}} UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2). 
+Events are available in the **Frankfurt (eu-de)** region. To view these events, you must [provision an instance](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-provision#provision) of the {{site.data.keyword.at_full_notm}} service in the **Frankfurt (eu-de)** region. Then, you must [open the {{site.data.keyword.at_full_notm}} UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2). 
 
 
 ## Analyzing events
 {: #at_events_iam_analyze}
 
-**Action: iam-groups.group.delete**
+
+### Delete an access group
+{: #an_del_ag}
+
+When you delete an access group, the event that is triggered has an `action` field set to `iam-groups.group.delete`.
 
 When an access group is deleted, consider the following information:
 * Other actions are automatically triggered to clean up other resources that are associated with the group. Some actions that are triggered report events that are related to deletion of members in an access group, deletion of policies, and deletion of dynamic rules. 
@@ -95,13 +141,4 @@ Apr 29 14:11:24 IAM Access Groups: delete rules -failure
 Apr 29 14:11:24 IAM Access Management: delete policy -failure
 ```
 {: screen}
-
-
-
-
-
-
-
-
-
 
