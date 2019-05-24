@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, export
 
@@ -25,37 +25,26 @@ subcollection: logdnaat
 # Exporting events
 {: #export}
 
-You can export data in JSONL format from an {{site.data.keyword.at_full_notm}} instance into a local file. You can export logs programmatically or from the IBM Log Analysis Web UI. 
+You can export data in JSONL format from an {{site.data.keyword.at_full_notm}} instance into a local file. You can export logs programmatically by using the LogDNA REST API or through the web UI. 
 {:shortdesc}
-
-Consider the following information when you export log data:
-* You export a set of event entries. To define the set of data that you want to export, you can apply filter and searches. You can also specify the time range. 
-* From the web UI, when you export events, you get an email that is sent to your email address, with a link to a compressed file that includes the data. To get the data, you must click the link and download the compressed file.
-* When you export events programmatically, you can choose to send an email or to stream events in to your terminal.
-* The compressed file that contains the data that you want to export is available for a maximum of 48 hours. 
-* The maximum number of lines that you can export is 10,000.
-
 
 
 ## Prerequisites
 {: #export_prereqs}
 
-Before you start, check that your user ID has permissions to launch the web UI and view events. Then, [go to the web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+* [Learn more about exporting events](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_export).
 
-**Note:** You must be an administrator of the {{site.data.keyword.at_full_notm}} service, an administrator of the {{site.data.keyword.at_full_notm}} instance, or have account IAM permissions to manage policies.
+* **You must have a paid service plan** for the {{site.data.keyword.at_full_notm}} service. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
 
-The following table lists the minimum policies that a user must have to be able to launch the {{site.data.keyword.at_full_notm}} web UI, and view, search, and filter events:
+* Check that your user ID has permissions to launch the web UI and view events. The following table lists the minimum roles that a user must have to be able to launch the {{site.data.keyword.at_full_notm}} web UI, and view, search, and filter events:
 
 | Role                      | Permission granted            |
 |---------------------------|-------------------------------|  
 | Platform role: `Viewer`     | Allows the user to view the list of service instances in the Observability dashboard. |
 | Service role: `Reader`      | Allows the user to launch the web UI and view events in the web UI.  |
-{: caption="Table 1. IAM policies" caption-side="top"} 
+{: caption="Table 1. IAM roles" caption-side="top"} 
 
-For more information on how to configure these policies for a user, see [Granting user permissions to a user or service ID](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-**You must have a paid service plan** for the {{site.data.keyword.at_full_notm}} service. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
-
+For more information on how to configure policies for a user, see [Granting user permissions to a user or service ID](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
 
 ## Step 1. Go to the web UI
@@ -99,7 +88,7 @@ Complete the following steps to export events programmatically:
 
     **Note:** You must have **manager** role for the {{site.data.keyword.at_full_notm}} instance or service to complete this step.
 
-    1. Launch the {{site.data.keyword.at_full_notm}} web UI. For more information, see [Go to to the {{site.data.keyword.at_full_notm}} web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
+    1. [Launch the {{site.data.keyword.at_full_notm}} web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
 
     2. Select the **Configuration** icon ![Configuration icon](images/admin.png). Then, select **Organization**. 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,71 +23,84 @@ subcollection: logdnaat
 
 
 # Viewing events
-{: #view_events.md}
+{: #view_events}
 
-After you provision an instance of the {{site.data.keyword.at_full_notm}} service in the {{site.data.keyword.cloud_notm}}, you can view events through the {{site.data.keyword.at_full_notm}} web UI.
+After you provision an instance of the {{site.data.keyword.at_full_notm}} service in the {{site.data.keyword.cloud_notm}}, you can view events through the {{site.data.keyword.at_full_notm}} web UI. You view events in your local time.
 {:shortdesc}
 
 
-## Prerequisites
-{: #view_events_prereqs}
-
-Before you start, check that your user ID has permissions to launch the web UI and view events. 
-
-**Note:** You must be an administrator of the {{site.data.keyword.at_full_notm}} service, an administrator of the {{site.data.keyword.at_full_notm}} instance, or have account IAM permissions to manage policies.
-
-The following table lists the minimum policies that a user must have to be able to launch the {{site.data.keyword.at_full_notm}} web UI, and view events:
-
-| Role                      | Permission granted            |
-|---------------------------|-------------------------------|  
-| Platform role: `Viewer`     | Allows the user to view the list of service instances in the Observability dashboard. |
-| Service role: `Reader`      | Allows the user to launch the web UI and view events in the web UI.  |
-{: caption="Table 1. IAM policies" caption-side="top"} 
-
-For more information on how to configure these policies for a user, see [Granting user permissions to a user or service ID](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-
-## View events through the web UI
+## View events
 {: #view_events_step1}
 
-To launch the {{site.data.keyword.at_full_notm}} web UI, complete the following steps:
+Complete the following steps to view events:
 
-1. [Log in to your {{site.data.keyword.cloud_notm}} account ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/login){:new_window}.
+1. Check that your user ID has permissions to launch the web UI and view events. 
 
-	After you log in with your user ID and password, the {{site.data.keyword.cloud_notm}} *Dashboard* opens.
+    The following table lists the minimum roles that a user must have to be able to launch the {{site.data.keyword.at_full_notm}} web UI, and view, search, and filter events:
 
-2. Go to the menu icon ![menu icon](../../icons/icon_hamburger.svg), and select **Observability**. 
+    <table>
+      <caption>Table 1. IAM roles</caption>
+      <tr>
+        <th>Role</th>
+        <th>Permission granted</th>
+      </tr>
+      <tr>
+        <td>Platform role: `Viewer`</td>
+        <td>Allows the user to view the list of service instances in the *Observability* dashboard.</td>
+      </tr>
+      <tr>
+        <td>Service role: `Reader`</td>
+        <td>Allows the user to launch the web UI, and view, search, and filter events in the web UI.</td>
+      </tr>
+    </table>
 
-3. Select **Activity Tracker**. 
+    For more information on how to configure policies for a user, see [Granting user permissions to a user or service ID](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
-    The list of {{site.data.keyword.at_full_notm}} instances is displayed.
+2. [Go to the web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
 
-    **Note:** There is 1 instance per region.
+3. Click the **Views** icon ![Configuration icon](images/views.png).
 
-4. Select the instance in the region where you want to view events. Then, click **View LogDNA**.
+4. Select **Everything** to see all the events, or a view. 
 
-The {{site.data.keyword.at_full_notm}} web UI opens and shows the **Everything** view. Through this view, you can see the events in your account for the region that you have selected.
-
-**Note:** If you have a `Lite` plan, and you cannot see the events that you are looking for, you might need to upgrade to a paid plan to enable search capabilities on older events. The number of days that events are available for search depends on the plan that you choose. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan).
+You can view events through the view that you have selected.
 
 
-## Customize your default view
+
+## View a subset of the events by applying a search query
 {: #view_events_step2}
 
-In the **USER PREFERENCES** section, you can modify the order of the data fields that are displayed per line.
+You can select the events that are displayed through a view by applying a search query. You can save that view for reuse later. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2).
 
-Complete the following steps to modify the format of an event line:
+ 
 
-1. In the web UI, click the **Configuration** icon ![Configuration icon](images/admin.png "Admin icon").
-2. Select **USER PREFERENCES**. A new window opens.
-3. Select **Log Format**.
-4. Modify the *Line Format* section to match your requirements. Drag boxes.
 
+## View a subset of the events by applying a timeframe
+{: #view_events_step3}
+
+You can select the events that are displayed through a view by applying a timeframe.
+
+You can apply a timestamp by specifying an absolute time, a relative time, or a time range.
+
+Complete the following steps to jump to a specific time:
+1. [Go to the web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+2. Click the **Views** icon ![Configuration icon](images/views.png).
+3. Select **Everything** or a view.
+4. Enter a time query. Choose any of the following options:
+
+    * Enter an abosute time to jump to a point in time in your events such as `May 20 7:00pm`.
+    
+    * Enter a relative time such as `2 days ago`, `today at 12am`, or `an hour ago`.
+
+    * Enter a time range such as `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM`, or `May 20 10am to May 22 10am`. Make sure to include `to` to separate the initial timestamp from the end timestamp.
+
+5. Click **ENTER**.
+
+    You might get the error message: `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.` You might get this error when the timeframe that you have specified does not have any events available to show. Change the time query, and retry.
 
 
 
 ## View an event in context
-{: #view_events_step3}
+{: #view_events_step4}
 
 At any time, you can view each event line in context.
 
@@ -106,9 +119,8 @@ When you finish exploring the event, click **Close** to close the line.
 
 
 
-
 ## Copy an event to the clipboard
-{: #view_events_step4}
+{: #view_events_step5}
 
 
 Complete the following steps to copy an event to the clipboard: 
