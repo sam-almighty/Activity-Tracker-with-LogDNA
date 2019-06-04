@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-05-22"
+lastupdated: "2019-06-06"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, getting started
 
@@ -37,7 +37,7 @@ Use the {{site.data.keyword.at_full}} service to monitor the activity of your {{
 
 
 ## About {{site.data.keyword.at_full}}
-{: #ov}
+{: #gs_ov}
 
 Compliance with internal policies and industry regulations is a key requirement in any organization's strategy, regardless of where applications run: on-premises, in a hybrid cloud, or in a public cloud. The {{site.data.keyword.at_full_notm}} service provides the framework and functionality to monitor API calls to services on the {{site.data.keyword.cloud_notm}} and produces the evidence to comply with corporate policies and market industry-specific regulations.
 
@@ -124,7 +124,7 @@ In this tutorial, you will learn how to grant a user management permissions to w
 
 
 ### 1. Create an access group
-{: #gs_step2_step1}
+{: #gs_step2_1}
 
 Complete the following steps to create an access group:
 1. From the menu bar, click **Manage** &gt; **Access (IAM)**, and select **Access Groups**.
@@ -132,7 +132,7 @@ Complete the following steps to create an access group:
 3. Enter a name and optional description for your group, and click **Create**.
 
 ### 2. Add permissions to manage events
-{: #gs_step2_step2}
+{: #gs_step2_2}
 
 After you set up your group, you must assign a common access policy to the group. Any policy that you set for an access group applies to all entities, users and service IDs, within the group.
 
@@ -167,7 +167,7 @@ Complete the following steps to assign a policy through the UI:
 
 
 ### 3. Add the user to the group
-{: #gs_step2_step3}
+{: #gs_step2_3}
 
 Complete the following steps to add the user to the access group:
 1. Click **Add users** on the **Users** tab.
@@ -222,7 +222,7 @@ Complete the following steps to launch the web UI:
 The web UI opens. 
 
 
-## Step 5. Viewing events
+## Step 5. View events
 {: #gs_step5}
 
 

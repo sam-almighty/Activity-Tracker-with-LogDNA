@@ -33,10 +33,11 @@ Use the {{site.data.keyword.at_full}} service to monitor user-initiated activiti
 ## Platform core integrated services
 {: #platform_core_integrated}
 
+
 Core platform services generate events that you can view through the **Frankfurt (eu-de)** {{site.data.keyword.at_full_notm}} web UI. To view these events, you must [provision an instance](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-provision#provision) of the {{site.data.keyword.at_full_notm}} service in the **Frankfurt (eu-de)** region.
 {: note}
 
-The following table lists core platform actions that send events to {{site.data.keyword.at_full_notm}} by the ***Reasource controller service**:
+The following table lists core platform actions that send events to {{site.data.keyword.at_full_notm}}:
 
 | Action                           | Description | {{site.data.keyword.at_full_notm}} events |
 |----------------------------------|-------------|-------------------------------------------|
@@ -47,7 +48,11 @@ The following table lists core platform actions that send events to {{site.data.
 | [Working with service aliases](/docs/resources?topic=resources-connect_app#what_is_alias) | An alias is a connection between your IAM-managed service within a resource group and an application within an org or a space. | [Events for managing aliases that are associated to a service instance](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_rc#rc_alias) | 
 | [Working with service credentials](/docs/resources?topic=resources-service_credentials#service_credentials) | A service credential provides the necessary information to connect an application to a service instance. | [Events for managing service credentials that are associated to a service instance](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_rc#rc_keys) | 
 | [Binding a service instance to an app](/docs/resources?topic=resources-s2s_binding#s2s_binding) | You can generate a Cloud Foundry (CF) instance, or alias, of a service instance with the same name in a space.  | [Events for binding and unbinding a service instance to an app](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_rc#rc_bind) |
+| [Managing tags](/docs/resources?topic=resources-tag) | A tag is a label that you assign to a resource for easy filtering of resources in your resource list. | [Events for managing tags](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_acc_mgt#at_events_acc_mgt_resources) |
 {: caption="List of core platform actions" caption-side="top"} 
+
+
+
 
 
 
@@ -59,13 +64,13 @@ Integrated security services generate events that you can view through the **Fra
 
 The following table lists core security platform actions that send events to {{site.data.keyword.at_full_notm}}:
 
-| Service               | Actions                                                     | Description | {{site.data.keyword.at_full_notm}} events |
-|-----------------------|-------------------------------------------------------------|-------------|-------------|
-| `IAM Access Groups`     | [Managing access groups](/docs/iam?topic=iam-groups#groups) | You can define access groups to organize a set of users and service IDs into a single entity that makes it easy for you to assign permissions. | [Events that are generated when you manage access groups](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_access) |
-| `IAM Access management` | [Managing policies](/docs/iam?topic=iam-userroles#userroles) | You can use IAM to manage users and roles across the {{site.data.keyword.cloud_notm}} Platform and Infrastructure services. | [Events that are generated when you manage IAM policies](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_policies) |
-| `IAM Identity service`  | [Log in to the {{site.data.keyword.cloud_notm}}](/docs/iam?topic=iam-iamoverview#iamoverview)| You can log into the {{site.data.keyword.cloud_notm}} by using a password, an API key, an authorization code, or a passcode. As a federated user, you can log in from the command-line interface (CLI) by using either a one-time passcode or an API key. | [Events that are generated when a user or app logs in to the {{site.data.keyword.cloud_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_login) |
-| `IAM Identity service`  | [Managing platform API keys](/docs/iam?topic=iam-manapikey#platform-api-keys) | You can define platform API keys in the {{site.data.keyword.IBM_notm}} Cloud that are associated with a user or a service ID. | [Events that are generated when you manage Platform API keys](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_apikeys) |
-| `IAM Identity service`  | [Managing service IDs](/docs/iam?topic=iam-serviceids#serviceids) | You can define service IDs at the account level in the {{site.data.keyword.IBM_notm}} Cloud. | [Events that are generated when you manage service IDs](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_serviceids) |
+| Actions                                                     | Description | {{site.data.keyword.at_full_notm}} events |
+|-------------------------------------------------------------|-------------|-------------------------------------------|
+| [Managing access groups](/docs/iam?topic=iam-groups#groups) | You can define access groups to organize a set of users and service IDs into a single entity that makes it easy for you to assign permissions. | [Events that are generated when you manage access groups](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_access) |
+| [Managing policies](/docs/iam?topic=iam-userroles#userroles) | You can use IAM to manage users and roles across the {{site.data.keyword.cloud_notm}} Platform and Infrastructure services. | [Events that are generated when you manage IAM policies](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_policies) |
+| [Log in to the {{site.data.keyword.cloud_notm}}](/docs/iam?topic=iam-iamoverview#iamoverview)| You can log into the {{site.data.keyword.cloud_notm}} by using a password, an API key, an authorization code, or a passcode. As a federated user, you can log in from the command-line interface (CLI) by using either a one-time passcode or an API key. | [Events that are generated when a user or app logs in to the {{site.data.keyword.cloud_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_login) |
+| [Managing platform API keys](/docs/iam?topic=iam-manapikey#platform-api-keys) | You can define platform API keys in the {{site.data.keyword.IBM_notm}} Cloud that are associated with a user or a service ID. | [Events that are generated when you manage Platform API keys](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_apikeys) |
+| [Managing service IDs](/docs/iam?topic=iam-serviceids#serviceids) | You can define service IDs at the account level in the {{site.data.keyword.IBM_notm}} Cloud. | [Events that are generated when you manage service IDs](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-at_events_iam#at_events_iam_serviceids) |
 {: caption="List of core security platform services" caption-side="top"} 
 
 
