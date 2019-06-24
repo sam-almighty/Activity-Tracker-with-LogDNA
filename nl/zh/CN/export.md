@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, export
 
@@ -25,37 +25,26 @@ subcollection: logdnaat
 # 导出事件
 {: #export}
 
-您可以将数据以 JSONL 格式从 {{site.data.keyword.at_full_notm}} 实例导出到本地文件。您可以通过编程方式或从 IBM Log Analysis Web UI 导出日志。
+您可以将数据以 JSONL 格式从 {{site.data.keyword.at_full_notm}} 实例导出到本地文件。您可以使用 LogDNA REST API 或通过 Web UI 以编程方式导出日志。
 {:shortdesc}
-
-导出日志数据时，请考虑以下信息：
-* 导出一组事件条目。要定义希望导出的数据集，可以应用过滤器和搜索。还可以指定时间范围。 
-* 在 Web UI 中导出事件时，您会收到一封发送到您电子邮件地址的电子邮件，其中附带包含相应数据的压缩文件的链接。要获取数据，必须单击链接并下载压缩文件。
-* 以编程方式导出事件时，可以选择发送电子邮件或将事件流式传输到终端。
-* 包含要导出的数据的压缩文件最多在 48 小时内可用。 
-* 可以导出的最大行数为 10,000。
-
 
 
 ## 先决条件
 {: #export_prereqs}
 
-开始之前，请检查用户标识是否有权启动 Web UI 和查看事件。然后，[转至 Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
+* [了解有关导出事件的更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_export)。
 
-**注：**您必须是 {{site.data.keyword.at_full_notm}} 服务的管理员或 {{site.data.keyword.at_full_notm}} 实例的管理员，或者具有管理策略的帐户 IAM 许可权。
+* **您必须具有 {{site.data.keyword.at_full_notm}} 服务的付费服务套餐**。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
 
-下表列出了用户要能够启动 {{site.data.keyword.at_full_notm}} Web UI 以及查看、搜索和过滤事件而必须具有的最基本策略：
+* 检查用户标识是否有权启动 Web UI 和查看事件。下表列出了用户要能够启动 {{site.data.keyword.at_full_notm}} Web UI 以及查看、搜索和过滤事件而必须具有的最基本角色：
 
 | 角色                      | 授予的许可权            |
 |---------------------------|-------------------------------|  
 | 平台角色：`查看者`     | 允许用户在“可观察性”仪表板中查看服务实例的列表。|
 | 服务角色：`读取者`     | 允许用户启动 Web UI 并在 Web UI 中查看事件。|
-{: caption="表 1. IAM 策略" caption-side="top"} 
+{: caption="表 1. IAM 角色" caption-side="top"} 
 
-有关如何为用户配置这些策略的更多信息，请参阅[授予用户对用户或服务标识的许可权](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
-
-**您必须具有 {{site.data.keyword.at_full_notm}} 服务的付费服务套餐**。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
-
+有关如何为用户配置策略的更多信息，请参阅[授予用户对用户或服务标识的许可权](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
 
 
 ## 步骤 1. 转至 Web UI
@@ -67,7 +56,7 @@ subcollection: logdnaat
 ## 步骤 2. 创建视图
 {: #export_step2}
 
-[创建视图](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md)。
+[创建视图](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views)。
 
 
 ## 步骤 3. 导出数据
@@ -99,7 +88,7 @@ subcollection: logdnaat
 
     **注:**您必须具有对 {{site.data.keyword.at_full_notm}} 实例或服务的**管理者**角色才能完成此步骤。
 
-    1. 启动 {{site.data.keyword.at_full_notm}} Web UI。有关更多信息，请参阅[转至 {{site.data.keyword.at_full_notm}} Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2)。
+    1. [启动 {{site.data.keyword.at_full_notm}} Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2)。
 
     2. 选择**配置**图标 ![“配置”图标](images/admin.png)。然后，选择 **组织**。 
 
@@ -107,9 +96,7 @@ subcollection: logdnaat
 
         您可以查看创建的服务密钥。 
 
-    4. 单击**生成服务密钥**。
-
-        新的密钥会添加到列表中。复制此密钥。
+    4. 单击**生成服务密钥**。新的密钥会添加到列表中。复制此密钥。
 
 2. 导出事件。运行以下 cURL 命令：
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, export
 
@@ -25,37 +25,26 @@ subcollection: logdnaat
 # Exportando eventos
 {: #export}
 
-É possível exportar dados no formato JSONL de uma instância do {{site.data.keyword.at_full_notm}} para um arquivo local. É possível exportar logs programaticamente ou por meio da IU da web do IBM Log Analysis. 
+É possível exportar dados no formato JSONL de uma instância do {{site.data.keyword.at_full_notm}} para um arquivo local. É possível exportar logs programaticamente usando a API de REST do LogDNA ou meio da IU da web.
 {:shortdesc}
-
-Considere as informações a seguir ao exportar dados do log:
-* Você exporta um conjunto de entradas de eventos. Para definir o conjunto de dados que você deseja exportar, é possível aplicar filtros e procuras. Também é possível especificar o intervalo de tempo. 
-* Na UI da web, ao exportar eventos, você obterá um e-mail que é enviado para seu endereço de e-mail, com um link para um arquivo compactado que inclui os dados. Para obter os dados, deve-se clicar no link e fazer download do arquivo compactado.
-* Quando você exporta eventos programaticamente, é possível optar por enviar um e-mail ou transmitir eventos para seu terminal.
-* O arquivo compactado que contém os dados que você deseja exportar está disponível por um máximo de 48 horas. 
-* O número máximo de linhas que podem ser exportadas é 10.000.
-
 
 
 ## Pré-requisitos
 {: #export_prereqs}
 
-Antes de iniciar, verifique se seu ID do usuário tem permissões para ativar a UI da web e visualizar eventos. Em seguida, [acesse a UI da web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+* [Saiba mais sobre a exportação de eventos](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_export).
 
-**Nota:** deve-se ser um administrador do serviço {{site.data.keyword.at_full_notm}}, um administrador da instância do {{site.data.keyword.at_full_notm}} ou ter permissões de conta do IAM para gerenciar as políticas.
+* **Deve-se ter um plano de serviço pago** para o serviço do {{site.data.keyword.at_full_notm}}. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
 
-A tabela a seguir lista as políticas mínimas que um usuário deve ter para poder ativar a UI da web do {{site.data.keyword.at_full_notm}} e visualizar, procurar e filtrar eventos:
+* Verifique se seu ID de usuário tem permissões para iniciar a IU da web e visualizar eventos. A tabela a seguir lista as funções mínimas necessárias para que um usuário possa iniciar a IU da web do {{site.data.keyword.at_full_notm}}, visualizar, procurar e filtrar eventos:
 
 | Atribuição                      | Permissão concedida            |
 |---------------------------|-------------------------------|  
 | Função de plataforma: `Viewer`     | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
-| Função de serviço: `Reader`        | Permite que o usuário ative a UI da web e visualize eventos na UI da web. |
-{: caption="Tabela 1. Políticas do IAM" caption-side="top"} 
+| Função de serviço: `Reader`      | Permite que o usuário ative a UI da web e visualize eventos na UI da web.  |
+{: caption="Tabela 1. Funções do IAM" caption-side="top"} 
 
-Para obter mais informações sobre como configurar essas políticas para um usuário, consulte [Concedendo permissões de usuário a um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-**Deve-se ter um plano de serviço pago** para o serviço do {{site.data.keyword.at_full_notm}}. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
-
+Para obter mais informações sobre como configurar políticas para um usuário, consulte [Concedendo permissões de usuário para um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
 
 ## Etapa 1. Acessar a UI da web
@@ -67,7 +56,7 @@ Para obter mais informações sobre como configurar essas políticas para um usu
 ## Etapa 2. Criar uma visualização
 {: #export_step2}
 
-[Criar uma visualização](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md).
+[Criar uma visualização](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views).
 
 
 ## Etapa 3. Exportar dados
@@ -99,7 +88,7 @@ Conclua as etapas a seguir para exportar eventos programaticamente:
 
     **Nota:** deve-se ter a função de **gerenciador** para a instância ou o serviço do {{site.data.keyword.at_full_notm}} para concluir essa etapa.
 
-    1. Ative a IU da web do  {{site.data.keyword.at_full_notm}} . Para obter mais informações, consulte [Acessar a UI da web do {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
+    1. [Ative a IU da web do {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
 
     2. Selecione o ícone  ** Configuração **   ![Configuration icon](images/admin.png). Em seguida, selecione  ** Organização **. 
 
@@ -107,9 +96,7 @@ Conclua as etapas a seguir para exportar eventos programaticamente:
 
         É possível ver as chaves de serviço que foram criadas. 
 
-    4. Clique em  ** Gerar chave de serviço **.
-
-        Uma nova chave é incluída na lista. Copie essa chave.
+    4. Clique em  ** Gerar chave de serviço **. Uma nova chave é incluída na lista. Copie essa chave.
 
 2. Exportar eventos. Execute o comando cURL a seguir:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -25,37 +25,34 @@ subcollection: logdnaat
 # IBM Cloud Object Storage에 이벤트 아카이브
 {: #archiving}
 
-{{site.data.keyword.at_full_notm}} 인스턴스의 이벤트를 {{site.data.keyword.cos_full_notm}}(COS) 인스턴스의 버킷으로 아카이브할 수 있습니다.
+{{site.data.keyword.at_full_notm}} 인스턴스의 이벤트를 {{site.data.keyword.cos_full_notm}}(COS) 인스턴스의 버킷으로 아카이브할 수 있습니다. 
 {:shortdesc}
 
-아카이브를 구성하려면 {{site.data.keyword.at_full_notm}} 서비스에 대해 플랫폼 역할이 **뷰어**이고 서비스 역할이 **관리자**인 IAM 정책이 있어야 합니다.
-
-{{site.data.keyword.at_full_notm}} 인스턴스의 이벤트를 {{site.data.keyword.cos_full_notm}}(COS) 인스턴스의 버킷으로 아카이브합니다. 각 {{site.data.keyword.at_full_notm}} 인스턴스에는 고유 아카이브 구성이 있습니다. 
-
-이벤트는 하루에 한 번 압축된 형식**(.json.gz)**으로 자동 아카이브됩니다. 각 행에는 해당 메타데이터가 유지됩니다.
-
-구성을 저장한 후 24 - 48시간 내에 이벤트가 아카이브됩니다. 
-
-{{site.data.keyword.cos_full_notm}} 인스턴스는 리소스 그룹의 컨텍스트 내에 프로비저닝됩니다. 또한 {{site.data.keyword.at_full_notm}} 인스턴스는 리소스 그룹의 컨텍스트 내에 프로비저닝됩니다. 동일한 리소스 그룹에 또는 서로 다른 그룹에서 두 인스턴스를 그룹화할 수 있습니다. 
-
-{{site.data.keyword.at_full_notm}}는 서비스 ID를 사용하여 {{site.data.keyword.cos_full_notm}} 서비스와 통신합니다.
-
-* {{site.data.keyword.cos_full_notm}} 인스턴스에 대해 작성하는 서비스 ID는 {{site.data.keyword.at_full_notm}}에서 {{site.data.keyword.cos_full_notm}} 인스턴스를 인증하고 액세스하는 데 사용됩니다. 
-* {{site.data.keyword.cos_full_notm}} 인스턴스에 대한 권한을 제한하는 서비스 ID에 특정 액세스 정책을 지정할 수 있습니다. 이벤트를 아카이브할 버킷에 대한 쓰기 권한만 보유하도록 서비스 ID를 제한하십시오.
-
-다음 그림은 이벤트를 아카이브할 때 통합되는 여러 컴포넌트의 상위 레벨 보기를 보여줍니다.
-
-![이벤트를 아카이브하는 상위 레벨 보기](images/archive.png "이벤트를 아카이브하는 상위 레벨 보기")
-
-
 {{site.data.keyword.at_full_notm}} 인스턴스를 {{site.data.keyword.cos_full_notm}} 인스턴스의 버킷에 아카이브하려면 다음 단계를 완료하십시오.
+
+## 전제조건
+{: #archiving_prereqs}
+
+* [이벤트 아카이브에 관해 자세히 보십시오](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive).
+
+* {{site.data.keyword.at_full_notm}} 서비스에 대한 **유료 서비스 플랜이 있어야 합니다**. [자세히 보기](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+
+* 사용자 ID에 웹 UI를 실행하고 이벤트를 관리할 수 있는 권한이 있는지 확인하십시오. 다음 표에는 사용자가 {{site.data.keyword.at_full_notm}} 웹 UI를 실행하며 이벤트를 보고, 검색하고, 필터링하기 위해 보유해야 하는 최소 역할이 나열되어 있습니다.
+
+|역할                      |부여되는 권한            |
+|---------------------------|-------------------------------|  
+|플랫폼 역할: `뷰어`     |사용자가 관찰 가능성 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
+| 서비스 역할: `Manager`      | 사용자가 웹 UI를 실행하고 웹 UI에서 이벤트를 관리할 수 있도록 허용합니다. |
+{: caption="표 1. IAM 역할" caption-side="top"} 
+
+사용자에 맞게 정책을 구성하는 방법에 대한 자세한 정보는 [사용자 또는 서비스 ID에 사용자 권한 부여](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)를 참조하십시오.
+
 
 
 ## 1단계. {{site.data.keyword.cos_full_notm}}에 대해 작업할 수 있도록 사용자에게 IAM 정책 부여
 {: #archiving_step1}
 
 **참고:** {{site.data.keyword.cloud_notm}}의 {{site.data.keyword.cos_full_notm}} 서비스 관리자 또는 계정 소유자가 이 단계를 완료해야 합니다.
-
 
 {{site.data.keyword.cos_full_notm}} 서비스의 관리자는 서비스 인스턴스를 프로비저닝하고, 다른 사용자에게 이러한 인스턴스에 대해 작업할 수 있는 권한을 부여하고, 서비스 ID를 작성할 수 있어야 합니다. 
 
@@ -68,11 +65,11 @@ subcollection: logdnaat
 
 다음 표에는 {{site.data.keyword.cos_full_notm}} 서비스에 대해 나열된 조치를 완료하기 위해 보유할 수 있는 역할이 나열되어 있습니다.
 
-|서비스                    |플랫폼 역할   |조치                                                                                        | 
+|서비스                    |플랫폼 역할    |조치                                                                                        | 
 |----------------------------|-------------------|-----------------------------------------------------------------------------------------------|       
 |`Cloud Object Storage`     |관리자     |사용자가 {{site.data.keyword.cos_full_notm}} 서비스에 대해 작업할 수 있도록 계정의 사용자에게 정책을 지정할 수 있게 합니다. |
-|`Cloud Object Storage`     |관리자 </br>편집자 |사용자가 {{site.data.keyword.cos_full_notm}} 서비스의 인스턴스를 프로비저닝할 수 있게 합니다. |
-|`Cloud Object Storage`     |관리자 </br>편집자 </br>운영자 |사용자가 서비스 ID를 작성할 수 있게 합니다. | 
+|`Cloud Object Storage`     | 관리자 </br>편집자                            |사용자가 {{site.data.keyword.cos_full_notm}} 서비스의 인스턴스를 프로비저닝할 수 있게 합니다.    |
+|`Cloud Object Storage`     | 관리자 </br>편집자 </br>운영자 |사용자가 서비스 ID를 작성할 수 있게 합니다.    | 
 {: caption="표 1.역할 및 조치" caption-side="top"} 
 
 
@@ -101,7 +98,7 @@ subcollection: logdnaat
 ## 2단계. {{site.data.keyword.cos_full_notm}} 인스턴스 프로비저닝
 {: #archiving_step2}
 
-**참고:** {{site.data.keyword.cloud_notm}}의 {{site.data.keyword.cos_full_notm}} 서비스 편집자 또는 관리자가 이 단계를 완료해야 합니다.
+**참고:** {{site.data.keyword.cloud_notm}}의 {{site.data.keyword.cos_full_notm}} 서비스 편집자 또는 관리자가 이 단계를 완료해야 합니다. 
 {{site.data.keyword.cos_full_notm}} 인스턴스를 프로비저닝하려면 다음 단계를 완료하십시오.
 
 1. 메뉴 표시줄에서 **카탈로그**를 클릭하십시오. {{site.data.keyword.cloud_notm}}에서 사용 가능한 서비스 목록이 열립니다.
@@ -133,10 +130,10 @@ subcollection: logdnaat
 
 |서비스                    |역할                   |조치                             | 
 |----------------------------|-------------------------|------------------------------------|       
-|`Cloud Object Storage`     |플랫폼 역할: 뷰어   |사용자가 {site.data.keyword.Bluemix_notm}} UI를 통해 모든 버킷을 보고 버킷 내의 오브젝트를 나열할 수 있도록 허용합니다. |
-|`Cloud Object Storage`     |서비스 역할: 관리자   |사용자가 오브젝트를 공용으로 설정할 수 있도록 허용합니다.                 |
-|`Cloud Object Storage`     |서비스 역할: 관리자 </br>작성자 |사용자가 버킷 및 오브젝트를 작성하고 영구 삭제할 수 있도록 허용합니다.             | 
-|`Cloud Object Storage`     |서비스 역할: 독자    |사용자가 오브젝트를 나열하고 다운로드할 수 있도록 허용합니다.                  |
+|`Cloud Object Storage`     |플랫폼 역할: 뷰어   | 사용자가 모든 버킷을 보고 해당 버킷에 있는 오브젝트를 나열할 수 있습니다. |
+|`Cloud Object Storage`     |서비스 역할: 관리자   |사용자가 오브젝트를 공용으로 설정할 수 있도록 허용합니다.                                                       |
+|`Cloud Object Storage`     | 서비스 역할: 관리자 </br>작성자 |사용자가 버킷 및 오브젝트를 작성하고 영구 삭제할 수 있도록 허용합니다.                         | 
+|`Cloud Object Storage`     |서비스 역할: 독자    |사용자가 오브젝트를 나열하고 다운로드할 수 있도록 허용합니다.                                                 |
 {: caption="표 1. 버킷에 대해 작업하기 위한 역할 및 조치" caption-side="top"} 
 
 **참고:** 버킷을 작성하려면 사용자에게 {{site.data.keyword.cos_full_notm}} 인스턴스에 대한 관리자 또는 작성자 권한이 있어야 합니다.
@@ -167,17 +164,18 @@ subcollection: logdnaat
     
     단일 데이터 센터는 단일 사이트 내의 디바이스에만 데이터를 분배합니다.
 
-    자세한 정보는 [지역 및 엔드포인트 선택](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints)을 참조하십시오.
+    자세한 정보는 [지역 및 엔드포인트 선택](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints)을 참조하십시오.
 
 6. *스토리지 클래스*의 유형을 선택하십시오.
 
-    여러 스토리지 클래스로 버킷을 작성할 수 있습니다. 요구사항에 따라 버킷에 대한 스토리지 클래스를 선택하여 데이터를 검색하십시오. 자세한 정보는 [스토리지 클래스 사용](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes)을 참조하십시오.
+    여러 스토리지 클래스로 버킷을 작성할 수 있습니다. 요구사항에 따라 버킷에 대한 스토리지 클래스를 선택하여 데이터를 검색하십시오. 자세한 정보는 [스토리지 클래스 사용](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes)을 참조하십시오.
 
     **참고:** 일단 버킷이 작성되면 버킷의 스토리지 클래스를 변경할 수 없습니다. 오브젝트가 다시 분류되어야 하는 경우 원하는 스토리지 클래스가 있는 다른 버킷으로 데이터를 이동해야 합니다.
 
 7. 선택적으로 Key Protect 키를 추가하여 저장 데이터를 암호화하십시오.
 
-    기본적으로 모든 오브젝트는 랜덤으로 생성된 키와 AONT(All-or-Nothing Transform)를 사용하여 암호화됩니다. 이 기본 암호화 모델이 저장 데이터 보안을 제공하지만 일부 워크로드는 사용되는 암호화 키를 보유해야 합니다. 자세한 정보는 [암호화 관리](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption)를 참조하십시오.
+    기본적으로 모든 오브젝트는 랜덤으로 생성된 키와 AONT(All-or-Nothing Transform)를 사용하여 암호화됩니다. 이 기본 암호화 모델이 저장 데이터 보안을 제공하지만 일부 워크로드는 사용되는 암호화 키를 보유해야 합니다. 자세한 정보는 [암호화 관리](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption)를 참조하십시오.
+
 
 
 
@@ -243,11 +241,9 @@ subcollection: logdnaat
 
 버킷에 대한 엔드포인트를 얻으려면 다음 단계를 완료하십시오.
 
-1. {{site.data.keyword.cloud_notm}} 계정에 로그인하십시오.
+1. [{{site.data.keyword.cloud_notm}} 계정 ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")에 로그인하십시오](https://cloud.ibm.com/login){:new_window}.
 
-    [{{site.data.keyword.cloud_notm}} 대시보드 ![외부 링크 아이콘](../../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/login){:new_window}를 클릭하여 {{site.data.keyword.cloud_notm}} 대시보드를 실행하십시오.
-
-	사용자 ID 및 비밀번호를 사용하여 로그인하면 {{site.data.keyword.cloud_notm}} 대시보드가 열립니다.
+	로그인하면 {{site.data.keyword.cloud_notm}} 대시보드가 열립니다.
 
 2. 대시보드에서 버킷을 작성할 {{site.data.keyword.cos_full_notm}} 인스턴스를 선택하십시오.
 
@@ -264,10 +260,10 @@ subcollection: logdnaat
 
 다음 표에는 사용자가 {{site.data.keyword.at_full_notm}} 웹 UI에서 이벤트를 {{site.data.keyword.cos_full_notm}} 인스턴스의 버킷으로 아카이브하도록 구성하기 위해 보유해야 하는 정책이 나열되어 있습니다.
 
-|서비스                    |역할                      |부여되는 권한            | 
+|서비스                              |역할                      |부여되는 권한                  | 
 |--------------------------------------|---------------------------|-------------------------------------|  
-| `{{site.data.keyword.at_full_notm}}` |플랫폼 역할: 뷰어   |사용자가 관찰 가능성 로깅 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
-| `{{site.data.keyword.at_full_notm}}` |서비스 역할: 관리자   |사용자가 웹 UI를 실행하고 웹 UI에서 이벤트를 볼 수 있도록 허용합니다. |
+| `{{site.data.keyword.at_full_notm}}` |플랫폼 역할: 뷰어     |사용자가 관찰 가능성 로깅 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
+| `{{site.data.keyword.at_full_notm}}` |서비스 역할: 관리자     |사용자가 웹 UI를 실행하고 웹 UI에서 이벤트를 볼 수 있도록 허용합니다.                             |
 {: caption="표 2. IAM 정책" caption-side="top"} 
 
 [자세히 보기](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
@@ -297,7 +293,7 @@ subcollection: logdnaat
 
 {{site.data.keyword.at_full_notm}} 인스턴스를 COS 버킷에 아카이브하도록 구성하려면 다음 단계를 완료하십시오.
 
-1. {{site.data.keyword.at_full_notm}} 웹 UI를 실행하십시오. [자세히 보기](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2).
+1. [{{site.data.keyword.at_full_notm}} 웹 UI를 실행하십시오](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch).
 
 2. **구성** 아이콘을 선택하십시오 그런 다음 **아카이브**를 선택하십시오. 
 

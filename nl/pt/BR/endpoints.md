@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-06"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, endpoints
 
@@ -28,8 +28,10 @@ A tabela a seguir lista os terminais por região:
 {:shortdesc}
 
 
-| Região                | Localização  |  Nó de
+| Região                | Nó de
 extremidade                                          |
-|-----------------------|-----------|----------------------------------------------------|
-| **Sul dos EUA**          | Dallas    | `https://api.us-south.logging.cloud.ibm.com`       |
+|-----------------------|---------------------------------------------------|
+| `Dallas (us-south)`   | `https://api.us-south.logging.cloud.ibm.com`      |
+| `Frankfurt (eu-de)`   | `https://api.eu-de.logging.cloud.ibm.com`         |
+| `Tokyo (jp-tok)`      | `https://api.jp-tok.logging.cloud.ibm.com`        |
 {: caption="Terminais por região" caption-side="top"} 

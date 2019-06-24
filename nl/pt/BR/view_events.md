@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,71 +23,84 @@ subcollection: logdnaat
 
 
 # Visualizando eventos
-{: #view_events.md}
+{: #view_events}
 
-Depois de provisionar uma instância do serviço do {{site.data.keyword.at_full_notm}} no {{site.data.keyword.cloud_notm}}, é possível visualizar eventos por meio da UI da web do {{site.data.keyword.at_full_notm}}.
+Depois de provisionar uma instância do serviço do {{site.data.keyword.at_full_notm}} no {{site.data.keyword.cloud_notm}}, é possível visualizar eventos por meio da UI da web do {{site.data.keyword.at_full_notm}}. Você visualiza eventos em seu horário local.
 {:shortdesc}
 
 
-## Pré-requisitos
-{: #view_events_prereqs}
-
-Antes de iniciar, verifique se seu ID do usuário tem permissões para ativar a UI da web e visualizar eventos. 
-
-**Nota:** deve-se ser um administrador do serviço {{site.data.keyword.at_full_notm}}, um administrador da instância do {{site.data.keyword.at_full_notm}} ou ter permissões de conta do IAM para gerenciar as políticas.
-
-A tabela a seguir lista as políticas mínimas que um usuário deve ter para poder ativar a UI da web do {{site.data.keyword.at_full_notm}} e visualizar eventos:
-
-| Atribuição                      | Permissão concedida            |
-|---------------------------|-------------------------------|  
-| Função de plataforma: `Viewer`     | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
-| Função de serviço: `Reader`        | Permite que o usuário ative a UI da web e visualize eventos na UI da web. |
-{: caption="Tabela 1. Políticas do IAM" caption-side="top"} 
-
-Para obter mais informações sobre como configurar essas políticas para um usuário, consulte [Concedendo permissões de usuário a um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-
-## Visualizar eventos por meio da UI da web
+## Visualizar eventos
 {: #view_events_step1}
 
-Para ativar a UI da web do {{site.data.keyword.at_full_notm}}, conclua as etapas a seguir:
+Conclua as etapas a seguir para visualizar eventos:
 
-1. [Efetue login em sua conta do {{site.data.keyword.cloud_notm}} ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/login){:new_window}.
+1. Verifique se seu ID de usuário tem permissões para iniciar a IU da web e visualizar eventos. 
 
-	Depois de efetuar login com seu ID do usuário e senha, o *Painel* do {{site.data.keyword.cloud_notm}} se abre.
+    A tabela a seguir lista as funções mínimas necessárias para que um usuário possa iniciar a IU da web do {{site.data.keyword.at_full_notm}}, visualizar, procurar e filtrar eventos:
 
-2. Acesse o ícone de menu ![ícone menu](../../icons/icon_hamburger.svg) e selecione **Observabilidade**. 
+    <table>
+      <caption>Tabela 1. Funções do IAM</caption>
+      <tr>
+        <th>Atribuição</th>
+        <th>Permissão concedida</th>
+      </tr>
+      <tr>
+        <td>Função de plataforma: `Viewer`</td>
+        <td>Permite que o usuário visualize a lista de instâncias de serviço no painel *Observabilidade*.</td>
+      </tr>
+      <tr>
+        <td>Função de serviço: `Reader`</td>
+        <td>Permite que o usuário ative a IU da web e visualize, procure e filtre eventos na IU da web.</td>
+      </tr>
+    </table>
 
-3. Selecione **Activity Tracker**. 
+    Para obter mais informações sobre como configurar políticas para um usuário, consulte [Concedendo permissões de usuário para um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
-    A lista de instâncias do {{site.data.keyword.at_full_notm}} é exibida.
+2. [Acessar a UI da web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
 
-    **Nota:** há 1 instância por região.
+3. Clique no ícone  ** Visualizações **   ![Configuration icon](images/views.png).
 
-4. Selecione a instância na região na qual você deseja visualizar eventos. Em seguida, clique em  ** Visualizar LogDNA **.
+4. Selecione **Tudo** para ver todos os eventos ou uma visualização. 
 
-A UI da web do {{site.data.keyword.at_full_notm}} é aberta e mostra a visualização **Tudo**. Por meio dessa visualização, é possível ver os eventos em sua conta para a região que você selecionou.
-
-**Nota:** se você tiver um plano `Lite` e não puder ver os eventos que você estiver procurando, talvez seja necessário fazer upgrade para um plano pago para ativar os recursos de procura em eventos mais antigos. O número de dias que os eventos estão disponíveis para procura depende do plano que você escolher. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan).
+É possível visualizar eventos por meio da visualização que você selecionou.
 
 
-## Customizar sua visualização padrão
+
+## Visualizar um subconjunto dos eventos aplicando uma consulta de procura
 {: #view_events_step2}
 
-Na seção **PREFERÊNCIAS DO USUÁRIO**, é possível modificar a ordem dos campos de dados que são exibidos por linha.
+É possível selecionar os eventos que são exibidos por meio de uma visualização aplicando uma consulta de procura. É possível salvar essa visualização para reutilizar posteriormente. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2).
 
-Conclua as etapas a seguir para modificar o formato de uma linha de eventos:
+ 
 
-1. Na UI da web, clique no ícone **Configuração** ![Ícone Configuração](images/admin.png "Ícone Administrador").
-2. Selecione  ** PREFERÊNCIAS DO USUÁRIO **. Uma nova janela é aberta.
-3. Selecione  ** Formato de log **.
-4. Modifique a seção *Formato de linha* para corresponder aos seus requisitos. Caixas de arrasto.
 
+## Visualizar um subconjunto dos eventos aplicando um intervalo de tempo
+{: #view_events_step3}
+
+É possível selecionar os eventos que são exibidos por meio de uma visualização aplicando um intervalo de tempo.
+
+É possível aplicar um registro de data e hora especificando um tempo absoluto, um tempo relativo ou um intervalo de tempo.
+
+Conclua as etapas a seguir para ir para um horário específico:
+1. [Acessar a UI da web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+2. Clique no ícone  ** Visualizações **   ![Configuration icon](images/views.png).
+3. Selecione  ** Tudo **  ou uma visualização.
+4. Insira uma consulta de tempo. Escolha qualquer uma das opções a seguir:
+
+    * Insira um tempo absoluto para ir para um horário específico em seus eventos como `May 20 7:00pm`.
+    
+    * Insira um tempo relativo, como `2 days ago`, `today at 12am` ou `an hour ago`.
+
+    * Insira um intervalo de tempo como `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM` ou `May 20 10am to May 22 10am`. Certifique-se de incluir `to` para separar o registro de data e hora inicial do registro de data e hora de encerramento.
+
+5. Clique em **ENTER**.
+
+    Você pode obter a mensagem de erro: `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.` Você poderá ver esse erro quando o intervalo de tempo que você especificou não tiver nenhum evento disponível a ser mostrado. Mude a consulta de tempo e tente novamente.
 
 
 
 ## Visualizar um evento no contexto
-{: #view_events_step3}
+{: #view_events_step4}
 
 A qualquer momento, é possível visualizar cada linha de eventos no contexto.
 
@@ -106,9 +119,8 @@ Quando você concluir a exploração do evento, clique em **Fechar** para fechar
 
 
 
-
 ## Copiar um evento para a área de transferência
-{: #view_events_step4}
+{: #view_events_step5}
 
 
 Conclua as etapas a seguir para copiar um evento para a área de transferência: 

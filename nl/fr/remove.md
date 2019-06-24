@@ -36,7 +36,7 @@ Pour supprimer une instance {{site.data.keyword.at_full_notm}} en utilisant l'in
 
 1. [Connectez-vous à votre compte {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/login){:new_window}.
 
-	Une fois que vous êtes connecté avec votre ID utilisateur et votre mot de passe, l'interface utilisateur {{site.data.keyword.cloud_notm}} s'ouvre. 
+	Une fois que vous êtes connecté avec votre ID utilisateur et votre mot de passe, l'interface utilisateur {{site.data.keyword.cloud_notm}} s'ouvre.
 
 2. Cliquez sur l'icône Menu ![Icône Menu](../../icons/icon_hamburger.svg) &gt; **Observabilité** pour accéder au tableau de bord *Observabilité*.
 
@@ -44,9 +44,9 @@ Pour supprimer une instance {{site.data.keyword.at_full_notm}} en utilisant l'in
 
 4. Sélectionnez l'instance que vous souhaitez supprimer.
 
-5. Dans le menu *Action*, sélectionnez **Retirer**. 
+5. Dans le menu *Action*, sélectionnez **Retirer**.
 
-Ensuite, retirez aux utilisateurs les droits accordés de travailler avec l'instance que vous avez supprimée. 
+Ensuite, retirez aux utilisateurs les droits accordés de travailler avec l'instance que vous avez supprimée.
 
 ## Suppression d'une instance à l'aide de l'interface de ligne de commande
 {: #remove_cli}
@@ -74,7 +74,7 @@ Pour supprimer une instance {{site.data.keyword.at_full_notm}} via la ligne de c
 
     Où NAME est le nom de l'instance
 
-    Pour répertorier toutes les instances disponibles dans le groupe de ressources auquel vous vous êtes connecté, exécutez la commande suivante : 
+    Pour répertorier toutes les instances disponibles dans le groupe de ressources auquel vous vous êtes connecté, exécutez la commande suivante :
 
     ```
     ibmcloud resource service-instances
@@ -89,6 +89,6 @@ ibmcloud resource service-instance-delete logdna-instance-01
 ```
 {: codeblock}
 
-Ensuite, retirez aux utilisateurs les droits accordés de travailler avec l'instance que vous avez supprimée. 
+Ensuite, retirez aux utilisateurs les droits accordés de travailler avec l'instance que vous avez supprimée.
 
 

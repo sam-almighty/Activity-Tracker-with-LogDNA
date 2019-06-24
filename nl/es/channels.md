@@ -33,10 +33,6 @@ En la tabla siguiente se muestran los canales de notificación que puede configu
 | `Slack`             | Puede configurar un canal de slack. |
 | `Webhook`           | Puede configurar un URL de webhook. |
 | `PagerDuty`         | Puede configurar detalles de conexión de su sistema PagerDuty y seleccionar un servicio.|
-| `OpsGenie`          | Puede configurar la clave de API para conectarse a su sistema OpsGenie. |
-| `Datadog`           | Puede configurar la clave de API para conectarse a su sistema `Datadog`. |
-| `AppOptics/Librato` | Puede configurar la clave de API para conectarse a su sistema AppOptics/Librato. |
-| `VictorOps`         | Puede configurar el URL al que se notificará cuando se desencadene una alerta, la clave de direccionamiento y un tipo de alerta. Los tipos de alerta válidos son: `info`, `warning`, `critical`|
 {: caption="Canales de notificación" caption-side="top"} 
 
 

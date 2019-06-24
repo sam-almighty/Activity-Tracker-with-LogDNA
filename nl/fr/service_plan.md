@@ -43,12 +43,12 @@ Différents forfaits de tarification sont à votre disposition pour une instance
 
 Les tableaux suivants présentent les différentes fonctionnalités incluses dans chaque forfait de service :
 
-| Fonctionnalité                    | Forfait avec `recherche dans les journaux pendant 30 jours` | Forfait avec `recherche dans les journaux pendant 14 jours`    | Forfait avec `recherche dans les journaux pendant 7 jours     | Forfait `Lite` | 
+| Fonctionnalité                          | Forfait avec `recherche dans les journaux pendant 30 jours` | Forfait avec `recherche dans les journaux pendant 14 jours`    | Forfait avec `recherche dans les journaux pendant 7 jours     | Forfait `Lite` | 
 |----------------------------------|-------------------------|-------------------------------|-----------------------------|--------------|
 | `Les journaux sont stockés et des recherches peuvent y être effectuées.` | Oui - pendant 30 jours       | Oui - pendant 14 jours             | Oui - pendant 7 jours            | Non           |
-| `Diffusion en flux avec Live Tail`            |Oui|Oui|Oui|Oui|
-| `Archivage`                      |Oui|Oui|Oui| Non           |
-| `Création d'alertes multicanal`         |Oui|Oui|Oui| Non           | 
+| `Diffusion en flux avec Live Tail`            | Oui                     | Oui                           | Oui                         | Oui          |
+| `Archivage`                      | Oui                     | Oui                           | Oui                         | Non           |
+| `Création d'alertes multicanal`         | Oui                     | Oui                           | Oui                         | Non           | 
 {: caption="Tableau 2. Liste des fonctionnalités disponibles pour chaque forfait de service" caption-side="top"} 
 
 

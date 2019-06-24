@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-06"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, endpoints
 
@@ -28,7 +28,9 @@ subcollection: logdnaat
 {:shortdesc}
 
 
-| 地區                | 位置  |  端點                                          |
-|-----------------------|-----------|----------------------------------------------------|
-| **美國南部**          | 達拉斯    | `https://api.us-south.logging.cloud.ibm.com`       |
+| 地區                |  端點                                          |
+|-----------------------|---------------------------------------------------|
+| `達拉斯 (us-south)`   | `https://api.us-south.logging.cloud.ibm.com`       |
+| `法蘭克福 (eu-de)`   | `https://api.eu-de.logging.cloud.ibm.com`         |
+| `東京 (jp-tok)`      | `https://api.jp-tok.logging.cloud.ibm.com`        |
 {: caption="每個地區的端點" caption-side="top"} 

@@ -32,6 +32,6 @@ subcollection: logdnaat
 
 * 포럼을 검토하여 다른 사용자에게 동일한 문제점이 발생했는지 확인할 수 있습니다. 포럼을 사용하여 질문하는 경우 {{site.data.keyword.cloud_notm}} 개발 팀이 확인할 수 있도록 질문에 태그를 지정하십시오.
 <!--Insert the appropriate Stack Overflow tag for your service for <service_keyword> in URL and text below:  -->
-  * {{site.data.keyword.at_full_notm}} 서비스에 대한 기술적인 질문이 있는 경우 [Stack Overflow](http://stackoverflow.com/search?q=activity-tracker-with-logdna+ibm-cloud){:new_window}에 질문을 게시하고 질문에 "ibm-cloud" 및 "activity-tracker-with-logdna" 태그를 지정하십시오.
+  * {{site.data.keyword.at_full_notm}} 서비스에 관한 기술적인 질문이 있으면 [Stack Overflow](https://stackoverflow.com/search?q=ibm-cloud+logdna){:new_window}에 질문을 게시하고 `ibm-cloud`, `activity-tracker` 및 `logdna`로 질문에 태그를 지정하십시오.
 
 * 문제점을 여전히 해결할 수 없는 경우 IBM 지원 티켓을 열 수 있습니다. IBM 지원 티켓 열기에 대한 정보 또는 지원 레벨 및 티켓 심각도에 대한 정보는 [지원 받기](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 참조하십시오.

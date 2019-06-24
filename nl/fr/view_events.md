@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,73 +23,86 @@ subcollection: logdnaat
 
 
 # Affichage d'événements
-{: #view_events.md}
+{: #view_events}
 
-Après avoir mis à disposition une instance du service {{site.data.keyword.at_full_notm}} dans {{site.data.keyword.cloud_notm}}, vous pouvez visualiser les événements via l'interface utilisateur web {{site.data.keyword.at_full_notm}}.
+Après avoir mis à disposition une instance du service {{site.data.keyword.at_full_notm}} dans {{site.data.keyword.cloud_notm}}, vous pouvez visualiser les événements via l'interface utilisateur web {{site.data.keyword.at_full_notm}}. Vous visualisez les événements dans l'heure locale.
 {:shortdesc}
 
 
-## Conditions préalables
-{: #view_events_prereqs}
-
-Avant de commencer, vérifiez que votre ID utilisateur dispose des droits nécessaires pour lancer l'interface utilisateur Web et afficher les événements.  
-
-**Remarque :** vous devez être administrateur du service {{site.data.keyword.at_full_notm}}, administrateur de l'instance {{site.data.keyword.at_full_notm}} ou disposer de droits IAM sur le compte pour gérer des règles.
-
-Le tableau suivant répertorie les règles minimales qu'un utilisateur doit posséder pour pouvoir lancer l'interface utilisateur Web {{site.data.keyword.at_full_notm}} et afficher les événements :
-
-|Rôle | Droits accordés            |
-|---------------------------|-------------------------------|  
-|  Rôle de plateforme : `Afficheur `     | Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord Observabilité. |
-| Rôle de service : `Lecteur`      | Permet à l'utilisateur de lancer l'interface utilisateur Web et d'afficher les événements dans l'interface utilisateur Web. |
-{: caption="Tableau 1. Règles IAM" caption-side="top"} 
-
-Pour plus d'informations sur la configuration de ces stratégies pour un utilisateur, voir [Octroi de droits utilisateur à un utilisateur ou à un ID de service](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-
-## Afficher des événements via l'interface utilisateur Web
+## Afficher les événements
 {: #view_events_step1}
 
-Pour lancer l'interface utilisateur Web {{site.data.keyword.at_full_notm}}, procédez comme suit :
+Pour visualiser les événements, procédez comme suit : 
 
-1. [Connectez-vous à votre compte {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/login){:new_window}.
+1. Vérifiez que votre ID utilisateur dispose des droits nécessaires pour lancer l'interface utilisateur Web et afficher les événements.  
 
-	Une fois connecté avec votre ID utilisateur et votre mot de passe, le *tableau de bord* {{site.data.keyword.cloud_notm}} s'ouvre.
+    Le tableau suivant répertorie les rôles minimaux qu'un utilisateur doit posséder pour pouvoir lancer l'interface utilisateur Web {{site.data.keyword.at_full_notm}} et afficher, rechercher et filtrer des événements : 
 
-2. Cliquez sur l'icône Menu ![Icône Menu](../../icons/icon_hamburger.svg) et sélectionnez **Observabilité**.  
+    <table>
+      <caption>Tableau 1. Rôles IAM</caption>
+      <tr>
+        <th>Rôle</th>
+        <th>Droits accordés</th>
+      </tr>
+      <tr>
+        <td>Rôle de plateforme : `Afficheur `</td>
+        <td>Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord *Observabilité*. </td>
+      </tr>
+      <tr>
+        <td>Rôle de service : `Lecteur`</td>
+        <td>Permet à l'utilisateur de lancer l'interface utilisateur Web, puis d'afficher, de rechercher et de filtrer les événements dans l'interface utilisateur Web. </td>
+      </tr>
+    </table>
 
-3. Sélectionnez **Activity Tracker**. 
+    Pour plus d'informations sur la configuration des stratégies pour un utilisateur, voir [Octroi de droits utilisateur à un utilisateur ou à un ID de service](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
-    La liste des instances {{site.data.keyword.at_full_notm}} s'affiche.
+2. [Accédez à l'interface utilisateur Web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
 
-    **Remarque :** il existe 1 instance par région.
+3. Cliquez sur l'icône **Vues** ![Icône Configuration](images/views.png).
 
-4. Sélectionnez l'instance dans la région où vous souhaitez afficher les événements. Ensuite, cliquez sur **Afficher LogDNA**.
+4. Sélectionnez **Tout** pour afficher tous les événements ou une vue.  
 
-L'interface utilisateur Web {{site.data.keyword.at_full_notm}} s'ouvre et affiche la vue **Tout**. Grâce à cette vue, vous pouvez voir les événements de votre compte relatifs à la région que vous avez sélectionnée. 
-
-**Remarque :** si vous disposez d'un forfait `Lite` et que vous ne pouvez pas voir les événements que vous recherchez, vous devrez peut-être passer à un forfait payant pour activer les fonctionnalités de recherche d'événements plus anciens. Le nombre de jours pendant lesquels les événements sont disponibles pour la recherche dépend du forfait que vous avez choisi. [En savoir plus](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan).
+Vous pouvez afficher les événements via la vue que vous avez sélectionnée. 
 
 
-## Personnaliser l'affichage par défaut
+
+## Afficher un sous-ensemble des événements en appliquant une requête de recherche
 {: #view_events_step2}
 
-Dans la section **Préférences utilisateur**, vous pouvez modifier l'ordre des zones de données qui s'affichent pour chaque ligne.
+Vous pouvez sélectionner les événements affichés par l'intermédiaire d'une vue en appliquant une requête de recherche. Vous pouvez sauvegarder cette vue pour la réutiliser ultérieurement. [En savoir plus](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2). 
 
-Effectuez les étapes suivantes pour modifier le format d'une ligne d'événement : 
+ 
 
-1. Dans l'interface Web, cliquez sur l'icône **Configuration** ![Icône Configuration](images/admin.png "Icône Admin"). 
-2. Sélectionnez **Préférences utilisateur**. Une nouvelle fenêtre s'ouvre.
-3. Sélectionnez **Format de journal**.
-4. Modifiez la section *Format de ligne* de manière à répondre à vos exigences. Faites glisser les zones.
 
+## Afficher un sous-ensemble des événements en appliquant une période
+{: #view_events_step3}
+
+Vous pouvez sélectionner les événements affichés par l'intermédiaire d'une vue en appliquant une période. 
+
+Vous pouvez appliquer un horodatage en spécifiant une heure absolue, une heure relative ou un intervalle.
+
+Pour accéder à une heure spécifique, procédez comme suit : 
+1. [Accédez à l'interface utilisateur Web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+2. Cliquez sur l'icône **Vues** ![Icône Configuration](images/views.png).
+3. Sélectionnez **Tout** ou bien une vue.
+4. Entrez une requête temporelle. Choisissez l'une des options suivantes : 
+
+    * Entrez une heure absolue pour accéder à un certain moment dans vos événements, tel que `May 20 7:00pm`.
+    
+    * Entrez une heure relative, telle que `2 days ago`, `today at 12am` ou `an hour ago`.
+
+    * Entrez un intervalle, tel que le suivant : `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM` ou `May 20 10am to May 22 10am`. Assurez-vous d'inclure `to` pour séparer l'horodatage initial de l'horodatage de fin.
+
+5. Cliquez sur **ENTREE**.
+
+    Le message d'erreur suivant risque de s'afficher : `Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Réessayez.` Vous risquez de recevoir cette erreur s'il n'existe pas d'événements disponibles à afficher pour la période que vous avez spécifiée. Modifiez la requête temporelle, puis réessayez. 
 
 
 
 ## Afficher un événement en contexte
-{: #view_events_step3}
+{: #view_events_step4}
 
-A tout moment, vous pouvez visualiser chaque ligne d'événement dans son contexte. 
+A tout moment, vous pouvez visualiser chaque ligne d'événement dans son contexte.
 
 Effectuez les étapes suivantes : 
 
@@ -106,12 +119,11 @@ Lorsque vous avez terminé d'explorer l'événement, cliquez sur **Fermer** pour
 
 
 
-
 ## Copier un événement dans le presse-papiers
-{: #view_events_step4}
+{: #view_events_step5}
 
 
-Effectuez les étapes suivantes pour copier un événement dans le presse-papiers :  
+Effectuez les étapes suivantes pour copier un événement dans le presse-papiers : 
 
 1. Dans l'interface Web, cliquez sur l'icône **Vues** ![Icône Configuration](images/views.png "Icône Configuration").
 2. Sélectionnez **Tout** ou une vue personnalisée.

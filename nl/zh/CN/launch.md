@@ -55,15 +55,19 @@ subcollection: logdnaat
 
 	使用用户标识和密码登录后，{{site.data.keyword.cloud_notm}}“仪表板”即会打开。
 
-2. 在导航菜单中，选择**可观察性**。 
+2. 单击**菜单**图标 ![“菜单”图标](../icons/icon_hamburger.svg) > **可观察性**。 
 
 3. 选择 **Activity Tracker**。 
 
-    这将显示 {{site.data.keyword.cloud_notm}} 上可用的实例的列表。
+    这将显示 {{site.data.keyword.at_full_notm}} 实例的列表。
 
-4. 选择一个实例。然后，单击**查看 LogDNA**。
+    每个区域有 1 个实例。
+    {: important}
 
-这将打开 Web UI。
+4. 选择要查看事件的区域中的实例。然后，单击**查看 LogDNA**。
+
+这将打开 {{site.data.keyword.at_full_notm}} Web UI，并显示**所有内容**视图。通过此视图，您可以在您的帐户中查看所选区域的事件。
+
 
 
 ## 从 {{site.data.keyword.cloud_notm}} 获取 Web UI URL

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -28,27 +28,26 @@ subcollection: logdnaat
 您可以将 {{site.data.keyword.at_full_notm}} 实例中的事件归档到 {{site.data.keyword.cos_full_notm}} (COS) 实例中的存储区。
 {:shortdesc}
 
-要配置归档，您必须针对 {{site.data.keyword.at_full_notm}} 服务分配有带有**查看者**平台角色和**管理者**服务角色的 IAM 策略。
-
-将 {{site.data.keyword.at_full_notm}} 实例中的事件归档到 {{site.data.keyword.cos_full_notm}} (COS) 实例中的存储区。每个 {{site.data.keyword.at_full_notm}} 实例都有其自己的归档配置。 
-
-事件会以压缩格式 **(.json.gz)** 每天自动归档一次。 每一行都会保留其元数据。
-
-保存配置后，事件会在 24-48 小时内进行归档。 
-
-{{site.data.keyword.cos_full_notm}} 实例在资源组的上下文中供应。 {{site.data.keyword.at_full_notm}} 实例也在资源组的上下文中供应。可以将这两个实例分组到同一资源组中，也可以分组到不同的资源组中。 
-
-{{site.data.keyword.at_full_notm}} 使用服务标识来与 {{site.data.keyword.cos_full_notm}} 服务进行通信。
-
-* {{site.data.keyword.at_full_notm}} 使用您为 {{site.data.keyword.cos_full_notm}} 实例创建的服务标识来认证和访问 {{site.data.keyword.cos_full_notm}} 实例。 
-* 您可以将特定访问策略分配给在 {{site.data.keyword.cos_full_notm}} 实例上限制许可权的服务标识。将服务标识限制为对您计划在其中归档事件的存储区仅具有写许可权。
-
-下图显示了归档事件时集成的不同组件的高级视图：
-
-![高级视图归档事件](images/archive.png "高级视图归档事件")
-
-
 完成以下步骤以将 {{site.data.keyword.at_full_notm}} 实例归档到 {{site.data.keyword.cos_full_notm}} 实例的存储区中：
+
+## 先决条件
+{: #archiving_prereqs}
+
+* [了解有关归档事件的更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive)。
+
+* **您必须具有 {{site.data.keyword.at_full_notm}} 服务的付费服务套餐**。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
+
+* 检查用户标识是否有权启动 Web UI 和管理事件。下表列出了用户要能够启动 {{site.data.keyword.at_full_notm}} Web UI 以及查看、搜索和过滤事件而必须具有的最基本角色：
+
+|角色|授予的许可权
+|
+|---------------------------|-------------------------------|  
+| 平台角色：`查看者`     | 允许用户在“可观察性”仪表板中查看服务实例的列表。|
+| 服务角色：`管理者`     | 允许用户启动 Web UI 并在 Web UI 中管理事件。|
+{: caption="表 1. IAM 角色" caption-side="top"} 
+
+有关如何为用户配置策略的更多信息，请参阅[授予用户对用户或服务标识的许可权](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
+
 
 
 ## 步骤 1. 将 IAM 策略授予用户以使用 {{site.data.keyword.cos_full_notm}}
@@ -69,9 +68,9 @@ subcollection: logdnaat
 
 | 服务                    | 平台角色    | 操作                                                                                        | 
 |----------------------------|-------------------|-----------------------------------------------------------------------------------------------|       
-| `Cloud Object Storage`     | 管理员     | 允许用户将策略分配给该帐户中的用户以使用 {{site.data.keyword.cos_full_notm}} 服务。|
-| `Cloud Object Storage`     | 管理员 </br>编辑者| 允许用户供应 {{site.data.keyword.cos_full_notm}} 服务的实例。    |
-| `Cloud Object Storage`     | 管理员 </br>编辑者</br>操作员| 允许用户创建服务标识。    | 
+| `Cloud Object Storage`     | 管理员 | 允许用户将策略分配给该帐户中的用户以使用 {{site.data.keyword.cos_full_notm}} 服务。|
+| `Cloud Object Storage`     | 管理员 </br>编辑者 | 允许用户供应 {{site.data.keyword.cos_full_notm}} 服务的实例。    |
+| `Cloud Object Storage`     | 管理员 </br>编辑者 </br>操作员 | 允许用户创建服务标识。    | 
 {: caption="表 1. 角色和操作" caption-side="top"} 
 
 
@@ -129,11 +128,11 @@ subcollection: logdnaat
 
 要管理存储区，必须授予用户在 {{site.data.keyword.cos_full_notm}} 实例上使用存储区的许可权。下表概述了使用存储区时用户可以执行的操作以及具有的角色：
 
-| 服务                    |角色| 操作                                                                                        | 
+| 服务                    |角色|操作| 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | 平台角色：查看者  | 允许用户查看所有存储区，并通过 {site.data.keyword.Bluemix_notm}} UI 列出这些存储区中的对象。|
+| `Cloud Object Storage`     | 平台角色：查看者  | 允许用户查看所有存储区，并列出这些存储区中的对象。|
 | `Cloud Object Storage`     | 服务角色：管理者  | 允许用户使对象成为公共对象。                                                       |
-| `Cloud Object Storage`     | 服务角色：管理者 </br>写入者| 允许用户创建和销毁存储区和对象。                         | 
+| `Cloud Object Storage`     | 服务角色：管理者 </br>写入者 | 允许用户创建和销毁存储区和对象。                         | 
 | `Cloud Object Storage`     | 服务角色：读取者  | 允许用户列出和下载对象。                                                 |
 {: caption="表 1. 使用存储区所需的角色以及可执行的操作" caption-side="top"} 
 
@@ -165,17 +164,18 @@ subcollection: logdnaat
     
     单个数据中心将仅在单个站点内的设备之间分布数据。
 
-    有关更多信息，请参阅[选择区域和端点](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints)。
+    有关更多信息，请参阅[选择区域和端点](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints)。
 
 6. 选择*存储类*的类型。
 
-    您可以使用不用的存储类来创建存储区。根据您的需求来选择存储区的存储类以检索数据。有关更多信息，请参阅[使用存储类](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes)。
+    您可以使用不用的存储类来创建存储区。根据您的需求来选择存储区的存储类以检索数据。有关更多信息，请参阅[使用存储类](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes)。
 
     **注：**一旦创建存储区，就将无法更改存储区的存储类。如果对象需要重新分类，那么需要将相应数据移至另一个使用所需存储类的存储区中。
 
 7. （可选）添加 Key Protect 密钥以对数据进行静态加密。
 
-    缺省情况下，所有对象都会使用随机生成的密钥以及全有或全无变换进行加密。虽然此缺省加密模型提供了静态安全性，但某些工作负载需要拥有所使用的加密密钥。 有关更多信息，请参阅[管理加密](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption)。
+    缺省情况下，所有对象都会使用随机生成的密钥以及全有或全无变换进行加密。虽然此缺省加密模型提供了静态安全性，但某些工作负载需要拥有所使用的加密密钥。 有关更多信息，请参阅[管理加密](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption)。
+
 
 
 
@@ -241,11 +241,9 @@ subcollection: logdnaat
 
 完成以下步骤以获取存储区的端点：
 
-1. 登录到 {{site.data.keyword.cloud_notm}} 帐户。
+1. [登录到 {{site.data.keyword.cloud_notm}} 帐户 ![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/login){:new_window}。
 
-    单击 [{{site.data.keyword.cloud_notm}}“仪表板”![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/login){:new_window} 以启动 {{site.data.keyword.cloud_notm}}“仪表板”。
-
-	使用用户标识和密码登录后，{{site.data.keyword.cloud_notm}}“仪表板”即会打开。
+	登录后，{{site.data.keyword.cloud_notm}}“仪表板”即会打开。
 
 2. 在仪表板中，选择您计划在其中创建存储区的 {{site.data.keyword.cos_full_notm}} 实例。
 
@@ -262,7 +260,7 @@ subcollection: logdnaat
 
 下表列出了用户为将事件配置为从 {{site.data.keyword.at_full_notm}} Web UI 归档到 {{site.data.keyword.cos_full_notm}} 实例中的存储区中而必须具有的策略：
 
-| 服务                    |角色|授予的许可权
+|服务|角色|授予的许可权
 | 
 |--------------------------------------|---------------------------|-------------------------------------|  
 | `{{site.data.keyword.at_full_notm}}` | 平台角色：查看者  | 允许用户在“可观察性 - 日志记录”仪表板中查看服务实例的列表。|
@@ -296,7 +294,7 @@ subcollection: logdnaat
 
 完成以下步骤以配置将 {{site.data.keyword.at_full_notm}} 实例归档到 COS 存储区中：
 
-1. 启动 {{site.data.keyword.at_full_notm}} Web UI。[了解更多信息](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2)。
+1. [启动 {{site.data.keyword.at_full_notm}} Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch)。
 
 2. 选择**配置**图标。然后选择**归档**。 
 

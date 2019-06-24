@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -30,6 +30,12 @@ O {{site.data.keyword.iamlong}} (IAM) permite que você autentique com seguranç
 
 Por exemplo, como um administrador do serviço, é possível provisionar e remover instâncias do serviço, conceder outras permissões de usuário para trabalhar com o serviço, arquivar logs em uma instância do {{site.data.keyword.cos_full_notm}} (COS) e mais. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
 
+## Pré-requisitos
+{: #iam_manage_events_prereq}
+
+Seu ID de usuário precisa de **permissões de plataforma de administrador** para gerenciar o serviço {{site.data.keyword.at_full_notm}}. Entre em contato com o administrador da conta. O proprietário da conta pode conceder a outro usuário acesso à conta com o objetivo de gerenciar o acesso do usuário e os recursos da conta. [ Saiba mais ](/docs/iam?topic=iam-userroles).
+
+
 ## Etapa 1. Criar um grupo de acesso
 {: #ime_step1}
 
@@ -56,7 +62,7 @@ ibmcloud iam access-group-create GROUP_NAME [-d, --description DESCRIPTION]
 
 Após configurar seu grupo, será possível designar uma política de acesso comum ao grupo. 
 
-Qualquer política que você configura para um grupo de acesso se aplica a todas as entidades, usuários e IDs de serviço, dentro do grupo.
+Qualquer política que você configura para um grupo de acesso se aplica a todas as entidades, usuários e IDs de serviço, dentro do grupo. 
 {: note}
 
 É possível designar a política usando a UI ou por meio da linha de comandos.
@@ -68,18 +74,27 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+Quando você define a política, é necessário selecionar uma função da plataforma e uma função do serviço:
+* As funções de gerenciamento da plataforma abrangem uma gama de ações, incluindo a capacidade de criar e
+excluir instâncias, gerenciar aliases, ligações, credenciais e acesso. As funções da plataforma são administrador,
+editor, operador, visualizador. As funções de gerenciamento de plataforma também se aplicam a serviços de gerenciamento de conta que permitem que os usuários convidem usuários, gerenciem IDs de serviço, políticas de acesso, entradas do catálogo e rastreiem faturamento e uso, dependendo de sua função designada em um serviço de gerenciamento de conta.
+* As funções de acesso ao serviço definem a capacidade de um usuário ou serviço de executar ações em uma instância de serviço. As funções de acesso de serviço são gerenciador, gravador e leitor.
+
+Para gerenciar o serviço {{site.data.keyword.at_full_notm}}, um usuário precisa das seguintes funções:
+* Função de plataforma: **administrador**. 
+* Função de serviço: **gerenciador**. 
+[ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+
 Conclua as etapas a seguir para designar uma política a um grupo de acesso por meio da UI:
 
 1. Na barra de menus, clique em **Gerenciar** &gt; **Acesso (IAM)** e selecione **Grupos de acesso**.
 2. Selecione o nome do grupo ao qual você deseja designar acesso. 
 3. Clique em **Políticas de acesso**.
 4. Clique em **Designar acesso**.
-5. Escolha para designar acesso por recursos dentro de um grupo de recursos, recursos individuais disponíveis dentro da conta ou serviços de gerenciamento de conta. Por exemplo, é possível escolher qualquer uma das opções a seguir para conceder a um usuário uma função de administrador para gerenciar uma instância do {{site.data.keyword.at_full_notm}}:
+5. Escolha designar acesso por recursos dentro de um grupo de recursos ou por recursos individuais disponíveis dentro da conta. Por exemplo, é possível escolher qualquer uma das opções a seguir para conceder a um usuário uma função de administrador para gerenciar o {{site.data.keyword.at_full_notm}}:
 
-### Opção 1. Conceda permissões a um usuário para se tornar um administrador do serviço na conta do {{site.data.keyword.cloud_notm}}
+### Opção 1. Conceder permissões no serviço
 {: #admin_account_opt1}
-
-Para conceder a um usuário a função de administrador para gerenciar o serviço na conta, o usuário deve ter uma política do IAM para o serviço {{site.data.keyword.at_full_notm}} com a função da plataforma **Administrador**. Deve-se designar esse acesso de usuário a um recurso individual na conta. 
 
 Conclua as etapas a seguir para designar uma função de administrador de usuário para o serviço {{site.data.keyword.at_full_notm}} na conta: 
 
@@ -91,10 +106,8 @@ Conclua as etapas a seguir para designar uma função de administrador de usuár
 6. Selecione a função de serviço  ** Gerenciador **.
 7. Clique em  ** Designar **.
 
-### Opção 2. Conceda permissões a um usuário para se tornar um administrador do serviço dentro de um grupo de recursos
+### Opção 2. Conceder permissões dentro do contexto de um grupo de recursos
 {: #admin_account_opt2}
-
-Para conceder a um usuário a função de administrador para gerenciar instâncias dentro de um grupo de recursos na conta, o usuário deve ter uma política do IAM para o serviço {{site.data.keyword.at_full_notm}} com a função da plataforma **Administrador** dentro do contexto do grupo de recursos. 
 
 Conclua as etapas a seguir para designar a um usuário a função de administrador para o serviço {{site.data.keyword.at_full_notm}} dentro do contexto de um grupo de recursos: 
 
@@ -111,8 +124,11 @@ Conclua as etapas a seguir para designar a um usuário a função de administrad
 6. Selecione a função de serviço  ** Gerenciador **.
 7. Clique em  ** Designar **.
 
-### Opção 3. Conceda permissões a um usuário para se tornar um administrador de uma única instância do serviço no {{site.data.keyword.cloud_notm}}
+### Opção 3. Conceder permissões em um local
 {: #admin_account_opt3}
+
+É possível provisionar apenas 1 instância do serviço do {{site.data.keyword.at_full_notm}} por local. Portanto, quando você concede permissões usando essa opção, está controlando o acesso por local.
+{: note}
 
 Conclua as etapas a seguir para designar uma função de administrador de usuário em uma instância do serviço do {{site.data.keyword.at_full_notm}}: 
 

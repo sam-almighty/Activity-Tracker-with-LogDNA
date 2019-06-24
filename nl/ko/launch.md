@@ -35,10 +35,10 @@ subcollection: logdnaat
 
 다음 표에는 사용자가 웹 UI를 실행하고 {{site.data.keyword.at_full_notm}} 웹 UI를 통해 데이터를 보기 위해 보유해야 하는 최소 정책이 나열되어 있습니다.
 
-|역할                      |부여되는 권한            |
+|역할                      |부여되는 권한       |
 |---------------------------|---------------------|
-|플랫폼 역할: `뷰어`     |사용자가 관찰 가능성 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
-|서비스 역할: `독자`     |사용자가 웹 UI를 통해 이벤트를 볼 수 있도록 허용합니다. | 
+|플랫폼 역할: `뷰어`   |사용자가 관찰 가능성 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
+|서비스 역할: `독자`    |사용자가 웹 UI를 통해 이벤트를 볼 수 있도록 허용합니다. | 
 {: caption="표 1. IAM 정책" caption-side="top"} 
 
 자세한 정보는 [사용자 또는 서비스 ID에 사용자 권한 부여](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)를 참조하십시오.
@@ -55,15 +55,19 @@ subcollection: logdnaat
 
 	사용자 ID 및 비밀번호를 사용하여 로그인하면 {{site.data.keyword.cloud_notm}} 대시보드가 열립니다.
 
-2. 탐색 메뉴에서 **관찰 가능성**을 선택하십시오. 
+2. **메뉴** 아이콘 ![메뉴 아이콘](../icons/icon_hamburger.svg) > **관찰 가능성**을 클릭하십시오. 
 
-3. **Activity Tracker**를 선택하십시오.  
+3. **Activity Tracker**를 선택하십시오. 
 
-    {{site.data.keyword.cloud_notm}}에서 사용 가능한 인스턴스의 목록이 표시됩니다.
+    {{site.data.keyword.at_full_notm}} 인스턴스의 목록이 표시됩니다.
 
-4. 하나의 인스턴스를 선택하십시오. 그런 다음 **LogDNA 보기**를 클릭하십시오.
+    지역당 인스턴스가 하나 있습니다.
+    {: important}
 
-웹 UI가 열립니다.
+4. 이벤트를 보려는 지역의 인스턴스를 선택하십시오. 그런 다음 **LogDNA 보기**를 클릭하십시오.
+
+{{site.data.keyword.at_full_notm}} 웹 UI가 열리고 **모든 항목** 보기가 표시됩니다. 이 보기를 통해 선택한 지역에 대한 계정의 이벤트를 볼 수 있습니다.
+
 
 
 ## {{site.data.keyword.cloud_notm}}에서 웹 UI URL 가져오기

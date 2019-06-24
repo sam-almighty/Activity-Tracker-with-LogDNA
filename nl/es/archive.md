@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -28,27 +28,25 @@ subcollection: logdnaat
 Puede archivar sucesos de una instancia de {{site.data.keyword.at_full_notm}} en un grupo en una instancia de {{site.data.keyword.cos_full_notm}} (COS). 
 {:shortdesc}
 
-Para configurar el archivado, debe tener una política de IAM con el rol de plataforma **Visor** y el rol de servicio **Gestor** para el servicio {{site.data.keyword.at_full_notm}}.
-
-Puede archivar sucesos desde una instancia de {{site.data.keyword.at_full_notm}} en un grupo en una instancia de {{site.data.keyword.cos_full_notm}} (COS). Cada instancia de {{site.data.keyword.at_full_notm}} tiene su propia configuración de archivado. 
-
-Los sucesos se archivan automáticamente una vez al día en un formato comprimido **(.json.gz)**. Cada línea mantiene sus metadatos.
-
-Los sucesos se archivan en 24-48 horas después de guardar la configuración. 
-
-La instancia de {{site.data.keyword.cos_full_notm}} se suministra dentro del contexto de un grupo de recursos. La instancia de {{site.data.keyword.at_full_notm}} también se suministra dentro del contexto de un grupo de recursos. Ambas instancias se pueden agrupar bajo el mismo grupo de recursos o en grupos distintos. 
-
-{{site.data.keyword.at_full_notm}} utiliza un ID de servicio para comunicarse con el servicio {{site.data.keyword.cos_full_notm}}.
-
-* El ID de servicio que cree para una instancia de {{site.data.keyword.cos_full_notm}} lo utiliza {{site.data.keyword.at_full_notm}} para autenticarse y acceder a la instancia de {{site.data.keyword.cos_full_notm}}. 
-* Puede asignar políticas de acceso específicas a un ID de servicio que restrinjan los permisos en la instancia de {{site.data.keyword.cos_full_notm}}. Restrinja el ID de servicio para que solo tenga permisos de escritura sobre el grupo donde tenga pensado archivar los sucesos.
-
-En la figura siguiente se muestra una vista de alto nivel de los distintos componentes que están integrados al archivar sucesos:
-
-![Vista de alto nivel de archivado de sucesos](images/archive.png "Vista de alto nivel de archivado de sucesos")
-
-
 Realice los pasos siguientes para archivar una instancia de {{site.data.keyword.at_full_notm}} en un grupo en una instancia de {{site.data.keyword.cos_full_notm}}:
+
+## Requisitos previos
+{: #archiving_prereqs}
+
+* [Obtenga más información sobre cómo archivar sucesos](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive).
+
+* **Debe tener un plan de servicio de pago** para el servicio {{site.data.keyword.at_full_notm}}. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+
+* Compruebe que el ID de usuario tenga permisos para iniciar la interfaz de usuario web y para gestionar los sucesos. En la tabla siguiente se muestran los roles mínimos que debe tener un usuario para poder iniciar la interfaz de usuario web de {{site.data.keyword.at_full_notm}} y visualizar sucesos:
+
+| Rol                      | Permiso otorgado            |
+|---------------------------|-------------------------------|  
+| Rol de la plataforma: `Visor`     | Permite al usuario ver la lista de instancias de servicio en el panel de control Observabilidad. |
+| Rol de servicio: `Gestor`      | Permite que el usuario pueda iniciar la interfaz de usuario web y gestionar sucesos en la interfaz de usuario web.  |
+{: caption="Tabla 1. Roles de IAM" caption-side="top"} 
+
+Para obtener más información sobre cómo configurar las políticas para un usuario, consulte [Cómo otorgar permisos de usuario a un usuario o ID de servicio](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
+
 
 
 ## Paso 1. Otorgar políticas de IAM a un usuario para trabajar con {{site.data.keyword.cos_full_notm}}
@@ -133,7 +131,7 @@ Para gestionar los grupos, se deben otorgar al usuario permisos para trabajar co
 
 | Servicio                    | Roles                   | Acción                             | 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | Rol de la plataforma: Visor   | Permite que el usuario pueda ver todos los grupos y listar los objetos dentro de ellos a través de la interfaz de usuario de {site.data.keyword.Bluemix_notm}}. |
+| `Cloud Object Storage`     | Rol de la plataforma: Visor   | Permite que el usuario pueda ver todos los grupos y listar los objetos dentro de ellos. |
 | `Cloud Object Storage`     | Rol de servicio: Gestor   | Permite al usuario hacer públicos los objetos.                                                       |
 | `Cloud Object Storage`     | Roles de servicio: Gestor </br>Escritor | Permite que el usuario pueda crear y destruir grupos y objetos.                         | 
 | `Cloud Object Storage`     | Rol de servicio: Lector    | Permite al usuario mostrar y descargar objetos.                                                 |
@@ -167,17 +165,18 @@ Realice los pasos siguientes para crear un grupo:
     
     Un centro de datos individual solo distribuirá los datos en dispositivos dentro de un único sitio.
 
-    Para obtener más información, consulte [Seleccionar regiones y puntos finales](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints).
+    Para obtener más información, consulte [Seleccionar regiones y puntos finales](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints).
 
 6. Elija el tipo de *Clase de almacenamiento*.
 
-    Puede crear grupos con distintas clases de almacenamiento. Elija la clase de almacenamiento del grupo según sus requisitos de recuperación de datos. Para obtener más información, consulte [Utilizar clases de almacenamiento](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes).
+    Puede crear grupos con distintas clases de almacenamiento. Elija la clase de almacenamiento del grupo según sus requisitos de recuperación de datos. Para obtener más información, consulte [Utilizar clases de almacenamiento](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes).
 
     **Nota:** no es posible cambiar la clase de almacenamiento de un grupo una vez que se haya creado. Si fuera necesario volver a clasificar los objetos, se deben mover los datos a otro grupo con la clase de almacenamiento deseada.
 
 7. También puede añadir una clave de protección de clave para cifrar los datos en reposo.
 
-    Todos los objetos se cifran de forma predeterminada utilizando claves generadas de forma aleatoria y una transformación de todo o nada. Aunque este modelo de cifrado predeterminado proporciona seguridad en reposo, algunas cargas de trabajo necesitan estar en posesión de las claves de cifrado utilizadas. Para obtener más información, consulte [Gestionar el cifrado](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption).
+    Todos los objetos se cifran de forma predeterminada utilizando claves generadas de forma aleatoria y una transformación de todo o nada. Aunque este modelo de cifrado predeterminado proporciona seguridad en reposo, algunas cargas de trabajo necesitan estar en posesión de las claves de cifrado utilizadas. Para obtener más información, consulte [Gestionar el cifrado](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption).
+
 
 
 
@@ -246,11 +245,9 @@ Un punto final define dónde buscar un grupo. Hay distintos puntos finales en fu
 
 Realice los pasos siguientes para obtener el punto final para el grupo:
 
-1. Inicie una sesión en su cuenta de {{site.data.keyword.cloud_notm}}.
+1. [Inicie sesión en su cuenta de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/login){:new_window}.
 
-    Pulse el [panel de control de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/login){:new_window} para iniciar el panel de control de {{site.data.keyword.cloud_notm}}.
-
-	Después de iniciar sesión con su ID de usuario y su contraseña, se abre el panel de control de {{site.data.keyword.cloud_notm}}.
+	Después de iniciar sesión, se abrirá el panel de control de {{site.data.keyword.cloud_notm}}.
 
 2. Desde el Panel de control, seleccione la instancia de {{site.data.keyword.cos_full_notm}} donde tenga pensado crear el grupo.
 
@@ -300,7 +297,7 @@ Realice los pasos siguientes para asignar a un usuario permiso para archivar suc
 
 Realice los pasos siguientes para configurar el archivado de su instancia de {{site.data.keyword.at_full_notm}} en un grupo COS:
 
-1. Inicie la interfaz de usuario web de {{site.data.keyword.at_full_notm}}. [Más información](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2).
+1. [Inicie la interfaz de usuario web de {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch).
 
 2. Seleccione el icono **Configuración**. A continuación, seleccione **Archivado**. 
 

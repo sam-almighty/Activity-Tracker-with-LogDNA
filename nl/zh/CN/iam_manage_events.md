@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -29,6 +29,12 @@ subcollection: logdnaat
 {:shortdesc}
 
 例如，作为服务的管理员，您可以供应和除去服务的实例，授予其他用户使用服务的许可权以及将日志归档到 {{site.data.keyword.cos_full_notm}} (COS) 实例等。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam)。
+
+## 先决条件
+{: #iam_manage_events_prereq}
+
+您的用户标识需要**管理员平台许可权**才能管理 {{site.data.keyword.at_full_notm}} 服务。请联系帐户管理员。帐户所有者可以授予其他用户对帐户的访问权，以便管理用户访问权和管理帐户资源。[了解更多信息](/docs/iam?topic=iam-userroles)。
+
 
 ## 步骤 1. 创建访问组
 {: #ime_step1}
@@ -68,18 +74,24 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+定义策略时，需要选择平台角色和服务角色：
+* 平台管理角色涵盖一系列操作，包括创建和删除实例，管理别名、绑定和凭证，以及管理访问权的能力。平台角色有管理员、编辑者、操作员和查看者。平台管理角色还适用于帐户管理服务，这些服务支持用户邀请其他用户，管理服务标识、访问策略和目录条目以及跟踪计费和使用情况，具体取决于用户在帐户管理服务上所分配的角色。
+* 服务访问角色定义用户或服务对服务实例执行操作的能力。服务访问角色有管理者、写入者和读取者。
+
+要管理 {{site.data.keyword.at_full_notm}} 服务，用户需要以下角色：
+* 平台角色：**管理员**。 
+* 服务角色：**管理者**。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam)。
+
 要通过 UI 为访问组分配策略，请完成以下步骤：
 
 1. 在菜单栏中，单击**管理** &gt; **访问权 (IAM)**，然后选择**访问组**。
 2. 选择要为其分配访问权的组的名称。 
 3. 单击**访问策略**。
 4. 单击**分配访问权**。
-5. 选择是按资源组中的资源、按帐户中可用的单个资源还是按帐户管理服务分配访问权。例如，可以选择以下任一选项向用户授予管理 {{site.data.keyword.at_full_notm}} 实例的管理员角色：
+5. 选择是按资源组中的资源，还是按帐户中可用的单个资源分配访问权。例如，可以选择以下任一选项向用户授予管理 {{site.data.keyword.at_full_notm}} 的管理员角色：
 
-### 选项 1. 向用户授予许可权，使其成为 {{site.data.keyword.cloud_notm}} 帐户中服务的管理员
+### 选项 1. 授予对服务的许可权
 {: #admin_account_opt1}
-
-要向用户授予管理员角色来管理帐户中的服务，用户必须具有包含对 {{site.data.keyword.at_full_notm}} 服务的**管理员**平台角色的 IAM 策略。您必须为此用户分配对帐户中单个资源的访问权。 
 
 要为用户分配对帐户中 {{site.data.keyword.at_full_notm}} 服务的管理员角色，请完成以下步骤： 
 
@@ -91,10 +103,8 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 6. 选择**管理者**服务角色。
 7. 单击**分配**。
 
-### 选项 2. 向用户授予许可权，使其成为资源组中服务的管理员
+### 选项 2. 授予资源组的上下文中的许可权
 {: #admin_account_opt2}
-
-要向用户授予管理员角色来管理帐户中资源组内的实例，用户必须在资源组上下文中具有包含对 {{site.data.keyword.at_full_notm}} 服务的**管理员**平台角色的 IAM 策略。 
 
 要为用户分配对资源组上下文中 {{site.data.keyword.at_full_notm}} 服务的管理员角色，请完成以下步骤： 
 
@@ -111,8 +121,11 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 6. 选择**管理者**服务角色。
 7. 单击**分配**。
 
-### 选项 3. 向用户授予许可权，使其成为 {{site.data.keyword.cloud_notm}} 中服务的单个实例的管理员
+### 选项 3. 授予对某个位置的许可权
 {: #admin_account_opt3}
+
+每个位置只能供应 1 个 {{site.data.keyword.at_full_notm}} 服务实例。因此，使用此选项授予许可权时，是按位置控制访问权。
+{: note}
 
 要为用户分配对 {{site.data.keyword.at_full_notm}} 服务的一个实例的管理员角色，请完成以下步骤： 
 

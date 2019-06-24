@@ -27,28 +27,28 @@ Sono disponibili diversi piani di prezzo che puoi scegliere per un'istanza {{sit
 {:shortdesc}
 
 
-|Piano| 
+| Piano                     | 
 |--------------------------|
 | `30 days log search`  |
 | `14 days log search`  |
 | `7-day log search`   |
 | `Lite`                  |
-{: caption="Tabella 1. Elenco dei piani di servizio " caption-side="top"} 
+{: caption="Tabella 1. Elenco dei piani di servizio" caption-side="top"} 
 
 {{site.data.keyword.at_full_notm}} offre un piano `Lite` che puoi utilizzare per visualizzare i tuoi log quando transitano per il sistema. Puoi visualizzare i log utilizzando l'accodamento di log. Puoi anche progettare dei filtri per la preparazione all'upgrade a un piano con un periodo di conservazione più lungo. Questo piano ha un periodo di conservazione di 0 giorni.
 
 
-## Funzioni per piano 
+## Funzioni per piano
 {: #svcplan_features}
 
-Le seguenti tabelle descrivono le diverse funzioni che sono incluse in ogni piano di servizio: 
+Le seguenti tabelle descrivono le diverse funzioni che sono incluse in ogni piano di servizio:
 
-| Funzione | Piano `30 day log search`  | Piano `14 days log search`   | Piano `7 days log search      | Piano `Lite`  | 
+| Funzione                          | Piano `30 day log search` | Piano `14 days log search`    | Piano `7 days log search     | Piano `Lite` | 
 |----------------------------------|-------------------------|-------------------------------|-----------------------------|--------------|
-| `Logs are stored and searchable` |Sì - per 30 giorni |Sì - per 14 giorni |Sì - per 7 giorni | No           |
-| `Live streaming tail`            | Sì                     | Sì                     | Sì                     | Sì                     |
-| `Archiving`                      | Sì                     | Sì                     | Sì                     | No           |
-| `Multi-channel Alerting`         | Sì                     | Sì                     | Sì                     | No           | 
-{: caption="Tabella 2. Elenco delle funzioni disponibili per ogni piano di servizio " caption-side="top"} 
+| `Logs are stored and searchable` | Sì - per 30 giorni       | Sì - per 14 giorni             | Sì - per 7 giorni            | No           |
+| `Live streaming tail`            | Sì                     | Sì                           | Sì                         | Sì          |
+| `Archiving`                      | Sì                     | Sì                           | Sì                         | No           |
+| `Multi-channel Alerting`         | Sì                     | Sì                           | Sì                         | No           | 
+{: caption="Tabella 2. Elenco delle funzioni disponibili per ogni piano di servizio" caption-side="top"} 
 
 

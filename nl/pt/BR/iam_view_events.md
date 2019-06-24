@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -25,11 +25,14 @@ subcollection: logdnaat
 # Concedendo permissões de usuário a um usuário ou ID de serviço
 {: #iam_view_events}
 
-O {{site.data.keyword.iamlong}} (IAM) permite que você autentique com segurança os usuários e controle o acesso a todos os recursos em nuvem de forma consistente no {{site.data.keyword.cloud_notm}}. Conclua as etapas a seguir para conceder a um usuário ou ID de serviço as permissões mínimas para trabalhar com o serviço do {{site.data.keyword.at_full_notm}}:
+O {{site.data.keyword.iamlong}} (IAM) permite que você autentique com segurança os usuários e controle o acesso a todos os recursos em nuvem de forma consistente no {{site.data.keyword.cloud_notm}}. Conclua as etapas a seguir para conceder a um usuário ou ID de serviço as permissões mínimas para trabalhar com o serviço do {{site.data.keyword.at_full_notm}}: 
 {:shortdesc}
 
-Por exemplo, se você tiver um plano pago, será possível configurar essas permissões mínimas para conceder a um usuário acesso para visualizar, procurar e filtrar eventos, exportar dados e configurar alertas.
-[ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+## Pré-requisitos
+{: #iam_view_events_prereq}
+
+Seu ID de usuário precisa de **permissões de plataforma de administrador** para gerenciar o serviço {{site.data.keyword.at_full_notm}}. Entre em contato com o administrador da conta. O proprietário da conta pode conceder a outro usuário acesso à conta com o objetivo de gerenciar o acesso do usuário e os recursos da conta. [ Saiba mais ](/docs/iam?topic=iam-userroles).
+
 
 
 ## Etapa 1. Criar um grupo de acesso
@@ -57,7 +60,7 @@ ibmcloud iam access-group-create GROUP_NAME [-d, --description DESCRIPTION]
 
 Após configurar seu grupo, será possível designar uma política de acesso comum ao grupo. 
 
-Qualquer política que você configura para um grupo de acesso se aplica a todas as entidades, usuários e IDs de serviço, dentro do grupo.
+Qualquer política que você configura para um grupo de acesso se aplica a todas as entidades, usuários e IDs de serviço, dentro do grupo. 
 {: note}
 
 É possível designar a política usando a UI ou por meio da linha de comandos.
@@ -69,21 +72,32 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+Quando você define a política, é necessário selecionar uma função da plataforma e uma função do serviço:
+* As funções de gerenciamento da plataforma abrangem uma gama de ações, incluindo a capacidade de criar e
+excluir instâncias, gerenciar aliases, ligações, credenciais e acesso. As funções da plataforma são administrador,
+editor, operador, visualizador. As funções de gerenciamento de plataforma também se aplicam a serviços de gerenciamento de conta que permitem que os usuários convidem usuários, gerenciem IDs de serviço, políticas de acesso, entradas do catálogo e rastreiem faturamento e uso, dependendo de sua função designada em um serviço de gerenciamento de conta.
+* As funções de acesso ao serviço definem a capacidade de um usuário ou serviço de executar ações em uma instância de serviço. As funções de acesso de serviço são gerenciador, gravador e leitor.
+
+Para gerenciar o serviço {{site.data.keyword.at_full_notm}}, um usuário precisa das seguintes funções:
+* Função da plataforma: **Visualizador**. 
+* Função do serviço: **Leitor**.
+[ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+
+
+
 Conclua as etapas a seguir para designar uma política a um grupo de acesso por meio da UI:
 
 1. Na barra de menus, clique em **Gerenciar** &gt; **Acesso (IAM)** e selecione **Grupos de acesso**.
 2. Selecione o nome do grupo ao qual você deseja designar acesso. 
 3. Clique em **Políticas de acesso**.
 4. Clique em **Designar acesso**.
-5. Escolha para designar acesso por recursos dentro de um grupo de recursos, recursos individuais disponíveis dentro da conta ou serviços de gerenciamento de conta. Por exemplo, é possível escolher qualquer uma das opções a seguir para conceder a um usuário uma função de administrador para gerenciar uma instância do {{site.data.keyword.at_full_notm}}:
+5. Conceda permissões. Selecione uma das opções a seguir:
 
 
-### Opção 1. Conceda permissões a um usuário para se tornar um administrador do serviço na conta do {{site.data.keyword.cloud_notm}}
+### Opção 1. Conceder permissões no serviço
 {: #user_opt1}
 
-Para conceder a um usuário a função de administrador para gerenciar o serviço na conta, o usuário deve ter uma política do IAM para o serviço {{site.data.keyword.at_full_notm}} com a função da plataforma **Administrador**. Deve-se designar esse acesso de usuário a um recurso individual na conta. 
-
-Conclua as etapas a seguir para designar uma função de administrador de usuário para o serviço {{site.data.keyword.at_full_notm}} na conta: 
+Conclua as etapas a seguir: 
 
 1. Selecione **Designar acesso a recursos**.
 2. Selecione **IBM Cloud Activity Tracker with LogDNA**.
@@ -93,12 +107,10 @@ Conclua as etapas a seguir para designar uma função de administrador de usuár
 6. Selecione a função de serviço **Leitor**.
 7. Clique em  ** Designar **.
 
-### Opção 2. Conceda permissões a um usuário para se tornar um administrador do serviço dentro de um grupo de recursos
+### Opção 2. Conceder permissões dentro do contexto de um grupo de recursos
 {: #user_opt2}
 
-Para conceder a um usuário a função de administrador para gerenciar instâncias dentro de um grupo de recursos na conta, o usuário deve ter uma política do IAM para o serviço {{site.data.keyword.at_full_notm}} com a função da plataforma **Administrador** dentro do contexto do grupo de recursos. 
-
-Conclua as etapas a seguir para designar a um usuário a função de administrador para o serviço {{site.data.keyword.at_full_notm}} dentro do contexto de um grupo de recursos: 
+Conclua as etapas a seguir: 
 
 1. Selecione **Designar acesso em um grupo de recursos**.
 2. Selecione um grupo de recursos.
@@ -113,14 +125,14 @@ Conclua as etapas a seguir para designar a um usuário a função de administrad
 6. Selecione a função de serviço **Leitor**.
 7. Clique em  ** Designar **.
 
-### Opção 3. Conceda permissões a um usuário para se tornar um administrador de uma única instância do serviço no {{site.data.keyword.cloud_notm}}
+### Opção 3. Conceder permissões em um local
 {: #user_opt3}
 
-Conclua as etapas a seguir para designar uma função de administrador de usuário em uma instância do serviço do {{site.data.keyword.at_full_notm}}: 
+É possível provisionar somente uma instância por local. Portanto, para conceder permissões para visualizar eventos em uma região, conclua as etapas a seguir: 
 
 1. Selecione **Designar acesso a recursos**.
 2. Selecione **IBM Cloud Activity Tracker with LogDNA**.
-3. Selecione a instância.
+3. Selecione a instância na região em que o usuário deve ter permissão para ver eventos.
 4. Selecione a função de plataforma  ** Visualizador **.
 5. Selecione a função de serviço **Leitor**.
 6. Clique em  ** Designar **.

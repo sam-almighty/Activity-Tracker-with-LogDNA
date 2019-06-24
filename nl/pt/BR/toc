@@ -9,6 +9,8 @@ IBM Cloud Activity Tracker with LogDNA
     event.md
     cloud_services.md
     iam.md
+    monitor_events.md
+    manage_events.md
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -33,6 +35,8 @@ IBM Cloud Activity Tracker with LogDNA
     {: .topicgroup}
     Eventos
         at_events_iam.md
+        at_events_acc_mgt.md
+        at_events_rc.md
 
     [Página de produtos LogDNA](https://logdna.com/)
     [Blog LogDNA](https://blog.logdna.com/)
