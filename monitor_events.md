@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-06-26"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, monitor events
 
@@ -100,17 +100,15 @@ To learn how to view events through this view, see [Viewing events](/docs/servic
 
 You might want to monitor a set of events in your account. To anayze a subset of events, you can create custom views. 
 
-To create a custom view, you must apply a search query that defines what events to display through the view. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events#view_events_step2).
+You create a custom view by applying a search query that defines what events to display through the view. [Learn more](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events#view_events_step2).
 
-You can [attach alerts](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts) to a custom view. 
+You can also run any of the following tasks:
 
-You can [export data](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-export) from a custom view. 
-
-You can [rename, and add or modify the description of a view](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step5). 
-
-You can [apply a line template](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step4) to a view to customize how the data is displayed. 
-
-You can organize views by grouping them in **categories*.
+* [Attach an alert](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts) to a custom view
+* [Export data](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-export) from a custom view 
+* [Rename, and add or modify the description of a view](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step5)
+* [Apply a line template](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step4) to a view to customize how the data is displayed
+* Organize views by grouping them into **categories**
 
 
 ## Monitoring events by applying a timeframe
@@ -137,26 +135,43 @@ There are scenarios where you might want to be notified if specific events are g
 
 Through the {{site.data.keyword.at_full_notm}} web UI, you can apply search queries to define the events that are displayed through a custom view. Then, you can attach an alert to that view to be notified when a condition occurs. A bell icon is displayed with the view to indicate that this view has an alert attached to it.
 
-* You can [attach one alert](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts#alerts_step4) per view.
-* You can configure conditions that are based on the number of event lines that meet the search query in the view, on a time frequency, or both.
+Consider the following information when you configure alerts:
+* You can [attach one alert](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts#alerts_step4) per custom view. There are 2 types of alerts: presence alert and absence alert.
+
+* You can configure conditions that are based on the number of event lines that meet the search query in the view, on a time frequency, or both. 
+
+* The time frequency that is specified as part of the condition defines the reset time of an alert after it is triggered.
+
 * You can define multiple notification channels for an alert. For information about the supported channels, see [Alert notification channels](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels).
-* You can [define a **preset**](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts#alerts_step3). A preset is an alert template that you can attach to any number of views. You can use presets to define templates that users can reuse when they attach an alert to a view. 
-* You can mute alerts. 
+
+* You can [define **presets**](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts#alerts_step3). A preset is an alert template that users can attach to any number of views. Service administrators define presets. Notice that when you delete a preset, any alerts that are defined by using this preset are automatically deleted.
+
+* You can enable or disable the feature on alerts that allow a user to mute an alert for a period of time. This feature only applies to email notification channels.
+
 * You can [detach an alert](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts#alerts_delete_view) from a view. 
 
+* The timestamp that you see in a notification is set to UTC. For email notifications, you can set the **Timezone** to define a different timestamp value such as local time, for example. 
 
-### Alert types
-{: #mon_alerts_types}
 
-You can configure the following types of alerts:
 
-* **Presence alert**: You can use this type of alert to notify when the number of events that show in a view is more than what you expect. 
-* **Absence alert**: You can use this type of alert to notify when the number of events that show in a view is less than what you expect, or none. 
+
+### Presence alert
+{: #mon_alerts_presence}
+
+Configure a presence alert to notify when the number of events that show in a view is more than what you expect. 
 
 For example, you might have a view that shows events that report the deletion of service instances in your account. You are not expecting the deletion of service instances. You can configure a *presence alert** that triggers an alert when 1 or more events show in the view.
 
-The absence alert is enabled after an event is shown in the view.
-{: note}
+
+### Absence alert
+{: #mon_alerts_absences}
+
+Configure an absence alert to notify when the number of events that show in a view is less than what you expect, or none. 
+
+An absence alert is triggered when the view that has an absence alert attached to it is active. A view is active when the view receives events within the last 24 hours.
+{: important}
+
+For example, you might have a view that does not get any events for 2 days. Therefore, this view is not active. You have an absence alert attached to this view that is configured to send a notification after 30 minutes. Because the view is not active, the absence alert is muted and you do not get notifications. To make the view active and get notifications for the absence condition, events need to start flowing into the view. 
 
 
 ### Alert conditions
@@ -175,6 +190,17 @@ If you set the *Event lines counter* to be the only condition that triggers an a
 For example, you can configure an alert that is triggered after 30 seconds, or when a 100 event lines that match the view's filtering and search criteria are collected.
 
 
+### Mute alert notifications
+{: #mon_alerts_mute}
+
+By default, the feature that controls the ability of a user to mute notifications is enabled when you configure an alert on a custom view. The **Muteable** feature applies to email notifications only.
+
+When the **mutable** feature is enabled on an alert, a user can pause notifications for a period of time. A user can choose to mute an alert for a period of 1 hour, 6 hours, 12 hours, or 1 day. 
+
+
+
+
+
 
 ## Exporting events
 {: #mon_export}
@@ -189,6 +215,11 @@ Consider the following information when you export events:
 * You export a set of event entries. 
 * To define the set of data that you want to export, you can apply filter and searches. You can also specify the time range. 
 * The maximum number of lines that you can export is 20,000.
+
+
+To make the EU-DE (Frankfurt) location EU compliant, the export function is **not available** in **Frankfurt**. The download website for the exported logs is currently located outside the EU.
+{: important}
+
 
 ### By using the REST API
 {: #mon_export_api}
