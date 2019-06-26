@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-06"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, endpoints
 
@@ -28,7 +28,9 @@ La seguente tabella elenca gli endpoint per ogni regione:
 {:shortdesc}
 
 
-|Regione|Ubicazione|  Endpoint                                          |
-|-----------------------|-----------|----------------------------------------------------|
-| **US South**          | Dallas    | `https://api.us-south.logging.cloud.ibm.com`       |
+| Regione                | Endpoint                                          |
+|-----------------------|---------------------------------------------------|
+| `Dallas (us-south)`   | `https://api.us-south.logging.cloud.ibm.com`      |
+| `Frankfurt (eu-de)`   | `https://api.eu-de.logging.cloud.ibm.com`         |
+| `Tokyo (jp-tok)`      | `https://api.jp-tok.logging.cloud.ibm.com`        |
 {: caption="Endpoint per ogni regione" caption-side="top"} 

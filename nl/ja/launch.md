@@ -38,7 +38,7 @@ subcollection: logdnaat
 | 役割                      | 付与される許可       |
 |---------------------------|---------------------|
 | プラットフォーム役割: `ビューアー`   | ユーザーが「プログラム識別情報」ダッシュボードでサービス・インスタンスのリストを表示できるようにします。 |
-| サービス役割: `リーダー`    | ユーザーが Web UI を介してイベントを表示できるようにします。| 
+| サービス役割: `リーダー`    | ユーザーが Web UI を介してイベントを表示できるようにします。 | 
 {: caption="表 1. IAM ポリシー" caption-side="top"} 
 
 詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
@@ -55,15 +55,19 @@ Web UI を起動するには、以下の手順を実行します。
 
 	ユーザー ID とパスワードを使用してログインすると、{{site.data.keyword.cloud_notm}} ダッシュボードが開きます。
 
-2. ナビゲーション・メニューで、**「プログラム識別情報」**を選択します。 
+2. **「メニュー」**アイコン ![メニュー・アイコン](../icons/icon_hamburger.svg) >**「プログラム識別情報」**をクリックします。 
 
 3. **「Activity Tracker」**を選択します。 
 
-    {{site.data.keyword.cloud_notm}} で使用可能なインスタンスのリストが表示されます。
+    {{site.data.keyword.at_full_notm}} インスタンスのリストが表示されます。
 
-4. インスタンスを 1 つ選択します。 次に、**「LogDNA の表示 (View LogDNA)」**をクリックします。
+    地域ごとに 1 つのインスタンスがあります。
+    {: important}
 
-Web UI が開きます。
+4. イベントを表示する地域のインスタンスを選択します。 次に、**「LogDNA の表示 (View LogDNA)」**をクリックします。
+
+{{site.data.keyword.at_full_notm}} Web UI が開き、**「すべて (Everything)」**ビューが表示されます。 このビューを介して、選択した地域での自分のアカウントのイベントを表示できます。
+
 
 
 ## {{site.data.keyword.cloud_notm}} からの Web UI URL の取得

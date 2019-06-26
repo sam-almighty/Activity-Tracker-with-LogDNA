@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,71 +23,83 @@ subcollection: logdnaat
 
 
 # イベントの表示
-{: #view_events.md}
+{: #view_events}
 
-{{site.data.keyword.cloud_notm}} に {{site.data.keyword.at_full_notm}} サービスのインスタンスをプロビジョンすると、{{site.data.keyword.at_full_notm}} Web UI を介してイベントを表示できます。
-{:shortdesc}
-
-
-## 前提条件
-{: #view_events_prereqs}
-
-開始する前に、自分のユーザー ID に Web UI を起動し、イベントを表示するための権限があるか確認します。 
-
-**注:** ポリシーを管理するには、{{site.data.keyword.at_full_notm}} サービスの管理者または {{site.data.keyword.at_full_notm}} インスタンスの管理者であるか、アカウントの IAM 権限が必要です。
-
-次の表は、{{site.data.keyword.at_full_notm}} Web UI を起動してイベントを表示するためにユーザーに必要な最小限のポリシーをリストしたものです。
-
-| 役割                      | 付与される許可            |
-|---------------------------|-------------------------------|  
-| プラットフォーム役割: `ビューアー`     | ユーザーが「プログラム識別情報」ダッシュボードでサービス・インスタンスのリストを表示できるようにします。 |
-| サービス役割: `リーダー`      | ユーザーが Web UI を起動して Web UI にイベントを表示できるようにします。  |
-{: caption="表 1. IAM ポリシー" caption-side="top"} 
-
-ユーザーに対してこれらのポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
+{{site.data.keyword.cloud_notm}} に {{site.data.keyword.at_full_notm}} サービスのインスタンスをプロビジョンすると、{{site.data.keyword.at_full_notm}} Web UI を介してイベントを表示できます。イベントはユーザーの現地時間で表示されます。{:shortdesc}
 
 
-## Web UI によるイベントの表示
+## イベントの表示
 {: #view_events_step1}
 
-{{site.data.keyword.at_full_notm}} Web UI を起動するには、以下のステップを実行します。
+イベントを表示するには、以下のステップを実行します。
 
-1. [{{site.data.keyword.cloud_notm}} アカウントにログイン ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/login){:new_window} します。
+1. 自分のユーザー ID に、Web UI を起動してイベントを表示するための権限があるか確認します。 
 
-	ユーザー ID とパスワードを使用してログインすると、{{site.data.keyword.cloud_notm}} *ダッシュボード* が開きます。
+    以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要な役割を示しています。
 
-2. メニュー・アイコン ![メニュー・アイコン](../../icons/icon_hamburger.svg) に移動し、**「プログラム識別情報」**を選択します。 
+    <table>
+      <caption>表 1. IAM 役割</caption>
+      <tr>
+        <th>役割</th>
+        <th>付与される許可</th>
+      </tr>
+      <tr>
+        <td>プラットフォーム役割: `ビューアー`</td>
+        <td>ユーザーが*「プログラム識別情報」*ダッシュボードでサービス・インスタンスのリストを表示できるようにします。</td>
+      </tr>
+      <tr>
+        <td>サービス役割: `リーダー`</td>
+        <td>ユーザーが Web UI を起動して Web UI でイベントを表示、検索、フィルタリングできるようにします。</td>
+      </tr>
+    </table>
 
-3. **「Activity Tracker」**を選択します。 
+    ユーザーに対してポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
 
-    {{site.data.keyword.at_full_notm}} インスタンスのリストが表示されます。
+2. [Web UI に移動します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
 
-    **注:** 地域ごとに 1 つのインスタンスがあります。
+3. **「ビュー」**アイコン ![構成アイコン](images/views.png) をクリックします。
 
-4. イベントを表示する地域のインスタンスを選択します。次に、**「LogDNA の表示 (View LogDNA)」**をクリックします。
+4. すべてのイベントまたは 1 つのビューを表示するには、**「すべて (Everything)」** を選択します。 
 
-{{site.data.keyword.at_full_notm}} Web UI が開き、**「すべて (Everything)」**ビューが表示されます。このビューを介して、選択した地域での自分のアカウントのイベントを表示できます。
-
-**注:** 現在、`ライト`・プランをご利用で、探しているイベントが見つからない場合は、古いイベントに関する検索機能を有効にするために有料プランにアップグレードする必要があることがあります。検索可能なイベントの日数は、選択するプランによって異なります。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。
+選択したビューを介してイベントを表示できます。
 
 
-## デフォルト・ビューのカスタマイズ
+
+## 検索照会を適用してイベントのサブセットを表示する
 {: #view_events_step2}
 
-**「ユーザー設定」**セクションで、行単位で表示されるデータ・フィールドの順序を変更できます。
+検索照会を適用して、ビューで表示されるイベントを選択できます。このビューを後で再使用するために保存できます。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2)。
 
-イベント行のフォーマットを変更するには、以下のステップを実行します。
+ 
 
-1. Web UI で、**「構成」**アイコン ![構成アイコン](images/admin.png "管理アイコン") をクリックします。
-2. **「ユーザー設定」**を選択します。 新しいウィンドウが開きます。
-3. **「ログ・フォーマット (Log Format)」**を選択します。
-4. *要件に合わせて「行フォーマット (Line Format)」*セクションを変更します。 ボックスをドラッグします。
 
+## 時間フレームを適用してイベントのサブセットを表示する
+{: #view_events_step3}
+
+時間フレームを適用して、ビューで表示されるイベントを選択できます。
+
+絶対時刻、相対時間、または時刻範囲を指定してタイム・スタンプを適用できます。
+
+特定の時刻にジャンプするには、以下のステップを実行します。
+1. [Web UI に移動します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
+2. **「ビュー」**アイコン ![構成アイコン](images/views.png) をクリックします。
+3. **「すべて (Everything)」**または 1 つのビューを選択します。
+4. 時刻照会を入力します。以下のいずれかのオプションを選択します。
+
+    * `May 20 7:00pm` などの、イベント内の特定の時点にジャンプするための絶対時間を入力します。
+    
+    * `2 days ago`、`today at 12am`、`an hour ago` などの相対時刻を入力します。
+
+    * `yesterday 10am to yesterday 11am`、`last fri 4:30pm to 11/12 1 AM`、`last wed 4:30pm to 23/05 1 AM`、`May 20 10am to May 22 10am` などの時刻範囲を入力します。開始タイム・スタンプと終了タイム・スタンプを区切る `to` を必ず入力してください。
+
+5. **Enter** をクリックします。
+
+    `「要求は予想より長い時間がかかっています。後れを取り戻そうとしているので、すぐにブラウザーの最新表示を試行してください。再試行してください。(Your request is taking longer than expected, try refreshing your browser in a bit as we try to catch up. Retry.)」`というエラー・メッセージが表示されます。このエラーは、指定した時間フレームに表示可能なイベントがない場合に発生することがあります。時間照会を変更し、再試行してください。
 
 
 
 ## コンテキストでイベントを表示する
-{: #view_events_step3}
+{: #view_events_step4}
 
 コンテキスト内の各イベント行を随時表示できます。
 
@@ -106,9 +118,8 @@ subcollection: logdnaat
 
 
 
-
 ## イベントをクリップボードにコピーする
-{: #view_events_step4}
+{: #view_events_step5}
 
 
 イベントをクリップボードにコピーするには、以下のステップを実行します。 

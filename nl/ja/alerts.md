@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, alerts, events
 
@@ -23,46 +23,30 @@ subcollection: logdnaat
 
 
 # アラートの構成
-{: #alerts.md}
+{: #alerts}
 
-{{site.data.keyword.at_full_notm}} の Web UI を使用して、検索基準やフィルター基準を適用することで、カスタム・ビューで表示されるイベントを定義できます。その後、通知させるアラートをビューにアタッチできます。1 つのビューに 1 つ以上のアラートをアタッチできます。 1 つのアラートについて複数の通知チャネルを定義できます。 アラートをミュートすることができます。 アラートをビューからデタッチできます。
+{{site.data.keyword.at_full_notm}} の Web UI で、検索照会を適用することで、カスタム・ビューで表示されるイベントを定義できます。その後、条件が発生したときに通知するアラートをそのビューにアタッチできます。1 つのビューに 1 つ以上のアラートをアタッチできます。 1 つのアラートについて複数の通知チャネルを定義できます。 アラートをミュートすることができます。 アラートをビューからデタッチできます。
 {:shortdesc}
 
 
-アラートに対して、以下の条件をどれでも構成できます。
-
-* *時間頻度*: アラートをトリガーする頻度を指定します。 有効な値は、30 秒、1 分、5 分、15 分、30 分、1 時間、6 時間、12 時間、24 時間です
-* *イベント行カウンター*: ビューのフィルターと検索基準に一致するイベント行の数を指定します。 このイベント行の数に達すると、アラートがトリガーされます。
-
-両方の条件とも検査するか、一方の条件のみにするかを決めることができます。 両方の条件とも設定した場合は、いずれかのしきい値に達するとアラートがトリガーされます。 
-
-例えば、30 秒後か、またはビューのフィルターと検索基準に一致するイベント行が 100 行収集されると、アラートがトリガーされるように構成できます。
-
-複数の通知チャネルを構成できます。 有効なチャネルは、`email`、`Slack`、`PagerDuty`、`Webhook`、`OpsGenie`、`Datadog`、`AppOptics`、`VictorOps` です
-
-**事前設定**も定義できます。 事前設定とは、任意の数のビューにアタッチできるアラート・テンプレートのことです。 
-
-ビューと共にベルのアイコンが表示されると、このビューにアラートがアタッチされていることを示しています。
-
-
 ## 前提条件
-{: #views_prereqs}
+{: #alerts_prereqs}
 
-開始する前に、自分のユーザー ID に Web UI を起動してイベントを表示するための権限があるか確認します。 
+* [アラートについての詳細を確認します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_alerts)。
 
-**注:** ポリシーを管理するには、{{site.data.keyword.at_full_notm}} サービスの管理者または {{site.data.keyword.at_full_notm}} インスタンスの管理者であるか、アカウントの IAM 権限が必要です。
+* {{site.data.keyword.at_full_notm}} サービスの**有料サービス・プランのご利用**が必要です。 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。
 
-以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要なポリシーを示しています。
+* 自分のユーザー ID に Web UI を起動してイベントを表示するための権限があるか確認します。以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要な役割を示しています。
 
 | 役割                      | 付与される許可            |
 |---------------------------|-------------------------------|  
 | プラットフォーム役割: `ビューアー`     | ユーザーが「プログラム識別情報」ダッシュボードでサービス・インスタンスのリストを表示できるようにします。 |
 | サービス役割: `リーダー`      | ユーザーが Web UI を起動して Web UI にイベントを表示できるようにします。  |
-{: caption="表 1. IAM ポリシー" caption-side="top"} 
+{: caption="表 1. IAM 役割" caption-side="top"} 
 
-ユーザーに対してこれらのポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
+ユーザーに対してポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
 
-{{site.data.keyword.at_full_notm}} サービスの**有料サービス・プランのご利用**が必要です。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
+ 
 
 
 ## ステップ 1. Web UI へ移動する
@@ -74,7 +58,7 @@ subcollection: logdnaat
 ## ステップ 2. ビューを作成する
 {: #alerts_step2}
 
-[ビューを作成します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md)。
+[ビューを作成します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views)。
 
 
 
@@ -89,8 +73,10 @@ subcollection: logdnaat
 1. Web UI で、**「構成」**アイコン ![構成アイコン](images/admin.png "管理アイコン") を選択します。
 2. **「アラート (Alerts)」**を選択します。
 3. **「事前設定アラートの追加 (Add a preset alert)」**を選択します。
-4. 通知チャネルを選択します。 
-5. しきい値条件を定義します。
+4. 通知チャネルを選択します。サポートされているチャネルのリストについては、[アラート通知チャネル](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels)を参照してください。
+5. アラートのタイプを選択します。ビューに表示されるイベントの数が予想より多い場合に通知するには、**「存在アラート (Presence alert)」**タイプを選択します。ビューに表示されるイベントの数が予想より少ない場合や存在しない場合に通知するには、**「不在アラート (Absence alert)」**タイプを選択します。 
+5. 通知チャネルを選択します。サポートされているチャネルのリストについては、[アラート通知チャネル](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels)を参照してください。
+6. しきい値条件を定義します。
 
     1. 時間頻度を選択します。 例えば、12 時間を選択します。
 
@@ -98,11 +84,11 @@ subcollection: logdnaat
 
     3. 両方の条件とも検査するか、一方だけにするかを選択します。
 
-6. 選択した通知チャネルに関する詳細情報を追加します。
+7. 選択した通知チャネルに関する詳細情報を追加します。
 
     例えば、E メール通知チャネルの場合、1 つ以上の宛先と、オプションでタイム・ゾーンを追加します。
 
-7. **「アラートの保存 (Save alert)」**をクリックします。
+8. **「アラートの保存 (Save alert)」**をクリックします。
 
 
 
@@ -117,7 +103,7 @@ subcollection: logdnaat
 ビューに事前設定をアタッチするには、以下のステップを実行します。
 
 1. Web UI で、**「ビュー」**アイコン ![構成アイコン](images/views.png) をクリックします。
-2. アラートをアタッチするビュー名をクリックします。次に、**「アラートのアタッチ (Attach an alert)」**を選択します。
+2. アラートをアタッチするビュー名をクリックします。 次に、**「アラートのアタッチ (Attach an alert)」**を選択します。
 3. 事前設定を選択してアラート定義を再利用します。 
 4. **「アラートの保存 (Save alert)」**をクリックします。 
 
@@ -133,7 +119,8 @@ subcollection: logdnaat
 2. ビュー名をクリックします。 次に、**「アラートのアタッチ (Attach an alert)」**を選択します。
 3. **「ビューに固有のアラート (view-specific alert)」**をクリックします。
 4. 通知チャネルを選択します。 
-5. しきい値条件を定義します。
+5. アラートのタイプを選択します。ビューに表示されるイベントの数が予想より多い場合に通知するには、**「存在アラート (Presence alert)」**タイプを選択します。ビューに表示されるイベントの数が予想より少ない場合や存在しない場合に通知するには、**「不在アラート (Absence alert)」**タイプを選択します。 
+6. しきい値条件を定義します。
 
     1. 時間頻度を選択します。 例えば、12 時間を選択します。
 
@@ -141,11 +128,11 @@ subcollection: logdnaat
 
     3. 両方の条件とも検査するか、一方だけにするかを選択します。
 
-6. 選択した通知チャネルに関する詳細情報を追加します。
+7. 選択した通知チャネルに関する詳細情報を追加します。
 
     例えば、E メール通知チャネルの場合、1 つ以上の宛先と、オプションでタイム・ゾーンを追加します。
 
-7. **「アラートの保存 (Save alert)」**をクリックします。
+8. **「アラートの保存 (Save alert)」**をクリックします。
 
 
 

@@ -37,7 +37,7 @@ A tabela a seguir lista a política mínima que um usuário deve ter para poder 
 
 | Atribuição                      | Permissão concedida       |
 |---------------------------|---------------------|
-| Função de plataforma: `Viewer` | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
+| Função de plataforma: `Viewer`   | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
 | Função de serviço: `Reader`    | Permite que o usuário visualize eventos por meio da UI da web. | 
 {: caption="Tabela 1. Políticas do IAM" caption-side="top"} 
 
@@ -55,15 +55,19 @@ Conclua as etapas a seguir para ativar a IU da web:
 
 	Depois de efetuar login com seu ID do usuário e senha, o painel do {{site.data.keyword.cloud_notm}} se abre.
 
-2. No menu de navegação, selecione  ** Observabilidade **. 
+2. Clique no ícone **Menu** ![Ícone de menu](../icons/icon_hamburger.svg) > **Observabilidade**. 
 
 3. Selecione **Activity Tracker**. 
 
-    A lista de instâncias disponíveis no {{site.data.keyword.cloud_notm}} é exibida.
+    A lista de instâncias do {{site.data.keyword.at_full_notm}} é exibida.
 
-4. Selecione uma instância. Em seguida, clique em  ** Visualizar LogDNA **.
+    Há 1 instância por região.
+    {: important}
 
-A UI da web é aberta.
+4. Selecione a instância na região na qual você deseja visualizar eventos. Em seguida, clique em  ** Visualizar LogDNA **.
+
+A UI da web do {{site.data.keyword.at_full_notm}} é aberta e mostra a visualização **Tudo**. Por meio dessa visualização, é possível ver os eventos em sua conta para a região que você selecionou.
+
 
 
 ## Obtendo a URL da IU da web por meio do {{site.data.keyword.cloud_notm}}

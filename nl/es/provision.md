@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-03"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, provision instance
 
@@ -24,18 +24,18 @@ subcollection: logdnaat
 # Suministro de una instancia
 {: #provision}
 
-Para poder supervisar y gestionar datos de sucesos con {{site.data.keyword.at_full_notm}}, primero debe suministrar una instancia del servicio en {{site.data.keyword.cloud_notm}}.
+Para poder supervisar y gestionar datos de sucesos con {{site.data.keyword.at_full_notm}}, debe suministrar una instancia del servicio en {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
-Para suministrar una instancia de {{site.data.keyword.at_full_notm}} en una región de Cloud pública, debe seleccionar el plan de servicio asociado a la instancia, la región donde se recopilan los registros y el plan que determina el periodo de retención de los registros. Puede elegir periodos de retención de 7, 14 o 30 días.
-
-Como alternativa, {{site.data.keyword.at_full_notm}} ofrece un plan `Lite` que puede utilizar para ver los sucesos a medida que pasan a través del sistema. Puede visualizar sucesos utilizando el seguimiento de sucesos. También puede diseñar filtros para preparar la actualización a un plan con un periodo de retención más largo. Este plan tiene un periodo de retención de 0 días.
-
-Para suministrar una instancia de servicio, el ID de usuario debe tener permisos para suministrar un servicio en un grupo de recursos. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups).
-{: tip}
+Para suministrar una instancia de {{site.data.keyword.at_full_notm}} en una región de Cloud pública, tenga en cuenta la información siguiente:
+* Debe seleccionar el plan de servicio asociado a la instancia, la región donde se recopilan los registros y el plan que determina el periodo de retención de los registros. Puede elegir periodos de retención de 7, 14 o 30 días. Como alternativa, {{site.data.keyword.at_full_notm}} ofrece un plan `Lite` que puede utilizar para ver los sucesos a medida que pasan a través del sistema. Puede visualizar sucesos utilizando el seguimiento de sucesos. También puede diseñar filtros para preparar la actualización a un plan con un periodo de retención más largo. Este plan tiene un periodo de retención de 0 días.
+* El ID de usuario debe tener permisos para suministrar un servicio en un grupo de recursos. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups).
 
 
-## Suministro de una instancia a través del panel de control Observabilidad.
+Solo puede suministrar una instancia del servicio por región de {{site.data.keyword.cloud_notm}}.
+{: important}
+
+## Suministro de una instancia a través del panel de control Observabilidad
 {: #provision_ui}
 
 Para suministrar una instancia desde el panel de control Observabilidad en {{site.data.keyword.cloud_notm}}, realice los pasos siguientes:
@@ -50,7 +50,7 @@ Para suministrar una instancia desde el panel de control Observabilidad en {{sit
 
 4. Especifique un nombre para la instancia de servicio.
 
-5. Seleccione la región donde tenga pensado suministrar la instancia.
+5. Seleccione la [ubicación](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions) donde tenga pensado suministrar la instancia. 
 
 6. Seleccione un grupo de recursos. 
 
@@ -66,7 +66,7 @@ Para suministrar una instancia desde el panel de control Observabilidad en {{sit
 
 Después de suministrar una instancia, se abre el panel de control *Activity Tracker*. 
 
-A continuación, acceda a la interfaz de usuario web para gestionar sucesos en la cuenta. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md).
+A continuación, acceda a la interfaz de usuario web para ver los sucesos de la cuenta. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events).
 
 
 
@@ -79,7 +79,7 @@ Para suministrar una instancia de {{site.data.keyword.at_full_notm}} a través d
 
 	Cuando inicia una sesión con su ID de usuario y su contraseña, se abre la interfaz de usuario de {{site.data.keyword.cloud_notm}}.
 
-2. Pulse **Catálogo**. Se abrirá la lista de servicios disponibles en {{site.data.keyword.cloud_notm}}.
+2. Pulse **Catálogo**. Se abre la lista de servicios disponibles en {{site.data.keyword.cloud_notm}}.
 
 3. Para filtrar la lista de servicios que se visualiza, seleccione la categoría **Herramientas de desarrollador**.
 
@@ -87,17 +87,22 @@ Para suministrar una instancia de {{site.data.keyword.at_full_notm}} a través d
 
 5. Especifique un nombre para la instancia de servicio.
 
-6. Seleccione un grupo de recursos. 
+6. Seleccione la ubicación donde tenga pensado suministrar la instancia. 
+
+    Para obtener la lista más reciente de ubicaciones disponibles para el servicio
+{{site.data.keyword.at_full_notm}}, consulte [Ubicaciones](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
+
+7. Seleccione un grupo de recursos. 
 
     De forma predeterminada, se selecciona el grupo de recursos **predeterminado**.
 
     **Nota:** si no puede seleccionar un grupo de recursos, compruebe que tiene permisos de edición sobre el grupo de recursos donde desea suministrar la instancia.
 
-7. Seleccione el plan de servicio `Lite`. 
+8. Seleccione el plan de servicio `Lite`. 
 
     De forma predeterminada, se establece el plan Lite.
 
-8. Pulse **Crear**.
+9. Pulse **Crear**.
 
 Después de suministrar una instancia, se abre el panel de control *Activity Tracker*. 
 
@@ -113,7 +118,10 @@ Para suministrar una instancia de {{site.data.keyword.at_full_notm}} a través d
 
    Si la CLI está instalada, continúe en el paso siguiente.
 
-2. Inicie una sesión en {{site.data.keyword.cloud_notm}} donde desea suministrar la instancia. Ejecute el siguiente mandato: [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+2. Inicie una sesión en la ubicación de {{site.data.keyword.cloud_notm}} donde desea suministrar la instancia. Ejecute el siguiente mandato: [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+
+    Para obtener la lista más reciente de ubicaciones disponibles para el servicio
+{{site.data.keyword.at_full_notm}}, consulte [Ubicaciones](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
 
 3. Establezca el grupo de recursos en el que desea suministrar la instancia. Ejecute el siguiente mandato: [`ibmcloud target`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_target)
 
@@ -134,7 +142,8 @@ Para suministrar una instancia de {{site.data.keyword.at_full_notm}} a través d
 
     * SERVICE_PLAN_NAME es el tipo de plan. Los valores válidos son *lite*, *7-days*, *14-days* y *30-days*
     
-    * LOCATION es la región donde se crea la instancia de LogDNA. Por ejemplo, un valor válido es *us-south*
+    * LOCATION es la región donde se crea la instancia de LogDNA. Para obtener la lista más reciente de ubicaciones disponibles para el servicio
+{{site.data.keyword.at_full_notm}}, consulte [Ubicaciones](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
 
     
 Por ejemplo, para suministrar una instancia con el plan de retención de 7 días, ejecute el mandato siguiente:

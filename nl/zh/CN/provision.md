@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-03"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, provision instance
 
@@ -27,13 +27,13 @@ subcollection: logdnaat
 必须先在 {{site.data.keyword.cloud_notm}} 中供应服务的实例，然后才能使用 {{site.data.keyword.at_full_notm}} 监视和管理事件数据。
 {:shortdesc}
 
-要在公共云区域中供应 {{site.data.keyword.at_full_notm}} 实例，必须选择与实例关联的服务套餐、在其中收集日志的区域以及用于确定日志保留期的套餐。您可以选择 7 天、14 天或 30 天保留期。
+要在公共云区域中供应 {{site.data.keyword.at_full_notm}} 实例，请考虑以下信息：
+* 必须选择与实例关联的服务套餐、在其中收集日志的区域以及用于确定日志保留期的套餐。您可以选择 7 天、14 天或 30 天保留期。或者，{{site.data.keyword.at_full_notm}} 提供了`轻量`套餐，可用于在事件通过系统时查看事件。您可以使用事件跟踪来查看事件。还可以设计过滤器来准备升级为更长保留期的套餐。此套餐的保留期为 0 天。
+* 您的用户标识必须具有在资源组中供应服务的许可权。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups)。
 
-或者，{{site.data.keyword.at_full_notm}} 提供了`轻量`套餐，可用于在事件通过系统时查看事件。您可以使用事件跟踪来查看事件。还可以设计过滤器来准备升级为更长保留期的套餐。此套餐的保留期为 0 天。
 
-要供应服务实例，您的用户标识必须具有在资源组中供应服务的许可权。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups)。
-{: tip}
-
+每个 {{site.data.keyword.cloud_notm}} 区域只能供应 1 个服务实例。
+{: important}
 
 ## 通过“可观察性”仪表板供应实例
 {: #provision_ui}
@@ -50,7 +50,7 @@ subcollection: logdnaat
 
 4. 输入服务实例的名称。
 
-5. 选择要在其中供应实例的区域。
+5. 选择计划在其中供应实例的[位置](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)。 
 
 6. 选择资源组。 
 
@@ -66,7 +66,7 @@ subcollection: logdnaat
 
 供应实例后，将打开 *Activity Tracker* 仪表板。 
 
-接下来，转至 Web UI 以管理帐户中的事件。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md)。
+接下来，转至 Web UI 以查看帐户中的事件。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events)。
 
 
 
@@ -87,17 +87,21 @@ subcollection: logdnaat
 
 5. 输入服务实例的名称。
 
-6. 选择资源组。 
+6. 选择计划在其中供应实例的位置。 
+
+    要获取可用于 {{site.data.keyword.at_full_notm}} 服务的位置的最新列表，请参阅[位置](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)。
+
+7. 选择资源组。 
 
     缺省情况下，已设置 **Default** 资源组。
 
     **注：**如果无法选择资源组，请检查您是否具有对要在其中供应实例的资源组的编辑许可权。
 
-7. 选择`轻量`服务套餐。 
+8. 选择`轻量`服务套餐。 
 
     缺省情况下，已设置轻量套餐。
 
-8. 单击**创建**。
+9. 单击**创建**。
 
 供应实例后，将打开 *Activity Tracker* 仪表板。 
 
@@ -113,7 +117,9 @@ subcollection: logdnaat
 
    如果 CLI 已安装，请继续执行下一步。
 
-2. 在 {{site.data.keyword.cloud_notm}} 中登录到要在其中供应实例的区域。运行以下命令：[`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+2. 在 {{site.data.keyword.cloud_notm}} 中登录到要在其中供应实例的位置。运行以下命令：[`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+
+    要获取可用于 {{site.data.keyword.at_full_notm}} 服务的位置的最新列表，请参阅[位置](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)。
 
 3. 设置要在其中供应实例的资源组。运行以下命令：[`ibmcloud target`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_target)
 
@@ -134,7 +140,7 @@ subcollection: logdnaat
 
     * SERVICE_PLAN_NAME 是套餐的类型。有效值为 *lite*、*7-days*、*14-days* 和 *30-days*
     
-    * LOCATION 是在其中创建 LogDNA 实例的区域。例如，有效值为 *us-south*
+    * LOCATION 是在其中创建 LogDNA 实例的区域。要获取可用于 {{site.data.keyword.at_full_notm}} 服务的位置的最新列表，请参阅[位置](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)。
 
     
 例如，要为实例供应 7 天保留期的套餐，请运行以下命令：

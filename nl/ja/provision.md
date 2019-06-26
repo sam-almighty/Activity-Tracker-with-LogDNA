@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-03"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, provision instance
 
@@ -24,16 +24,16 @@ subcollection: logdnaat
 # インスタンスのプロビジョニング
 {: #provision}
 
-{{site.data.keyword.at_full_notm}} でイベント・データのモニターと管理を行うには、その前に、まずサービスのインスタンスを {{site.data.keyword.cloud_notm}} 内にプロビジョンする必要があります。
+{{site.data.keyword.at_full_notm}} でイベント・データのモニターと管理を行うには、その前に、サービスのインスタンスを {{site.data.keyword.cloud_notm}} 内にプロビジョンする必要があります。
 {:shortdesc}
 
-{{site.data.keyword.at_full_notm}} インスタンスを Public Cloud リージョンにプロビジョンするには、インスタンスに関連付けられたサービス・プラン、ログが収集される地域、およびログの保存期間を決定するプランを選択する必要があります。 保存期間は、7、14、または 30 日から選択できます。
+{{site.data.keyword.at_full_notm}} インスタンスを Public Cloud リージョンにプロビジョンするには、以下の情報を考慮してください。
+* インスタンスに関連付けられるサービス・プラン、ログが収集される地域、およびログの保存期間を決定するプランを選択する必要があります。保存期間は、7、14、または 30 日から選択できます。代わりに、{{site.data.keyword.at_full_notm}} は、イベントがシステムを通過する際にそれを表示するために使用できる、`「ライト」`プランも提供しています。 イベント追尾を使用してイベントを表示できます。 また、より長期の保存期間プランにアップグレードするための準備として、フィルターを設計することもできます。 このプランの保存期間は 0 日です。
+* リソース・グループ内にサービスをプロビジョンするための権限がユーザー ID に必要です。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups)。
 
-代わりに、{{site.data.keyword.at_full_notm}} は、イベントがシステムを通過する際にそれを表示するために使用できる、`「ライト」`プランも提供しています。 イベント追尾を使用してイベントを表示できます。 また、より長期の保存期間プランにアップグレードするための準備として、フィルターを設計することもできます。 このプランの保存期間は 0 日です。
 
-サービス・インスタンスをプロビジョンするには、ユーザー ID にリソース・グループ内でサービスをプロビジョンするための権限が必要です。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups)。
-{: tip}
-
+プロビジョンできるサービスのインスタンスは {{site.data.keyword.cloud_notm}} 地域につき 1 つのみです。
+{: important}
 
 ## プログラム識別情報ダッシュボードによるインスタンスのプロビジョニング
 {: #provision_ui}
@@ -50,7 +50,7 @@ subcollection: logdnaat
 
 4. サービス・インスタンスの名前を入力します。
 
-5. インスタンスをプロビジョンすることを計画している地域を選択します。
+5. インスタンスをプロビジョンすることを計画している[ロケーション](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)を選択します。 
 
 6. リソース・グループを選択します。 
 
@@ -66,7 +66,7 @@ subcollection: logdnaat
 
 インスタンスがプロビジョンされると、*「Activity Tracker」*ダッシュボードが開きます。 
 
-次に、Web UI に移動してアカウント内のイベントを管理します。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md)。
+次に、Web UI に移動してアカウント内のイベントを表示します。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events)。
 
 
 
@@ -87,21 +87,25 @@ subcollection: logdnaat
 
 5. サービス・インスタンスの名前を入力します。
 
-6. リソース・グループを選択します。 
+6. インスタンスをプロビジョンすることを計画しているロケーションを選択します。 
+
+    {{site.data.keyword.at_full_notm}} サービスに使用可能なロケーションの最新リストを入手するには、[ロケーション](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)を参照してください。
+
+7. リソース・グループを選択します。 
 
     デフォルトでは、**Default** リソース・グループが設定されます。
 
     **注:** リソース・グループを選択できない場合、インスタンスをプロビジョンするリソース・グループでの編集許可があることを確認してください。
 
-7. `「ライト」`サービス・プランを選択します。 
+8. `「ライト」`サービス・プランを選択します。 
 
     デフォルトでは、ライト・プランが設定されます。
 
-8. **「作成」**をクリックします。
+9. **「作成」**をクリックします。
 
 インスタンスがプロビジョンされると、*「Activity Tracker」*ダッシュボードが開きます。 
 
-次に、Web UI に移動してアカウント内のイベントを管理します。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
+次に、Web UI に移動してアカウント内のイベントを管理します。 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
 
 
 ## CLI によるインスタンスのプロビジョニング
@@ -113,7 +117,9 @@ subcollection: logdnaat
 
    CLI がインストールされている場合は、次のステップに進みます。
 
-2. インスタンスをプロビジョンしたい、{{site.data.keyword.cloud_notm}} の地域にログインします。 次のコマンドを実行します。 [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+2. インスタンスをプロビジョンする {{site.data.keyword.cloud_notm}} 内のロケーションにログインします。次のコマンドを実行します。 [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+
+    {{site.data.keyword.at_full_notm}} サービスに使用可能なロケーションの最新リストを入手するには、[ロケーション](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)を参照してください。
 
 3. インスタンスをプロビジョンするリソース・グループを設定します。 次のコマンドを実行します。 [`ibmcloud target`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_target)
 
@@ -134,7 +140,7 @@ subcollection: logdnaat
 
     * SERVICE_PLAN_NAME はプランのタイプです。 有効値は、*lite*、*7-days*、*14-days*、*30-days* です
     
-    * LOCATION は LogDNA インスタンスが作成される地域です。 例えば、有効な値として *us-south* があります。
+    * LOCATION は LogDNA インスタンスが作成される地域です。 {{site.data.keyword.at_full_notm}} サービスに使用可能なロケーションの最新リストを入手するには、[ロケーション](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)を参照してください。
 
     
 例えば、7 日間の保存プランでインスタンスをプロビジョンするには、以下のコマンドを実行します。

@@ -33,10 +33,6 @@ subcollection: logdnaat
 | `Slack`             | Slack チャネルを構成できます。 |
 | `Webhook`           | Webhook URL を構成できます。 |
 | `PagerDuty`         | PagerDuty システムへの接続の詳細を構成し、サービスを選択できます。|
-| `OpsGenie`          | OpsGenie システムに接続するように API 鍵を構成できます。 |
-| `Datadog`           | `Datadog` システムに接続するように API 鍵を構成できます。 |
-| `AppOptics/Librato` | AppOptics/Librato システムに接続するように API 鍵を構成できます。 |
-| `VictorOps`         | アラートがトリガーされる時点、ルーティング・キー、アラートのタイプを通知するように URL を構成できます。 有効なアラートのタイプは `info`、`warning`、`critical` です|
 {: caption="通知チャネル" caption-side="top"} 
 
 

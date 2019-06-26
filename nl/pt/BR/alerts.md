@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, alerts, events
 
@@ -23,46 +23,30 @@ subcollection: logdnaat
 
 
 # Configurar alertas
-{: #alerts.md}
+{: #alerts}
 
-Por meio da UI da web do {{site.data.keyword.at_full_notm}}, é possível aplicar critérios de procura e filtragem para definir os eventos que são exibidos por meio de uma visualização customizada. Em seguida, é possível anexar um alerta a uma visualização a ser notificada. É possível anexar um ou mais alertas a uma visualização. É possível definir múltiplos canais de notificação para um alerta. É possível silenciar alertas. É possível remover alertas de uma visualização.
+Por meio da IU da web do {{site.data.keyword.at_full_notm}}, é possível aplicar consultas de procura para definir os eventos exibidos por meio de uma visualização customizada. Em seguida, é possível conectar um alerta a essa visualização para ser notificado quando uma condição ocorrer. É possível anexar um ou mais alertas a uma visualização. É possível definir múltiplos canais de notificação para um alerta. É possível silenciar alertas. É possível remover alertas de uma visualização.
 {:shortdesc}
 
 
-É possível configurar qualquer uma das condições a seguir para um alerta:
-
-* *Frequência de tempo*: especifique com que frequência acionar um alerta. Os valores válidos são: 30 segundos, 1 minuto, 5 minutos, 15 minutos, 30 minutos, 1 hora, 6 horas, 12 horas, 24 horas
-* *contador de linhas de eventos*: especifique o número de linhas de eventos que correspondem aos critérios de filtragem e procura da visualização. Quando o número de linhas de eventos é atingido, um alerta é acionado.
-
-É possível decidir se as duas condições são verificadas ou apenas uma. Se ambas as condições forem configuradas, um alerta será acionado quando qualquer um dos limites for atingido. 
-
-Por exemplo, é possível configurar um alerta que é acionado após 30 segundos ou quando 100 linhas de eventos que correspondem aos critérios de filtragem e procura da visualização são coletadas.
-
-É possível configurar diversos canais de notificação. Os canais válidos são: `email`, `Slack`, `PagerDuty`, `Webhook`, `OpsGenie`, `Datadog`, `AppOptics`, `VictorOps`
-
-Também será possível definir uma **pré-configuração**. Uma pré-configuração é um modelo de alerta que pode ser anexado a qualquer número de visualizações. 
-
-Um ícone de sino é exibido com a visualização para indicar que ela tem um alerta anexado.
-
-
 ## Pré-requisitos
-{: #views_prereqs}
+{: #alerts_prereqs}
 
-Antes de iniciar, verifique se seu ID do usuário tem permissões para ativar a UI da web e visualizar eventos. 
+* [Saiba mais sobre alertas](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_alerts).
 
-**Nota:** deve-se ser um administrador do serviço {{site.data.keyword.at_full_notm}}, um administrador da instância do {{site.data.keyword.at_full_notm}} ou ter permissões de conta do IAM para gerenciar as políticas.
+* **Deve-se ter um plano de serviço pago** para o serviço do {{site.data.keyword.at_full_notm}}. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan).
 
-A tabela a seguir lista as políticas mínimas que um usuário deve ter para poder ativar a UI da web do {{site.data.keyword.at_full_notm}} e visualizar, procurar e filtrar eventos:
+* Verifique se seu ID de usuário tem permissões para iniciar a IU da web e visualizar eventos. A tabela a seguir lista as funções mínimas necessárias para que um usuário possa iniciar a IU da web do {{site.data.keyword.at_full_notm}}, visualizar, procurar e filtrar eventos:
 
 | Atribuição                      | Permissão concedida            |
 |---------------------------|-------------------------------|  
 | Função de plataforma: `Viewer`     | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
-| Função de serviço: `Reader`        | Permite que o usuário ative a UI da web e visualize eventos na UI da web. |
-{: caption="Tabela 1. Políticas do IAM" caption-side="top"} 
+| Função de serviço: `Reader`      | Permite que o usuário ative a UI da web e visualize eventos na UI da web.  |
+{: caption="Tabela 1. Funções do IAM" caption-side="top"} 
 
-Para obter mais informações sobre como configurar essas políticas para um usuário, consulte [Concedendo permissões de usuário a um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
+Para obter mais informações sobre como configurar políticas para um usuário, consulte [Concedendo permissões de usuário para um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
-**Deve-se ter um plano de serviço pago** para o serviço do {{site.data.keyword.at_full_notm}}. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+ 
 
 
 ## Etapa 1. Acessar a UI da web
@@ -74,7 +58,7 @@ Para obter mais informações sobre como configurar essas políticas para um usu
 ## Etapa 2. Criar uma visualização
 {: #alerts_step2}
 
-[Criar uma visualização](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md).
+[Criar uma visualização](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views).
 
 
 
@@ -89,8 +73,10 @@ Conclua as etapas a seguir para definir uma pré-configuração:
 1. Na UI da web, selecione o ícone **Configuração** ![Ícone Administrador](images/admin.png "Ícone Administrador").
 2. Selecione  ** Alertas **.
 3. Selecione  ** Incluir um alerta de pré-configuração **.
-4. Escolha um canal de notificação. 
-5. Defina as condições de limite.
+4. Escolha um canal de notificação. Para obter a lista de canais suportados, consulte [Canais de notificação de alerta](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels).
+5. Selecione o tipo de alerta. Escolha o tipo **Alerta de presença** para obter notificações quando o número de eventos mostrados em uma visualização for maior do que o esperado. Escolha o tipo **Alerta de ausência** para obter notificações quando o número de eventos exibidos em uma visualização for menor do que o esperado ou for ausente. 
+5. Escolha um canal de notificação. Para obter a lista de canais suportados, consulte [Canais de notificação de alerta](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels).
+6. Defina as condições de limite.
 
     1. Selecione uma frequência de tempo. Por exemplo, 12 horas.
 
@@ -98,11 +84,11 @@ Conclua as etapas a seguir para definir uma pré-configuração:
 
     3. Selecione se deseja que ambas as condições sejam verificadas ou apenas uma.
 
-6. Inclua os detalhes para o canal de notificação que você escolheu.
+7. Inclua os detalhes para o canal de notificação que você escolheu.
 
     Por exemplo, para o canal de notificação por e-mail, inclua um ou mais destinatários e, opcionalmente, um fuso horário.
 
-7. Clique em  ** Salvar alerta **.
+8. Clique em  ** Salvar alerta **.
 
 
 
@@ -133,7 +119,8 @@ Conclua as etapas a seguir para anexar um alerta a uma visualização:
 2. Clique no nome da visualização. Em seguida, selecione  ** Anexar um alerta **.
 3. Escolha  ** Alerta Específico da Visualização **.
 4. Escolha um canal de notificação. 
-5. Defina as condições de limite.
+5. Selecione o tipo de alerta. Escolha o tipo **Alerta de presença** para obter notificações quando o número de eventos mostrados em uma visualização for maior do que o esperado. Escolha o tipo **Alerta de ausência** para obter notificações quando o número de eventos exibidos em uma visualização for menor do que o esperado ou for ausente. 
+6. Defina as condições de limite.
 
     1. Selecione uma frequência de tempo. Por exemplo, 12 horas.
 
@@ -141,11 +128,11 @@ Conclua as etapas a seguir para anexar um alerta a uma visualização:
 
     3. Selecione se deseja que ambas as condições sejam verificadas ou apenas uma.
 
-6. Inclua os detalhes para o canal de notificação que você escolheu.
+7. Inclua os detalhes para o canal de notificação que você escolheu.
 
     Por exemplo, para o canal de notificação por e-mail, inclua um ou mais destinatários e, opcionalmente, um fuso horário.
 
-7. Clique em  ** Salvar alerta **.
+8. Clique em  ** Salvar alerta **.
 
 
 

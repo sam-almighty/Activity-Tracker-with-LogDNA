@@ -20,23 +20,19 @@ subcollection: logdnaat
 {:important: .important}
 {:note: .note}
 
-# Canali di notifica degli avvisi 
+# Canali di notifica degli avvisi
 {: #channels}
 
 La seguente tabella elenca i canali di notifica che puoi configurare quando viene attivato un avviso:
 {:shortdesc}
 
 
-|Canale |Dettagli di configurazione | 
+| Canale           | Dettagli di configurazione | 
 |-------------------|-----------------------|
-| `email`             |Puoi configurare uno o più indirizzi email. | 
-| `Slack`             |Puoi configurare un canale slack. |
-| `Webhook`           |Puoi configurare un URL webhook. |
-| `PagerDuty`         |Puoi configurare i dettagli di connessione per il tuo sistema PagerDuty e selezionare un servizio. |
-| `OpsGenie`          |Puoi configurare la chiave API per la connessione al tuo sistema OpsGenie. |
-| `Datadog`           |Puoi configurare la chiave API per la connessione al tuo sistema `Datadog`. |
-| `AppOptics/Librato` |Puoi configurare la chiave API per la connessione al tuo sistema AppOptics/Librato. |
-| `VictorOps`         |Puoi configurare l'URL per la notifica quando viene attivato un avviso, la chiave di instradamento e un tipo di avviso. I tipi di avviso validi sono: `info`, `warning`, `critical` |
+| `email`             | Puoi configurare uno o più indirizzi email.  | 
+| `Slack`             | Puoi configurare un canale slack. |
+| `Webhook`           | Puoi configurare un URL webhook. |
+| `PagerDuty`         | Puoi configurare i dettagli di connessione per il tuo sistema PagerDuty e selezionare un servizio.|
 {: caption="Canali di notifica" caption-side="top"} 
 
 

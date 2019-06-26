@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, export
 
@@ -25,37 +25,26 @@ subcollection: logdnaat
 # イベントのエクスポート
 {: #export}
 
-データを JSONL 形式で {{site.data.keyword.at_full_notm}} インスタンスからローカル・ファイル内にエクスポートできます。 ログをプログラマチックにエクスポートするか。 IBM Log Analysis Web UI からエクスポートすることができます。 
+データを JSONL 形式で {{site.data.keyword.at_full_notm}} インスタンスからローカル・ファイルにエクスポートできます。 LogDNA REST API または Web UI を使用して、ログをプログラムによってエクスポートできます。
 {:shortdesc}
-
-ログ・データをエクスポートする際には、以下の情報を考慮してください。
-* イベント項目の集合をエクスポートします。 エクスポートしようとしているデータ集合を定義する際に、フィルターと検索を適用できます。 時刻範囲を指定することもできます。 
-* Web UI からイベントをエクスポートする場合は、ご自分の E メール・アドレスに、当該データが含まれる圧縮ファイルへのリンクがある E メールが送信されます。 このデータを取得するには、リンクをクリックし、圧縮ファイルをダウンロードしなければなりません。
-* イベントをプログラマチックにエクスポートする際には、E メールの送信か、端末へのイベントのストリーミングを選択できます。
-* エクスポートしようとしているデータが含まれる圧縮ファイルは、最大 48 時間入手可能です。 
-* エクスポートできる最大行数は 10,000 です。
-
 
 
 ## 前提条件
 {: #export_prereqs}
 
-開始する前に、自分のユーザー ID に Web UI を起動してイベントを表示するための権限があるか確認します。次に、[Web UI に移動します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
+* [イベントのエクスポート方法について確認します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_export)。
 
-**注:** ポリシーを管理するには、{{site.data.keyword.at_full_notm}} サービスの管理者または {{site.data.keyword.at_full_notm}} インスタンスの管理者であるか、アカウントの IAM 権限が必要です。
+* {{site.data.keyword.at_full_notm}} サービスの**有料サービス・プランのご利用**が必要です。 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
 
-以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要なポリシーを示しています。
+* 自分のユーザー ID に Web UI を起動してイベントを表示するための権限があるか確認します。以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要な役割を示しています。
 
 | 役割                      | 付与される許可            |
 |---------------------------|-------------------------------|  
 | プラットフォーム役割: `ビューアー`     | ユーザーが「プログラム識別情報」ダッシュボードでサービス・インスタンスのリストを表示できるようにします。 |
 | サービス役割: `リーダー`      | ユーザーが Web UI を起動して Web UI にイベントを表示できるようにします。  |
-{: caption="表 1. IAM ポリシー" caption-side="top"} 
+{: caption="表 1. IAM 役割" caption-side="top"} 
 
-ユーザーに対してこれらのポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
-
-{{site.data.keyword.at_full_notm}} サービスの**有料サービス・プランのご利用**が必要です。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
-
+ユーザーに対してポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
 
 
 ## ステップ 1. Web UI へ移動する
@@ -67,7 +56,7 @@ subcollection: logdnaat
 ## ステップ 2. ビューを作成する
 {: #export_step2}
 
-[ビューを作成します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md)。
+[ビューを作成します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views)。
 
 
 ## ステップ 3. データをエクスポートする
@@ -99,7 +88,7 @@ subcollection: logdnaat
 
     **注:** このステップを完了するには、{{site.data.keyword.at_full_notm}} インスタンスまたはサービスに対する**管理者**の役割がなければなりません。
 
-    1. {{site.data.keyword.at_full_notm}} Web UI を起動します。 詳しくは、[{{site.data.keyword.at_full_notm}} Web UI への移動](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2)を参照してください。
+    1. [{{site.data.keyword.at_full_notm}} Web UI を起動します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2)。
 
     2. **「構成」**アイコン ![構成アイコン](images/admin.png) を選択します。 次に、**「組織」**を選択します。 
 
@@ -107,9 +96,7 @@ subcollection: logdnaat
 
         作成したサービス・キーが表示されます。 
 
-    4. **「サービス・キーの生成 (Generate Service Key)」**をクリックします。
-
-        リストに新しい鍵が追加されます。 このキーをコピーします。
+    4. **「サービス・キーの生成 (Generate Service Key)」**をクリックします。リストに新しい鍵が追加されます。 このキーをコピーします。
 
 2. イベントをエクスポートします。 次の cURL コマンドを実行します。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -28,27 +28,25 @@ subcollection: logdnaat
 您可以將事件從 {{site.data.keyword.at_full_notm}} 實例保存至 {{site.data.keyword.cos_full_notm}} (COS) 實例中的儲存區。
 {:shortdesc}
 
-若要配置保存，您必須對 {{site.data.keyword.at_full_notm}} 服務具有平台角色為**檢視者**，且服務角色為**管理員**的 IAM 原則。
-
-您可以將事件從 {{site.data.keyword.at_full_notm}} 實例保存至 {{site.data.keyword.cos_full_notm}} (COS) 實例中的儲存區。每一個 {{site.data.keyword.at_full_notm}} 實例都有它自己的保存配置。 
-
-事件會以壓縮格式 **(.json.gz)** 自動保存，一天一次。每一行都會保留其 meta 資料。
-
-事件會在您儲存配置之後的 24-48 小時內進行保存。 
-
-{{site.data.keyword.cos_full_notm}} 實例是在資源群組的環境定義內佈建。{{site.data.keyword.at_full_notm}} 實例也是在資源群組的環境定義內佈建。這兩個實例可以在相同的資源群組之下或在不同的資源群組中分組。 
-
-{{site.data.keyword.at_full_notm}} 會使用服務 ID 與 {{site.data.keyword.cos_full_notm}} 服務通訊。
-
-* 您為 {{site.data.keyword.cos_full_notm}} 實例建立的服務 ID 是由 {{site.data.keyword.at_full_notm}} 用來鑑別及存取 {{site.data.keyword.cos_full_notm}} 實例。 
-* 您可以將特定存取原則指派給限制 {{site.data.keyword.cos_full_notm}} 實例之許可權的服務 ID。將服務 ID 限制為僅對您計劃保存事件的儲存區具有寫入許可權。
-
-下圖顯示在保存事件時整合之不同元件的高階視圖：
-
-![保存事件的高階視圖](images/archive.png "保存事件的高階視圖")
-
-
 請完成下列步驟，將 {{site.data.keyword.at_full_notm}} 實例保存至 {{site.data.keyword.cos_full_notm}} 實例中的儲存區：
+
+## 必要條件
+{: #archiving_prereqs}
+
+* [進一步瞭解保存事件](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive)。
+
+* 您必須具有 {{site.data.keyword.at_full_notm}} 服務**的付費服務方案**。[進一步瞭解](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
+
+* 檢查使用者 ID 是否有權啟動 Web 使用者介面以及管理事件。下表列出使用者必須具有的最低角色，才能啟動 {{site.data.keyword.at_full_notm}} Web 使用者介面，以及檢視、搜尋及過濾事件：
+
+| 角色                      | 授與的許可權            |
+|---------------------------|-------------------------------|  
+| 平台角色：`檢視者`     | 容許使用者在「觀察」儀表板中檢視服務實例的清單。|
+| 服務角色：`管理員`     | 容許使用者啟動 Web 使用者介面，並在 Web 使用者介面中管理事件。|
+{: caption="表 1. IAM 角色" caption-side="top"} 
+
+如需如何為使用者配置原則的相關資訊，請參閱[授與使用者對使用者或服務 ID 的許可權](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
+
 
 
 ## 步驟 1. 將 IAM 原則授與使用者，以使用 {{site.data.keyword.cos_full_notm}}
@@ -70,9 +68,9 @@ subcollection: logdnaat
 | 服務                    | 平台角色    | 動作                                                                                        | 
 |----------------------------|-------------------|-----------------------------------------------------------------------------------------------|       
 | `Cloud Object Storage`     | 管理者     | 容許使用者將原則指派給帳戶中的使用者，以使用 {{site.data.keyword.cos_full_notm}} 服務。|
-| `Cloud Object Storage`     | 管理者     </br>編輯者 | 容許使用者佈建 {{site.data.keyword.cos_full_notm}} 服務的實例。|
-| `Cloud Object Storage`     | 管理者     </br>編輯者 </br>操作員 | 容許使用者建立服務 ID。| 
-{: caption="表格 1. 角色與動作" caption-side="top"} 
+| `Cloud Object Storage`     |管理者</br>編輯者| 容許使用者佈建 {{site.data.keyword.cos_full_notm}} 服務的實例。|
+| `Cloud Object Storage`     |管理者</br>編輯者</br>操作員| 容許使用者建立服務 ID。| 
+{: caption="表 1. 角色與動作" caption-side="top"} 
 
 
 請完成下列步驟，將資源群組環境定義內 {{site.data.keyword.cos_full_notm}} 服務的管理者角色指派給使用者： 
@@ -131,9 +129,9 @@ subcollection: logdnaat
 
 | 服務                    | 角色                   | 動作                             | 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | 平台角色：檢視者   | 容許使用者檢視所有儲存區，並透過 {site.data.keyword.Bluemix_notm}} 使用者介面列出其中的物件。|
+| `Cloud Object Storage`     | 平台角色：檢視者   | 容許使用者檢視所有儲存區，並列出這些儲存區中的物件。|
 | `Cloud Object Storage`     | 服務角色：管理員   | 容許使用者將物件公開。                                                       |
-| `Cloud Object Storage`     | 服務角色：管理員   </br>撰寫者 | 容許使用者建立及破壞儲存區及物件。                         | 
+| `Cloud Object Storage`     | 服務角色：管理員 </br>撰寫者 | 容許使用者建立及破壞儲存區及物件。                         | 
 | `Cloud Object Storage`     | 服務角色：讀者   | 容許使用者列出及下載物件。                                                 |
 {: caption="表 1. 要使用儲存區的角色和動作" caption-side="top"} 
 
@@ -159,23 +157,24 @@ subcollection: logdnaat
 
     備援是指資料分散的地理區域範圍及規模。 
     
-    跨區域備援會將資料分散到數個都會區。
+    跨地區備援會將資料分散到數個都會區。
     
-    區域性備援會將資料分散到單一都會區。 
+    地區性備援會將資料分散到單一都會區。 
     
     「單一資料中心」只會在單一網站內的各個裝置之間分散存放資料。
 
-    如需相關資訊，請參閱[選取地區及端點](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints)。
+    如需相關資訊，請參閱[選取地區及端點](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints)。
 
 6. 選擇*儲存空間類別* 的類型。
 
-    您可以建立不同儲存空間類別的儲存區。根據您擷取資料的需求，選擇儲存區的儲存空間類別類別。如需相關資訊，請參閱[使用儲存空間類別](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes)。
+    您可以建立不同儲存空間類別的儲存區。根據您擷取資料的需求，選擇儲存區的儲存空間類別類別。如需相關資訊，請參閱[使用儲存空間類別](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes)。
 
-    **附註：**一旦建立了儲存區，就無法變更儲存區的儲存空間類別。如果需要重新分類物件，則需要將資料移至另一個具有所需儲存空間類別的儲存區。
+    **附註：**一旦建立儲存區，就無法變更儲存區的儲存空間類別。如果需要重新分類物件，則需要將資料移至另一個具有所需儲存空間類別的儲存區。
 
 7. 選擇性地新增「Key Protect 金鑰」，以加密靜態資料。
 
-    依預設，所有物件都使用隨機產生的金鑰和 all-or-nothing-transform 來加密。雖然這個預設加密模型提供靜態安全，但是有些工作負載需要擁有已使用的加密金鑰。如需相關資訊，請參閱[管理加密](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption)。
+    依預設，所有物件都使用隨機產生的金鑰和 all-or-nothing-transform 來加密。雖然這個預設加密模型提供靜態安全，但是有些工作負載需要擁有已使用的加密金鑰。如需相關資訊，請參閱[管理加密](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption)。
+
 
 
 
@@ -241,11 +240,9 @@ subcollection: logdnaat
 
 請完成下列步驟來取得儲存區的端點：
 
-1. 登入 {{site.data.keyword.cloud_notm}} 帳戶。
+1. [登入 {{site.data.keyword.cloud_notm}} 帳戶 ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/login){:new_window}。
 
-    按一下 [{{site.data.keyword.cloud_notm}} 儀表板 ![外部鏈結圖示](../../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/login){:new_window}，以啟動 {{site.data.keyword.cloud_notm}} 儀表板。
-
-	在使用您的使用者 ID 和密碼登入之後，「{{site.data.keyword.cloud_notm}} 儀表板」即會開啟。
+	登入後，{{site.data.keyword.cloud_notm}}「儀表板」即會開啟。
 
 2. 從「儀表板」中，選取您計劃要在其中建立儲存區的 {{site.data.keyword.cos_full_notm}} 實例。
 
@@ -295,7 +292,7 @@ subcollection: logdnaat
 
 請完成下列步驟，配置將您的 {{site.data.keyword.at_full_notm}} 實例保存至 COS 儲存區：
 
-1. 啟動 {{site.data.keyword.at_full_notm}} Web 使用者介面。[進一步瞭解](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2)。
+1. [啟動 {{site.data.keyword.at_full_notm}} Web 使用者介面](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch)。
 
 2. 選取**配置**圖示。然後，選取**保存**。 
 

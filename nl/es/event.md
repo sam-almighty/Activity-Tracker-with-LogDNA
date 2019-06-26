@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, event fields
 
@@ -51,7 +51,7 @@ La tabla siguiente contiene los campos de destino comunes que están disponibles
 
 | Nombre de campo | Descripción | Valor |
 |------------|-------------|-------|
-| `target.id` | Nombre del recurso de nube (CRN) del recurso en el que se ejecuta la acción. </br>Para obtener más información, consulte [Formato de CRN](/docs/overview?topic=overview-format-crn#format). | Por ejemplo, `crn:v1:bluemix:public:cloud-object-storage:global:a/12345678e6232019c6567c9123456789:fr56et47-befb-440a-a223c-12345678dae1:bucket:bucket1` |
+| `target.id` | Nombre del recurso de nube (CRN) del recurso en el que se ejecuta la acción. </br>Para obtener más información, consulte [Formato de CRN](/docs/overview?topic=overview-crn#format-crn). | Por ejemplo, `crn:v1:bluemix:public:cloud-object-storage:global:a/12345678e6232019c6567c9123456789:fr56et47-befb-440a-a223c-12345678dae1:bucket:bucket1` |
 | `target.name` | Nombre legible por el usuario del recurso de nube en el que se ejecuta la acción. |  |
 | `target.typeURI` | Tipo de recurso de nube en el que se ejecuta la acción. </br>El formato de este campo es **serviceName/objectType**, donde `servicename` es el nombre del servicio. | Por ejemplo, `iam-am/policy` o `cloud-object-storage/bucket/acl` |
 {: caption="Tabla 2. Campos de destino comunes" caption-side="top"} 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -22,13 +22,17 @@ subcollection: logdnaat
 {:note: .note}
 
  
-# Concessione delle autorizzazioni utente a un utente o ID servizio 
+# Concessione delle autorizzazioni utente a un utente o ID servizio
 {: #iam_view_events}
 
-IAM ({{site.data.keyword.iamlong}}) ti consente di autenticare in modo sicuro gli utenti e di controllare l'accesso a tutte le risorse cloud in modo congruente in {{site.data.keyword.cloud_notm}}. Completa la seguente procedura per concedere le autorizzazioni minime a un utente o un ID servizio per utilizzare il servizio {{site.data.keyword.at_full_notm}}:
+IAM ({{site.data.keyword.iamlong}}) ti consente di autenticare in modo sicuro gli utenti e di controllare l'accesso a tutte le risorse cloud in modo congruente in {{site.data.keyword.cloud_notm}}. Completa la seguente procedura per concedere le autorizzazioni minime a un utente o un ID servizio per utilizzare il servizio {{site.data.keyword.at_full_notm}}: 
 {:shortdesc}
 
-Ad esempio, se hai un account a pagamento, puoi configurare queste autorizzazioni minime per concedere a un utente l'accesso per visualizzare, ricercare e filtrare gli eventi, esportare i dati e configurare gli avvisi. [Ulteriori informazioni](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+## Prerequisiti
+{: #iam_view_events_prereq}
+
+Il tuo ID utente ha bisogno delle **autorizzazioni della piattaforma di amministratore** per gestire il servizio {{site.data.keyword.at_full_notm}}. Contatta l'amministratore dell'account. Il proprietario dell'account può concedere a un altro utente l'accesso all'account ai fini della gestione dell'accesso utente e della gestione delle risorse dell'account. [Ulteriori informazioni](/docs/iam?topic=iam-userroles).
+
 
 
 ## Passo 1. Crea un gruppo di accesso
@@ -51,7 +55,7 @@ ibmcloud iam access-group-create GROUP_NAME [-d, --description DESCRIPTION]
 
 
 
-## Passo 2. Aggiungi le autorizzazioni per visualizzare gli eventi 
+## Passo 2. Aggiungi le autorizzazioni per visualizzare gli eventi
 {: #iam_view_events_step2}
 
 Dopo aver configurato il tuo gruppo, puoi assegnare una politica di accesso comune al gruppo. 
@@ -68,36 +72,43 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+Quando definisci la politica, devi selezionare un ruolo della piattaforma e un ruolo del servizio:
+* I ruoli di gestione della piattaforma coprono una gamma di azioni, inclusa la capacità di creare ed eliminare le istanze, gestire gli alias, i bind e le credenziali e gestire l'accesso. I ruoli della piattaforma sono amministratore, editor, operatore, visualizzatore. I ruoli di gestione della piattaforma si applicano anche ai servizi di gestione dell'account che consentono agli utenti di invitare utenti, gestire ID di servizio, politiche di accesso, voci di catalogo e tenere traccia della fatturazione e dell'utilizzo in base al proprio ruolo assegnato in un servizio di gestione dell'account.
+* I ruoli di accesso al servizio definiscono la capacità di un utente o un servizio di eseguire azioni su un'istanza del servizio. I ruoli di accesso al servizio sono gestore, scrittore e lettore.
+
+Per gestire il servizio {{site.data.keyword.at_full_notm}}, un utente ha bisogno dei seguenti ruoli:
+* Ruolo della piattaforma: **Visualizzatore**. 
+* Ruolo del servizio: **Lettore**.
+[Ulteriori informazioni](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+
+
+
 Completa la seguente procedura per assegnare una politica a un gruppo di accesso tramite l'IU:
 
 1. Dalla barra dei menu, fai clic su **Gestisci** &gt; **Accesso (IAM)** e seleziona **Gruppi di accesso**.
 2. Seleziona il nome del gruppo a cui vuoi assegnare l'accesso. 
 3. Fai clic su **Politiche di accesso**.
 4. Fai clic su **Assegna accesso**.
-5. Scegli di assegnare l'accesso in base alle risorse all'interno di un gruppo di risorse, alle singole risorse disponibili nell'account o ai servizi di gestione dell'account. Ad esempio, scegli una qualsiasi delle seguenti opzioni per concedere a un utente il ruolo di amministratore per gestire un'istanza {{site.data.keyword.at_full_notm}}:
+5. Concedi le autorizzazioni. Scegli una delle seguenti opzioni:
 
 
-### Opzione 1. Concedi le autorizzazioni a un utente in modo che diventi un amministratore del servizio nell'account {{site.data.keyword.cloud_notm}}
+### Opzione 1. Concedi le autorizzazioni sul servizio
 {: #user_opt1}
 
-Per concedere un ruolo di amministratore a un utente per gestire il servizio nell'account, l'utente deve disporre di una politica IAM per il servizio {{site.data.keyword.at_full_notm}} con il ruolo della piattaforma **Amministratore**. Devi assegnare a questo utente l'accesso a una singola risorsa nell'account. 
-
-Completa la seguente procedura per assegnare a un utente il ruolo di amministratore per il servizio {{site.data.keyword.at_full_notm}} nell'account: 
+Completa la seguente procedura: 
 
 1. Seleziona **Assegna l'accesso alle risorse**.
 2. Seleziona **IBM Cloud Activity Tracker with LogDNA**.
 3. Seleziona **Tutte le regioni correnti**.
 4. Seleziona **Tutte le istanze del servizio correnti**.
 5. Seleziona il ruolo della piattaforma **Visualizzatore**.
-6. Seleziona il ruolo del servizio **Lettore**. 
+6. Seleziona il ruolo del servizio **Lettore**.
 7. Fai clic su **Assegna**.
 
-### Opzione 2. Concedi le autorizzazioni a un utente in modo che diventi un amministratore del servizio all'interno di un gruppo di risorse
+### Opzione 2. Concedi le autorizzazioni all'interno del contesto di un gruppo di risorse
 {: #user_opt2}
 
-Per concedere a un utente il ruolo di amministratore per gestire le istanze all'interno di un gruppo di risorse nell'account, l'utente deve disporre di una politica IAM per il servizio {{site.data.keyword.at_full_notm}} con il ruolo della piattaforma **Amministratore** all'interno del contesto del gruppo di risorse. 
-
-Completa la seguente procedura per assegnare a un utente il ruolo di amministratore per il servizio {{site.data.keyword.at_full_notm}} nel contesto di un gruppo di risorse: 
+Completa la seguente procedura: 
 
 1. Seleziona **Assegna l'accesso in un gruppo di risorse**.
 2. Seleziona un gruppo di risorse.
@@ -109,23 +120,23 @@ Completa la seguente procedura per assegnare a un utente il ruolo di amministrat
 
 4. Seleziona **IBM Cloud Activity Tracker with LogDNA**.
 5. Seleziona il ruolo della piattaforma **Visualizzatore**.
-6. Seleziona il ruolo del servizio **Lettore**. 
+6. Seleziona il ruolo del servizio **Lettore**.
 7. Fai clic su **Assegna**.
 
-### Opzione 3. Concedi le autorizzazioni a un utente in modo che diventi un amministratore di una sola istanza in {{site.data.keyword.cloud_notm}}
+### Opzione 3. Concedi le autorizzazioni in un'ubicazione
 {: #user_opt3}
 
-Completa la seguente procedura per assegnare a un utente il ruolo di amministratore su un'istanza del servizio {{site.data.keyword.at_full_notm}}: 
+Puoi eseguire il provisioning di solo 1 istanza per ogni ubicazione. Pertanto, per concedere le autorizzazioni per visualizzare gli eventi in una regione, completa la seguente procedura: 
 
 1. Seleziona **Assegna l'accesso alle risorse**.
 2. Seleziona **IBM Cloud Activity Tracker with LogDNA**.
-3. Seleziona l'istanza.
+3. Seleziona l'istanza nella regione in cui l'utente deve avere l'autorizzazione per visualizzare gli eventi.
 4. Seleziona il ruolo della piattaforma **Visualizzatore**.
-5. Seleziona il ruolo del servizio **Lettore**. 
+5. Seleziona il ruolo del servizio **Lettore**.
 6. Fai clic su **Assegna**.
 
 
-## Passo 3. Aggiungi un utente al gruppo di accesso 
+## Passo 3. Aggiungi un utente al gruppo di accesso
 {: #iam_view_events_step3}
 
 Continua con la configurazione del tuo gruppo aggiungendo utenti o ID servizio.

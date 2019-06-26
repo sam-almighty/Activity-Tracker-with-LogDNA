@@ -21,14 +21,14 @@ subcollection: logdnaat
 {:important: .important}
 {:note: .note}
 
-# Passaggio alla IU web 
+# Passaggio alla IU web
 {: #launch}
 
 Dopo aver eseguito il provisioning a un'istanza del servizio {{site.data.keyword.at_full_notm}} in {{site.data.keyword.cloud_notm}}, puoi visualizzare, monitorare e gestire gli eventi tramite l'IU web {{site.data.keyword.at_full_notm}}.
 {:shortdesc}
 
 
-## Passo 1. Concessione di politiche IAM a un utente per visualizzare i dati  
+## Passo 1. Concessione di politiche IAM a un utente per visualizzare i dati 
 {: #step1}
 
 **Nota:** devi essere un amministratore del servizio {{site.data.keyword.at_full_notm}}, un amministratore di un'istanza {{site.data.keyword.at_full_notm}} o disporre delle autorizzazioni IAM dell'account per concedere le politiche ad altri utenti.
@@ -37,17 +37,17 @@ La seguente tabella elenca le politiche minime che un utente deve avere per pote
 
 | Ruolo                      | Autorizzazione concessa       |
 |---------------------------|---------------------|
-| Ruolo piattaforma: `Viewer`   | Consente all'utente di visualizzare l'elenco delle istanze del servizio nel dashboard Observability. |
-| Ruolo servizio: `Reader`    |Consente all'utente di visualizzare gli eventi tramite l'IU web. | 
+| Ruolo piattaforma: `Viewer`   | Consente all'utente di visualizzare l'elenco delle istanze del servizio nel dashboard Osservabilità. |
+| Ruolo servizio: `Reader`    | Consente all'utente di visualizzare gli eventi tramite l'IU web. | 
 {: caption="Tabella 1. Politiche IAM" caption-side="top"} 
 
 Per ulteriori informazioni, vedi [Concessione delle autorizzazioni utente a un utente o a un ID servizio](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
 
-## Passo 2. Avvio dell'IU web mediante l'IU {{site.data.keyword.cloud_notm}} 
+## Passo 2. Avvio dell'IU web mediante l'IU {{site.data.keyword.cloud_notm}}
 {: #launch_step2}
 
-Avvia l'IU web all'interno del contesto di un'istanza {{site.data.keyword.at_full_notm}}, dall'IU {{site.data.keyword.cloud_notm}}.  
+Avvia l'IU web all'interno del contesto di un'istanza {{site.data.keyword.at_full_notm}}, dall'IU {{site.data.keyword.cloud_notm}}. 
 
 Completa la seguente procedura per avviare l'IU web:
 
@@ -55,21 +55,25 @@ Completa la seguente procedura per avviare l'IU web:
 
 	Dopo che hai eseguito l'accesso con il tuo ID utente e la tua password, viene aperto il dashboard {{site.data.keyword.cloud_notm}}.
 
-2. Nel menu di navigazione, seleziona **Osservabilità**. 
+2. Fai clic sull'icona **Menu** ![Icona Menu](../icons/icon_hamburger.svg) > **Osservabilità**. 
 
 3. Seleziona **Programma di traccia dell'attività**. 
 
-    Viene visualizzato l'elenco delle istanze disponibili in {{site.data.keyword.cloud_notm}}.
+    Viene visualizzato l'elenco delle istanze di {{site.data.keyword.at_full_notm}}.
 
-4. Seleziona un'istanza. Fai quindi clic su **Visualizza LogDNA**.
+    Esiste 1 istanza per ogni regione.
+    {: important}
 
-Viene aperta l'IU web
+4. Seleziona l'istanza nella regione in cui vuoi visualizzare gli eventi. Fai quindi clic su **Visualizza LogDNA**.
+
+Si apre l'IU web {{site.data.keyword.at_full_notm}} che mostra la vista **Everything**. Tramite questa vista, puoi visualizzare gli eventi nel tuo account per la regione che hai selezionato.
 
 
-## Ottenimento dell'URL dell'IU web da {{site.data.keyword.cloud_notm}} 
+
+## Ottenimento dell'URL dell'IU web da {{site.data.keyword.cloud_notm}}
 {: #launch_get}
 
-Per ottenere l'URL dell'IU web, completa la seguente procedura da un terminale: 
+Per ottenere l'URL dell'IU web, completa la seguente procedura da un terminale:
 
 1. Imposta il gruppo di risorse in cui viene eseguito il provisioning dell'istanza {{site.data.keyword.at_full_notm}}.
 
@@ -115,7 +119,7 @@ Per ottenere l'URL dell'IU web, completa la seguente procedura da un terminale:
     ```
     {: codeblock}
 
-7. Ottieni l'URL dell'IU web. 
+7. Ottieni l'URL dell'IU web.
 
     ```
     echo $dashboard_url

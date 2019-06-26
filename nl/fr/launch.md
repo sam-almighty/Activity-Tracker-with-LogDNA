@@ -28,23 +28,23 @@ Après avoir mis à disposition une instance du service {{site.data.keyword.at_f
 {:shortdesc}
 
 
-## Etape 1. Octroi de règles IAM à un utilisateur pour afficher des données  
+## Etape 1. Octroi de règles IAM à un utilisateur pour afficher des données 
 {: #step1}
 
 **Remarque :** vous devez être administrateur du service {{site.data.keyword.at_full_notm}}, administrateur d'une instance {{site.data.keyword.at_full_notm}} ou disposer de droits IAM sur le compte pour accorder des règles à d'autres utilisateurs.
 
-Le tableau suivant répertorie la règle minimale qu'un utilisateur doit posséder pour pouvoir lancer l'interface utilisateur Web et afficher les données via l'interface utilisateur Web {{site.data.keyword.at_full_notm}} : 
+Le tableau suivant répertorie la règle minimale qu'un utilisateur doit posséder pour pouvoir lancer l'interface utilisateur Web et afficher les données via l'interface utilisateur Web {{site.data.keyword.at_full_notm}} :
 
-|Rôle | Droits accordés       |
+| Rôle                      | Droits accordés       |
 |---------------------------|---------------------|
-|  Rôle de plateforme : `Afficheur `     | Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord Observabilité. |
-| Rôle de service : `Lecteur`      | Permet à l'utilisateur d'afficher les événements dans l'interface utilisateur Web. | 
+| Rôle de plateforme : `Afficheur `   | Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord Observabilité. |
+| Rôle de service : `Lecteur`    | Permet à l'utilisateur d'afficher les événements dans l'interface utilisateur Web. | 
 {: caption="Tableau 1. Règles IAM" caption-side="top"} 
 
 Pour plus d'informations, voir [Octroi de droits utilisateur à un utilisateur ou à un ID de service](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
 
-## Etape 2. Lancement de l'interface utilisateur Web via l'interface utilisateur {{site.data.keyword.cloud_notm}} 
+## Etape 2. Lancement de l'interface utilisateur Web via l'interface utilisateur {{site.data.keyword.cloud_notm}}
 {: #launch_step2}
 
 Le démarrage de l'interface utilisateur Web dans le contexte d'une instance {{site.data.keyword.at_full_notm}} s'effectue depuis l'interface utilisateur {{site.data.keyword.cloud_notm}}. 
@@ -55,15 +55,19 @@ Pour lancer l'interface utilisateur Web, procédez comme suit :
 
 	Une fois connecté avec votre ID utilisateur et votre mot de passe, le tableau de bord {{site.data.keyword.cloud_notm}} s'ouvre.
 
-2. Dans le menu de navigation, sélectionnez **Observabilité**.  
+2. Cliquez sur l'icône **Menu** ![Icône Menu](../icons/icon_hamburger.svg) > **Observabilité**.  
 
 3. Sélectionnez **Activity Tracker**. 
 
-    La liste des instances disponibles sur {{site.data.keyword.cloud_notm}} s'affiche. 
+    La liste des instances {{site.data.keyword.at_full_notm}} s'affiche.
 
-4. Sélectionnez une instance. Ensuite, cliquez sur **Afficher LogDNA**.
+    Il existe une instance par région.
+    {: important}
 
-L'interface utilisateur Web s'ouvre.
+4. Sélectionnez l'instance dans la région où vous souhaitez afficher les événements. Ensuite, cliquez sur **Afficher LogDNA**.
+
+L'interface utilisateur Web {{site.data.keyword.at_full_notm}} s'ouvre et affiche la vue **Tout**. Grâce à cette vue, vous pouvez voir les événements de votre compte relatifs à la région que vous avez sélectionnée.
+
 
 
 ## Obtention de l'adresse URL de l'interface utilisateur Web depuis {{site.data.keyword.cloud_notm}}

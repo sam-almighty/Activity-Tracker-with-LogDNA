@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -25,31 +25,28 @@ subcollection: logdnaat
 # Archivage d'événements dans IBM Cloud Object Storage
 {: #archiving}
 
-Vous pouvez archiver des événements d'une instance {{site.data.keyword.at_full_notm}} dans un compartiment d'une instance {{site.data.keyword.cos_full_notm}} (COS).
+Vous pouvez archiver des événements d'une instance {{site.data.keyword.at_full_notm}} dans un compartiment d'une instance {{site.data.keyword.cos_full_notm}} (COS). 
 {:shortdesc}
 
-Pour configurer l'archivage, vous devez disposer d'une règle IAM avec le rôle de plateforme **Afficheur** et le rôle de service **Responsable** pour le service {{site.data.keyword.at_full_notm}}.
-
-Vous archivez des événements d'une instance {{site.data.keyword.at_full_notm}} dans un compartiment d'une instance {{site.data.keyword.cos_full_notm}} (COS).
-Chaque instance {{site.data.keyword.at_full_notm}} a sa propre configuration d'archivage. 
-
-Les événements sont automatiquement archivés une fois par jour dans un format compressé **(.json.gz)**. Chaque ligne conserve ses métadonnées.
-
-Les événements sont archivés dans les 24 à 48 heures après que vous avez enregistré la configuration.  
-
-L'instance {{site.data.keyword.cos_full_notm}} est mise à disposition dans le contexte d'un groupe de ressources. L'instance {{site.data.keyword.at_full_notm}} est également mise à disposition dans le contexte d'un groupe de ressources. Les deux instances peuvent être regroupées dans le même groupe de ressources ou se trouver dans des groupes différents. 
-
-{{site.data.keyword.at_full_notm}} utilise un ID de service pour communiquer avec le service {{site.data.keyword.cos_full_notm}}.
-
-* {{site.data.keyword.at_full_notm}} utilise l'ID de service que vous créez pour une instance {{site.data.keyword.cos_full_notm}} pour authentifier et accéder à l'instance {{site.data.keyword.cos_full_notm}}. 
-* Vous pouvez affecter à l'ID de service des règles d'accès spécifiques qui limitent les droits sur l'instance {{site.data.keyword.cos_full_notm}}. Limitez l'ID de service pour avoir uniquement des droits en écriture sur le compartiment où vous prévoyez d'archiver les événements. 
-
-La figure suivante présente une vue d'ensemble des différents composants intégrés lors de l'archivage d'événements : 
-
-![Vue d'ensemble d'archivage d'événements](images/archive.png "Vue d'ensemble d'archivage d'événements")
-
-
 Pour archiver une instance {{site.data.keyword.at_full_notm}} dans un compartiment d'une instance {{site.data.keyword.cos_full_notm}}, procédez comme suit :
+
+## Conditions préalables
+{: #archiving_prereqs}
+
+* [En savoir plus sur l'archivage des événements](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive).
+
+* **Vous devez disposer d'un forfait de service payant pour le service **{{site.data.keyword.at_full_notm}}. [En savoir plus](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+
+* Vérifiez que votre ID utilisateur dispose des droits nécessaires pour lancer l'interface utilisateur Web et gérer les événements. Le tableau suivant répertorie les rôles minimaux qu'un utilisateur doit posséder pour pouvoir lancer l'interface utilisateur Web {{site.data.keyword.at_full_notm}} et afficher, rechercher et filtrer des événements : 
+
+| Rôle                      | Droits accordés            |
+|---------------------------|-------------------------------|  
+| Rôle de plateforme : `Afficheur `     | Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord Observabilité. |
+| Rôle de service : `Responsable`      | Permet à l'utilisateur de lancer l'interface utilisateur Web et de gérer les événements dans l'interface utilisateur Web. |
+{: caption="Tableau 1. Rôles IAM" caption-side="top"} 
+
+Pour plus d'informations sur la configuration des stratégies pour un utilisateur, voir [Octroi de droits utilisateur à un utilisateur ou à un ID de service](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
+
 
 
 ## Etape 1. Accord à un utilisateur de règles IAM pour l'utilisation d'{{site.data.keyword.cos_full_notm}}
@@ -61,7 +58,7 @@ En tant qu'administrateur du service {{site.data.keyword.cos_full_notm}}, vous d
 
 Il existe différentes façons d'accorder à un utilisateur le droit d'éditeur du service {{site.data.keyword.cos_full_notm}} :
 
-* En tant qu'administrateur du service dans le compte, une règle IAM pour le service {{site.data.keyword.cos_full_notm}} doit être affectée à l'utilisateur avec le rôle de plateforme *Administrateur*. Vous devez attribuer cet accès utilisateur à une ressource individuelle dans le compte.  
+* En tant qu'administrateur du service dans le compte, une règle IAM pour le service {{site.data.keyword.cos_full_notm}} doit être affectée à l'utilisateur avec le rôle de plateforme *Administrateur*. Vous devez attribuer cet accès utilisateur à une ressource individuelle dans le compte. 
 
 * En tant qu'administrateur du service dans le contexte d'un groupe de ressources, une règle IAM pour le service {{site.data.keyword.cos_full_notm}} avec le rôle de plateforme *Administrateur* doit être affectée à l'utilisateur dans le contexte du groupe de ressources. 
 
@@ -70,9 +67,9 @@ Le tableau suivant répertorie les rôles que peut avoir un utilisateur pour ex�
 
 | Service                    | Rôles de plateforme    | Action                                                                                        | 
 |----------------------------|-------------------|-----------------------------------------------------------------------------------------------|       
-| `Cloud Object Storage`     |Administrateur                    | Autorise l'utilisateur à affecter à d'autres utilisateurs dans le compte des règles d'utilisation du service {{site.data.keyword.cos_full_notm}}. |
-| `Cloud Object Storage`     |Administrateur                    </br>Editeur | Autorise l'utilisateur à mettre à disposition une instance du service {{site.data.keyword.cos_full_notm}}.    |
-| `Cloud Object Storage`     |Administrateur                    </br>Editeur </br>Opérateur| Autorise l'utilisateur à créer un ID de service.    | 
+| `Cloud Object Storage`     | Administrateur     | Autorise l'utilisateur à affecter à d'autres utilisateurs dans le compte des règles d'utilisation du service {{site.data.keyword.cos_full_notm}}. |
+| `Cloud Object Storage`     | Administrateur </br>Editeur | Autorise l'utilisateur à mettre à disposition une instance du service {{site.data.keyword.cos_full_notm}}.    |
+| `Cloud Object Storage`     | Administrateur </br>Editeur </br>Opérateur | Autorise l'utilisateur à créer un ID de service.    | 
 {: caption="Tableau 1. Rôles et actions" caption-side="top"} 
 
 
@@ -80,7 +77,7 @@ Pour affecter à un utilisateur le rôle d'administrateur sur le service {{site.
 
 1. [Connectez-vous à votre compte {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/login){:new_window}.
 
-	Une fois que vous êtes connecté avec votre ID utilisateur et votre mot de passe, l'interface utilisateur {{site.data.keyword.cloud_notm}} s'ouvre. 
+	Une fois que vous êtes connecté avec votre ID utilisateur et votre mot de passe, l'interface utilisateur {{site.data.keyword.cloud_notm}} s'ouvre.
     
 2. Dans la barre de menus, cliquez sur **Gérer** &gt; **Accès (IAM)** puis sélectionnez **Utilisateurs**.
 3. Sur la ligne de l'utilisateur auquel vous voulez affecter un accès, sélectionnez le menu **Actions**, puis cliquez sur **Affecter un accès**.
@@ -93,7 +90,7 @@ Pour affecter à un utilisateur le rôle d'administrateur sur le service {{site.
     Vous pouvez sélectionner **Aucun accès** si vous voulez que l'utilisateur puisse uniquement accéder au service {{site.data.keyword.at_full_notm}} dans le groupe de ressources.
 
 7. Sélectionnez **Cloud Object Storage**.
-8. Sélectionnez le rôle de plateforme **Administrateur**. 
+8. Sélectionnez le rôle de plateforme **Administrateur**.
 9. Cliquez sur **Affecter**.
 
 
@@ -104,7 +101,7 @@ Pour affecter à un utilisateur le rôle d'administrateur sur le service {{site.
 **Remarque :** cette étape doit être effectuée par un éditeur ou un administrateur du service {{site.data.keyword.cos_full_notm}} sur {{site.data.keyword.cloud_notm}}. 
 Pour mettre à disposition une instance {{site.data.keyword.cos_full_notm}}, procédez comme suit :
 
-1. Dans la barre de menus, cliquez sur **Catalogue**. La liste des services disponibles dans {{site.data.keyword.cloud_notm}} s'affiche. 
+1. Dans la barre de menus, cliquez sur **Catalogue**. La liste des services disponibles dans {{site.data.keyword.cloud_notm}} s'affiche.
 
 2. Pour filtrer la liste des services affichés, sélectionnez la catégorie **Stockage**.
 
@@ -131,11 +128,11 @@ Les compartiments vous permettent d'organiser vos données dans une instance {{s
 
 Pour gérer les compartiments, l'utilisateur doit disposer de droits d'utilisation des compartiments dans l'instance {{site.data.keyword.cos_full_notm}}. Le tableau suivant répertorie les différents rôles et actions que peut avoir un utilisateur pour exploiter des compartiments :
 
-| Service                    |Rôles | Action                             | 
+| Service                    | Rôles                   | Action                             | 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | Rôle de plateforme : Afficheur   | Autorise l'utilisateur à afficher tous les compartiments et à répertorier les objets qu'ils contiennent via l'interface utilisateur {site.data.keyword.Bluemix_notm}}. |
+| `Cloud Object Storage`     | Rôle de plateforme : Afficheur   | Autorise l'utilisateur à afficher tous les compartiments et à répertorier les objets qu'ils contiennent. |
 | `Cloud Object Storage`     | Rôle de service : Responsable   | Autorise l'utilisateur à rendre des objets publics.                                                       |
-| `Cloud Object Storage`     | Rôles de service : Responsable </br> Auteur | Autorise l'utilisateur à créer et à détruire des compartiments et des objets.                         | 
+| `Cloud Object Storage`     | Rôles de service : Responsable </br>Auteur | Autorise l'utilisateur à créer et à détruire des compartiments et des objets.                         | 
 | `Cloud Object Storage`     | Rôle de service : Lecteur    | Autorise l'utilisateur à répertorier et télécharger des objets.                                                 |
 {: caption="Tableau 1. Rôles et actions pour utiliser des compartiments" caption-side="top"} 
 
@@ -167,17 +164,18 @@ Pour créer un compartiment, procédez comme suit :
     
     Un centre de données unique distribue les données uniquement aux périphériques d'un seul site.
 
-    Pour plus d'informations, voir [Select regions and endpoints](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints).
+    Pour plus d'informations, voir [Select regions and endpoints](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints).
 
 6. Sélectionnez le type de *Classe de stockage*.
 
-    Vous pouvez créer des compartiments ayant différentes classes de stockage. Sélectionnez la classe de stockage de votre compartiment en fonction de vos besoins en matière d'extraction des données. Pour plus d'informations, voir [Use storage classes](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes).
+    Vous pouvez créer des compartiments ayant différentes classes de stockage. Sélectionnez la classe de stockage de votre compartiment en fonction de vos besoins en matière d'extraction des données. Pour plus d'informations, voir [Use storage classes](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes).
 
     **Remarque :** une fois le compartiment créé, vous ne pouvez plus modifier la classe de stockage. Si vous avez besoin de reclassifier des objets, vous devez déplacer les données vers un autre compartiment ayant la classe de stockage requise.
 
 7. Vous pouvez éventuellement ajouter une clé Key Protect pour chiffrer les données au repos.
 
-    Tous les objets sont chiffrés par défaut à l'aide de clés générées de manière aléatoire et d'une transformation en tout ou rien. Même si ce modèle de chiffrement par défaut fournit une sécurité au repos, certaines charges de travail doivent posséder les clés de chiffrement utilisées. Pour plus d'informations, voir [Manage encryption](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption).
+    Tous les objets sont chiffrés par défaut à l'aide de clés générées de manière aléatoire et d'une transformation en tout ou rien. Même si ce modèle de chiffrement par défaut fournit une sécurité au repos, certaines charges de travail doivent posséder les clés de chiffrement utilisées. Pour plus d'informations, voir [Manage encryption](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption).
+
 
 
 
@@ -203,9 +201,9 @@ Pour créer un ID de service disposant de droits d'écriture pour l'instance {{s
 
 5. Cliquez sur **Ajouter**.
 
-    Un nouvel ID de service est créé et ajouté à la liste.  
+    Un nouvel ID de service est créé et ajouté à la liste. 
 
-    **Remarque :** L'ID de service créé dans {{site.data.keyword.cloud_notm}} et répertorié via l'interface utilisateur IAM a un nom générique. Le nom de l'ID de service dans l'interface utilisateur IAM correspond à la valeur de la zone **iam_apikey_name** que vous avez créée à cette étape via l'interface utilisateur d'ID de service COS. 
+    **Remarque :** L'ID de service créé dans {{site.data.keyword.cloud_notm}} et répertorié via l'interface utilisateur IAM a un nom générique. Le nom de l'ID de service dans l'interface utilisateur IAM correspond à la valeur de la zone **iam_apikey_name** que vous avez créée à cette étape via l'interface utilisateur d'ID de service COS.
     
 6. [Facultatif] Pour verrouiller l'ID de service afin d'empêcher toute suppression, dans la barre de menus, cliquez sur **Gérer** &gt; **Accès (IAM)**. Recherchez l'ID de service. Ensuite, sélectionnez l'action **Verrouiller**.
 
@@ -222,7 +220,7 @@ Pour l'ID de service que vous venez de créer, cliquez sur **Afficher les donné
 
 Pour accorder à l'ID de service uniquement le droit d'écriture pour un compartiment, procédez comme suit :
 
-1. Dans l'interface utilisateur COS, sélectionnez le compartiment. 
+1. Dans l'interface utilisateur COS, sélectionnez le compartiment.
 
 2. Dans le menu du compartiment, sélectionnez **Policies**. La page *Bucket access policies* s'ouvre.
 
@@ -243,15 +241,13 @@ Un noeud final définit à quel endroit rechercher un compartiment. Il existe di
 
 Pour obtenir le noeud final de votre compartiment, procédez comme suit :
 
-1. Connectez-vous à votre compte {{site.data.keyword.cloud_notm}}.
+1. [Connectez-vous à votre compte {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/login){:new_window}.
 
-    Cliquez sur le tableau de bord [{{site.data.keyword.cloud_notm}} ![Icône de lien externe](../../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/login){:new_window} pour lancer le tableau de bord {{site.data.keyword.cloud_notm}}. 
-
-	Une fois que vous êtes connecté avec votre ID utilisateur et votre mot de passe, le tableau de bord {{site.data.keyword.cloud_notm}} s'ouvre.
+	Une fois que vous êtes connecté, le tableau de bord {{site.data.keyword.cloud_notm}} s'ouvre. 
 
 2. Depuis le tableau de bord, sélectionnez l'instance {{site.data.keyword.cos_full_notm}} dans laquelle vous prévoyez de créer le compartiment.
 
-3. Sélectionnez **Compartiments**. Ensuite, sélectionnez le compartiment que vous avez créé pour archiver les événements. 
+3. Sélectionnez **Compartiments**. Ensuite, sélectionnez le compartiment que vous avez créé pour archiver les événements.
 
 4. Sélectionnez **Configuration**.
 
@@ -259,15 +255,15 @@ Pour obtenir le noeud final de votre compartiment, procédez comme suit :
 
 
 
-## Etape 7. Octroi de règles IAM à un utilisateur pour archiver des événements 
+## Etape 7. Octroi de règles IAM à un utilisateur pour archiver des événements
 {: #archiving_step7}
 
 Le tableau suivant répertorie les règles qu'un utilisateur doit posséder pour configurer l'archivage des événements de l'interface utilisateur Web {{site.data.keyword.at_full_notm}} vers un compartiment dans une instance {{site.data.keyword.cos_full_notm}} :
 
-| Service                              |Rôle | Droits accordés                  | 
+| Service                              | Rôle                      | Droits accordés                  | 
 |--------------------------------------|---------------------------|-------------------------------------|  
 | `{{site.data.keyword.at_full_notm}}` | Rôle de plateforme : Afficheur     | Autorise l'utilisateur à afficher la liste des instances de service dans le tableau de bord de journalisation d’observabilité. |
-| `{{site.data.keyword.at_full_notm}}` | Rôle de service : Responsable     | Permet à l'utilisateur de lancer l'interface utilisateur Web et d'afficher les événements dans l'interface utilisateur Web. |
+| `{{site.data.keyword.at_full_notm}}` | Rôle de service : Responsable     | Permet à l'utilisateur de lancer l'interface utilisateur Web et d'afficher les événements dans l'interface utilisateur Web.                             |
 {: caption="Tableau 2. Règles IAM" caption-side="top"} 
 
 [En savoir plus](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
@@ -285,8 +281,8 @@ Pour octroyer à un utilisateur le droit d'archiver des événements, procédez 
     Vous pouvez sélectionner **Aucun accès** si vous voulez que l'utilisateur puisse uniquement accéder au service {{site.data.keyword.at_full_notm}} dans le groupe de ressources.
 
 6. Sélectionnez **IBM Log Analysis avec LogDNA**.
-7. Sélectionnez le rôle de plateforme **Afficheur**. 
-8. Sélectionnez le rôle de service **Responsable**. 
+7. Sélectionnez le rôle de plateforme **Afficheur**.
+8. Sélectionnez le rôle de service **Responsable**.
 9. Cliquez sur **Affecter**.
 
 
@@ -297,14 +293,13 @@ Pour octroyer à un utilisateur le droit d'archiver des événements, procédez 
 
 Pour configurer l'archivage de votre instance {{site.data.keyword.at_full_notm}} dans un compartiment COS, procédez comme suit :
 
-1. Lancez l'interface utilisateur Web {{site.data.keyword.at_full_notm}}. [En savoir plus](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2).
-
+1. [Lancez l'interface utilisateur Web {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch).
 
 2. Cliquez sur l'icône **Configuration**. Puis sélectionnez **Archivage**. 
 
 3. Sélectionnez **IBM Cloud Object Storage**.
 
-4. Définissez le compartiment, le noeud final, la clé API et l'ID d'instance où vous souhaitez que les événements soient archivés. 
+4. Définissez le compartiment, le noeud final, la clé API et l'ID d'instance où vous souhaitez que les événements soient archivés.
 
     <table>
       <caption>Tableau 3. Zones de Cloud Object Storage</caption>
@@ -317,7 +312,7 @@ Pour configurer l'archivage de votre instance {{site.data.keyword.at_full_notm}}
          <td>Défini sur le nom du compartiment COS. </td>
       </tr>
       <tr>
-         <td>Noeud final </td>
+         <td>Noeud final</td>
          <td>Défini sur le noeud final privé du compartiment COS.</td>
       </tr>
       <tr>
@@ -325,7 +320,7 @@ Pour configurer l'archivage de votre instance {{site.data.keyword.at_full_notm}}
          <td>Définie sur la clé d'API associée à l'ID de service COS.</td>
       </tr>
       <tr>
-         <td>ID d'instance </td>
+         <td>ID d'instance</td>
          <td>Défini sur l'ID d'instance COS. </td>
       </tr>
     </table>
@@ -333,7 +328,7 @@ Pour configurer l'archivage de votre instance {{site.data.keyword.at_full_notm}}
 5. Cliquez sur **Sauvegarder**.
 
 
-Une fois la configuration sauvegardée, les événements sont archivés une fois par jour. 
+Une fois la configuration sauvegardée, les événements sont archivés une fois par jour.
 
 
 

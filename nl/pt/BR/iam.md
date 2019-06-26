@@ -86,10 +86,11 @@ Use a tabela a seguir para identificar a função da plataforma que é possível
 |-------------------------------------------------------------------------|------------------------------------------------------|
 | `Conceder acesso aos outros membros da conta para que trabalhem com o serviço`           | Administrador                                        | 
 | `Fornecer uma instância de serviço`                                          | Editor                            | 
-| `Excluir uma instância de serviço`                                             | Administrador </br>Editor | 
-| `Criar um ID de serviço`                                                   | Administrador </br>Editor |
+| `Excluir uma instância de serviço`                                             | Administrador </br>Editor                            | 
+| `Criar um ID de serviço`                                                   | Administrador </br>Editor                            |
 | `Visualizar detalhes de uma instância de serviço`                                    | Administrador </br>Editor </br>Operador </br>Visualizador  | 
-| `View service instances in the Observability Activity Tracker dashboard`   | Administrador </br>Editor </br>Operador </br>Visualizador  | 
+| `Visualizar instâncias de serviço no painel Criação de log de observabilidade`         | Administrador </br>Editor </br>Operador </br>Visualizador  | 
+| `Visualize a chave de ingestão no console do {{site.data.keyword.cloud_notm}}` | Administrador                                        | 
 {: caption="Tabela 1. Funções e ações do usuário do IAM" caption-side="top"}
 
 
@@ -101,13 +102,17 @@ Use a tabela a seguir para identificar as funções de serviço que você pode c
 
 | Ações                                                                 | Funções de serviço do {{site.data.keyword.cloud_notm}}     | 
 |-------------------------------------------------------------------------|------------------------------------------------------|
+| `Manage ingestion keys through the logDNA web UI`                       | Gerente                                              |
+| `Gerenciar chaves de serviço`                                                   | Gerente                                              |
 | `Archive events`                                                        | Gerente                                              |
-| `Configure alerts`                                                      | Gerenciador </br>Leitor       | 
-| `Filter and search data`                                                | Gerenciador </br>Leitor       |
-| `Create views`                                                          | Gerenciador </br>Leitor       |
-| `Export events`                                                         | Gerenciador </br>Leitor       |
-| `Configure user preferences in the LogDNA web UI`                       | Gerenciador </br>Leitor       |
-| `View events through the LogDNA web UI`                                 | Gerenciador </br>Leitor       | 
+| `Define exclusion rules`                                                | Gerente                                              |
+| `Configure alerts`                                                      | Gerenciador </br>Leitor                                  | 
+| `Filter and search data`                                                | Gerenciador </br>Leitor                                  |
+| `Create views`                                                          | Gerenciador </br>Leitor                                  |
+| `Gerenciar visualizações`                                                          | Gerenciador </br>Leitor                                  |
+| `Exportar dados do log`                                                       | Gerenciador </br>Leitor                                  |
+| `Configure user preferences in the LogDNA web UI`                       | Gerenciador </br>Leitor                                  |
+| `View events through the LogDNA web UI`                                 | Gerenciador </br>Leitor                                  | 
 {: caption="Tabela 2. Funções e ações do usuário do IAM" caption-side="top"}
 
 

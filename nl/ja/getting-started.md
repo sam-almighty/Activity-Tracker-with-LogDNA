@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-06"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, getting started
 
@@ -25,19 +25,19 @@ subcollection: logdnaat
 # 入門チュートリアル
 {: #getting-started}
 
-{{site.data.keyword.at_full}} サービスを使用して、アプリケーションが {{site.data.keyword.cloud_notm}} サービスとどのように対話するのかをトラッキングします。 このサービスを使用して、異常なアクティビティーや重大なアクションがないかを調査し、規制当局の監査条件に適合させることができます。さらに、アクションが発生した際にそれに関するアラートを通知させるようにできます。収集されるイベントは、Cloud Auditing Data Federation (CADF) 標準に準拠しています。
+{{site.data.keyword.at_full}} サービスを使用して、{{site.data.keyword.cloud_notm}} アカウントのアクティビティーをモニターします。このサービスを使用して、異常なアクティビティーや重大なアクションがないかを調査し、規制当局の監査条件に適合させることができます。 さらに、アクションが発生した際にそれに関するアラートを通知させるようにできます。収集されるイベントは、Cloud Auditing Data Federation (CADF) 標準に準拠しています。
 {:shortdesc}
 
 ![{{site.data.keyword.at_full_notm}} サービス](images/atov.png "{{site.data.keyword.at_full_notm}} サービス")
 
 
-{{site.data.keyword.at_full_notm}} は、 {{site.data.keyword.cloud_notm}} で実行されるリソースに対する API 呼び出しの監査レコードを収集し、保管します。これらのイベントは  {{site.data.keyword.cloud_notm}} にアーカイブして、長期的に保管できます。
+{{site.data.keyword.at_full_notm}} は、 {{site.data.keyword.cloud_notm}} で実行されるリソースに対する API 呼び出しの監査レコードを収集し、保管します。 これらのイベントは  {{site.data.keyword.cloud_notm}} にアーカイブして、長期的に保管できます。
 {: note}
 
 
 
 ## {{site.data.keyword.at_full}} について
-{: #ov}
+{: #gs_ov}
 
 アプリケーションの実行場所がオンプレミス、ハイブリッド・クラウド、またはパブリック・クラウドのいずれであるかに関係なく、社内のポリシーおよび業界の規定に準拠することは、すべての組織の戦略にとって重要な要件です。 {{site.data.keyword.at_full_notm}} サービスは {{site.data.keyword.cloud_notm}} 上のサービスへの API 呼び出しをモニターするためのフレームワークおよび機能を提供し、企業のポリシーおよび市場の業界固有の規定への準拠の証拠を生成します。
 
@@ -61,28 +61,24 @@ subcollection: logdnaat
 * {{site.data.keyword.at_full_notm}} イベントを生成する IBM サービスは、{{site.data.keyword.IBM_notm}} クラウドのセキュリティー・ポリシーに従います。 詳しくは、[Trust the security and privacy of IBM Cloud ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/security){: new_window} を参照してください。
 * {{site.data.keyword.at_full_notm}} サービスは、クラウド・サービスの状態を変更するユーザー開始アクションを取り込みます。 この情報からデータベースまたはアプリケーションに直接アクセスすることはできません。
 * 許可されたユーザーのみが {{site.data.keyword.at_full_notm}} イベント・ログの表示およびモニターを行うことができます。 各ユーザーは、{{site.data.keyword.cloud_notm}} での固有の ID によって識別されます。
+* プロビジョンできるサービスのインスタンスは {{site.data.keyword.cloud_notm}} のロケーション (地域) につき 1 つのみです。
 
 
 ## 達成目標
 {: #gs_objectives}
 
-このチュートリアルを完了すると、{{site.data.keyword.cloud_notm}} でサービスをプロビジョンする方法を学習できます。各イベントでどの一般的なデータが使用できるか、お使いのクラウド環境の監視のにどのように役立てることができるかを学びます。Web UI でのナビゲートについて学びます。 
+このチュートリアルを完了すると、{{site.data.keyword.cloud_notm}} でサービスをプロビジョンする方法を学習できます。 各イベントでどの一般的なデータが使用できるか、お使いのクラウド環境の監視のにどのように役立てることができるかを学びます。 Web UI でのナビゲートについて学びます。 
 
 
 ## 前提条件
 {: #gs_prereq}
 
-* {{site.data.keyword.cloud_notm}} アカウントのメンバーまたは所有者であるユーザー ID が必要です。{{site.data.keyword.cloud_notm}} ユーザー ID を取得するには、[「登録」![外部リンク・アイコン](../../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/login){:new_window} にアクセスしてください。
+* {{site.data.keyword.cloud_notm}} アカウントのメンバーまたは所有者であるユーザー ID が必要です。 {{site.data.keyword.cloud_notm}} ユーザー ID を取得するには、[登録 ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/login){:new_window} に移動してください。
 
-* {{site.data.keyword.cloud_notm}} で {{site.data.keyword.at_full_notm}} サービスを使用して作業するには、{{site.data.keyword.IBM_notm}} ID に IAM ポリシーが割り当てられていなければなりません。以下の表は、このチュートリアルを完了するために最低限必要な権限をリストしたものです。 
+* コマンド・ラインを使用して作業する方法を選ぶ場合は、{{site.data.keyword.cloud_notm}} CLI をインストールする必要があります。 詳しくは、[『{{site.data.keyword.cloud_notm}}CLI のインストール』](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli)を参照してください。
 
-| リソース                             | アクセス・ポリシーの有効範囲 | 役割    | 地域    | 情報                  |
-|--------------------------------------|----------------------------|---------|-----------|------------------------------|
-| リソース・グループ **Default**           |  リソース・グループ            | エディター  | us-south  | デフォルトのリソース・グループ内のサービス・インスタンスをユーザーが表示できるようにするためには、このポリシーが必要です。    |
-| {{site.data.keyword.at_full_notm}} サービス |  リソース・グループ            | エディター  | us-south  | デフォルトのリソース・グループ内の {{site.data.keyword.at_full_notm}} サービスをユーザーがプロビジョンおよび管理できるようにするためには、このポリシーが必要です。|
-{: caption="表 1. チュートリアルを実行するために必要な IAM ポリシーのリスト" caption-side="top"} 
+* サービスへのアクセスを管理する手順を実行するには、ユーザー ID に、{{site.data.keyword.at_full_notm}} サービスを管理するための**管理者プラットフォーム権限**が必要です。アカウント管理者にお問い合わせください。アカウント所有者は、ユーザー・アクセスの管理とアカウント・リソースの管理を行う目的で、別のユーザーにアカウントへのアクセス権限を付与できます。[詳細はこちら](/docs/iam?topic=iam-userroles)。
 
-* コマンド・ラインを使用して作業する方法を選ぶ場合は、{{site.data.keyword.cloud_notm}} CLI をインストールする必要があります。詳しくは、[『{{site.data.keyword.cloud_notm}}CLI のインストール』](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli)を参照してください。
 
 
 ## ステップ 1. {{site.data.keyword.at_full_notm}} のインスタンスをプロビジョンする
@@ -100,11 +96,13 @@ subcollection: logdnaat
 
 4. サービス・インスタンスの名前を入力します。
 
-5. インスタンスをプロビジョンすることを計画している地域を選択します。
+5. ロケーションとして**「フランクフルト」**を選択します。 
+
+    サービスが使用可能な地域について詳しくは、[地域](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions)を参照してください。
 
 6. リソース・グループを選択します。 
 
-    デフォルトでは、**Default** リソース・グループが設定されます。
+    デフォルトでは、**default** リソース・グループが設定されています。
 
     **注:** リソース・グループを選択できない場合、インスタンスをプロビジョンするリソース・グループでの編集許可があることを確認してください。
 
@@ -120,28 +118,34 @@ subcollection: logdnaat
 ## ステップ 2. サービスへのアクセスを管理する
 {: #gs_step2}
 
-**ご使用のアカウント内の {{site.data.keyword.at_full_notm}} サービスにアクセスするすべてのユーザーには、IAM ユーザー役割が定義されたアクセス・ポリシーを割り当てる必要があります。** そのポリシーによって、選択したサービスまたはインスタンスのコンテキスト内でユーザーが実行できるアクションが決まります。 許可されるアクションは、サービス上で実行できる操作としてカスタマイズされて定義されます。 その後、アクションは IAM ユーザー役割にマップされます。 
+**ご使用のアカウント内の {{site.data.keyword.at_full_notm}} サービスにアクセスするすべてのユーザーには、IAM ユーザー役割が定義されたアクセス・ポリシーを割り当てる必要があります。** そのポリシーによって、選択したサービスまたはインスタンスのコンテキスト内でユーザーが実行できるアクションが決まります。 許可されるアクションは、サービス上で実行できる操作としてカスタマイズされて定義されます。 その後、操作は IAM ユーザー役割にマップされます。 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam)。
 
-このチュートリアルでは、リソース・グループのコンテキスト内で、{{site.data.keyword.at_full_notm}} サービスを使用して作業するための管理権限をユーザーに付与する方法を学習します。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam)。
+このチュートリアルでは、リソース・グループのコンテキスト内で、{{site.data.keyword.at_full_notm}} サービスを使用して作業するための管理権限をユーザーに付与する方法を学習します。
 
 
 ### 1. アクセス・グループを作成する
-{: #gs_step2_step1}
+{: #gs_step2_1}
 
 アクセス・グループを作成するには、以下のステップを実行します。
-
 1. メニュー・バーから、**「管理」** &gt; **「アクセス (IAM)」**をクリックして、**「アクセス・グループ」**を選択します。
 2. **「作成」**をクリックします。
 3. グループの名前と説明 (オプション) を入力して**「作成」**をクリックします。
 
 ### 2. イベントを管理する権限を追加する
-{: #gs_step2_step2}
+{: #gs_step2_2}
 
-グループをセットアップした後で、共通するアクセス・ポリシーをそのグループに割り当てることができます。
+グループをセットアップした後で、共通するアクセス・ポリシーをそのグループに割り当てる必要があります。アクセス・グループに設定するポリシーは、そのグループ内のすべてのエンティティー、ユーザー、およびサービス ID に適用されます。
 
-アカウントのリソース・グループ内のインスタンスを管理する管理者役割をユーザーに付与するには、ユーザーに、リソース・グループのコンテキスト内での**管理者**のプラットフォーム役割とともに、{{site.data.keyword.at_full_notm}} サービスの IAM ポリシーが必要となります。 
+ポリシーを定義するときには、プラットフォーム役割とサービス役割を選択する必要があります。
+* プラットフォーム管理の役割は、インスタンスの作成と削除、別名、バインディング、および資格情報の管理、およびアクセスの管理を行う能力を含めて、さまざまなアクションをカバーします。プラットフォームの役割は、管理者、エディター、オペレーター、ビューアーです。プラットフォーム管理の役割は、アカウント管理サービスにも適用され、ユーザーが、アカウント管理サービスに関して割り当てられた役割に応じて、ユーザーの招待、サービス ID の管理、アクセス・ポリシーの管理、カタログ・エントリーの管理、請求および使用量の追跡を行うことを可能にします。
+* サービス・アクセスの役割は、ユーザーまたはサービスの、サービス・インスタンスに関するアクションを実行する能力を定義します。サービス・アクセスの役割は、管理者、ライター、およびリーダーです。
 
-UI を使ってアクセス・グループにポリシーを割り当てるには、以下のステップを実行します。
+{{site.data.keyword.at_full_notm}} サービスを管理するには、ユーザーに以下の役割が必要です。
+* プラットフォーム役割: **管理者**。 
+* サービス役割: **管理者**。 
+
+
+UI を使ってポリシーを割り当てるには、以下のステップを実行します。
 
 1. メニュー・バーから、**「管理」** &gt; **「アクセス (IAM)」**をクリックします。
 2. **「アクセス・グループ」**を選択します。
@@ -162,30 +166,39 @@ UI を使ってアクセス・グループにポリシーを割り当てるに�
 12. **「割り当て」**をクリックします。
 
 
-### 3. グループへのユーザーの追加
-{: #gs_step2_step3}
+### 3. ユーザーをグループに追加する
+{: #gs_step2_3}
 
 アクセス・グループにユーザーを追加するには、以下のステップを実行します。
 1. **「ユーザー」**タブで**「ユーザーの追加」**をクリックします。
 2. 追加するユーザーをリストから選択して、**「グループに追加」**をクリックします。
 
 
-
 ## ステップ 3. {{site.data.keyword.at_full_notm}} イベントを生成する
 {: #gs_step3}
 
-アクセス・グループを作成するときにイベントを生成するには、以下のステップを実行します。
+{{site.data.keyword.cloudcerts_short}} サービスのインスタンスがプロビジョンされたときにイベントを生成するには、以下のステップを実行します。
 
 
-1. [{{site.data.keyword.cloud_notm}} カタログ ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog){:new_window} から、**「管理」** &gt; **「セキュリティーおよび ID」**を選択します。
+1. [{{site.data.keyword.cloud_notm}} カタログ ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog){:new_window} から、**「セキュリティーおよび ID」**のカテゴリーを選択します。
 
-2. **「アクセス・グループ」**を選択します。
+2. {{site.data.keyword.cloudcerts_short}} サービスを選択します。
 
-3. **「作成」**を選択します。 次に、アクセス・グループの名前を入力します。
+3. サービス・インスタンスの名前を入力します。
 
-4. **「作成」**をクリックします。
+4. インスタンスをプロビジョンすることを計画している地域を選択します。
 
-アクセス・グループが作成されます。
+5. リソース・グループを選択します。 
+
+    デフォルトでは、**Default** リソース・グループが設定されます。
+
+    **注:** リソース・グループを選択できない場合、インスタンスをプロビジョンするリソース・グループでの編集許可があることを確認してください。
+
+6. `「無料」`サービス・プランを選択します。 
+
+7. **「作成」**をクリックします。
+
+{{site.data.keyword.cloudcerts_short}} サービスのインスタンスが作成されます。
 
 ## ステップ 4. Web UI を起動する 
 {: #gs_step4}
@@ -202,11 +215,11 @@ Web UI を起動するには、以下の手順を実行します。
 
     {{site.data.keyword.cloud_notm}} で使用可能なインスタンスのリストが表示されます。
 
-4. インスタンスを 1 つ選択します。 次に、**「LogDNA の表示 (View LogDNA)」**をクリックします。
+4. **フランクフルト**にあるインスタンスを選択します。次に、**「LogDNA の表示 (View LogDNA)」**をクリックします。
+
+    グローバル・イベント (サービスのプロビジョニングなど) は、フランクフルトにあるグローバル・ドメイン・インスタンスを介して使用できます。
 
 Web UI が開きます。 
-
-
 
 
 ## ステップ 5. イベントを表示する
@@ -217,34 +230,19 @@ Web UI が開きます。
 
 * イベントは自動的に収集されます。 
 * {{site.data.keyword.at_full_notm}} で収集されるイベントは、**Cloud Auditing Data Federation (CADF) 標準**に準拠しています。 CADF 標準は、クラウド環境にあるアプリケーションのセキュリティーの認証、管理、および監査に必要な情報が含まれた、フルイベント・モデルを定義しています。
-* {{site.data.keyword.at_full_notm}} は、地域別にイベントを保管およびグループ化します。 
-* {{site.data.keyword.cloud_notm}} のグローバル・アカウントのアクションに関するレポートを作成するイベントが **US-South** 地域で収集され、保管されます。
-* {{site.data.keyword.at_full_notm}} インスタンス用に選択するサービス・プランによって、Web UI でイベントを検索可能な日数が決まります。 
+* {{site.data.keyword.at_full_notm}} は、ロケーション別にイベントを保管およびグループ化します。 
+* {{site.data.keyword.cloud_notm}} のグローバル・アカウントのアクションに関するレポートを作成するイベントが**フランクフルト (EU-DE)** 地域で収集され、保管されます。
+* {{site.data.keyword.at_full_notm}} インスタンス用に選択するサービス・プランによって、Web UI でイベントを検索可能な日数が設定されます。 
 
+Web UI が開くと、**「すべて (Everything)」**ビューが表示されます。このビューを介してイベントを表示できます。
 
-コンテキスト内の各イベント行を随時表示できます。 コンテキストでイベントを表示するには、以下のステップを実行します。 
-
-1. Web UI で、**「ビュー」**アイコン ![構成アイコン](images/views.png "構成アイコン") をクリックします。
-2. **「すべて (Everything)」**を選択します。
-3. 調べる行を特定します。
-4. イベント行を展開します。 
-
-    行 ID、タグ、およびラベルに関する情報が表示されます。
-
-5. **「コンテキスト内のビュー (View in Context)」**をクリックすると、そのホストまたはアプリ、あるいはその両方からの他の項目のコンテキスト内のイベント行が表示されます。
-
-イベントの探索が終了したら、**「閉じる」**をクリックしてイベント行を閉じます。
-
-
-[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md)。
-
-
+カスタム・ビューを定義して、タイム・スタンプ、検索照会、またはその両方を適用することにより、一連のイベントを表示することもできます。[詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views)。
 
 
 ## ステップ 6. イベントの構造について学習する
 {: #gs_step6}
 
-イベントは **Cloud Auditing Data Federation (CADF) 標準**に準拠しています。CADF 標準は、クラウド環境にあるアプリケーションのセキュリティーの認証、管理、および監査に必要な情報が含まれた、フルイベント・モデルを定義しています。
+イベントは **Cloud Auditing Data Federation (CADF) 標準**に準拠しています。 CADF 標準は、クラウド環境にあるアプリケーションのセキュリティーの認証、管理、および監査に必要な情報が含まれた、フルイベント・モデルを定義しています。
 
 CADF イベント・モデルには、以下のコンポーネントが含まれています。
 
@@ -259,10 +257,14 @@ CADF イベント・モデルには、以下のコンポーネントが含まれ
 
 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-event#event)。
 
+
+
 ## 次のステップ
 {: #gs_next_steps}
 
-{{site.data.keyword.at_full_notm}} サービス・プランを、[イベントのフィルター処理](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views_step1)、[イベントの検索](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views_step2)、[ビューの定義](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views_step3)、[アラートの構成](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts.md#alerts.md)を行える有料プランにアップグレードします。 
+[カスタム・ビューを定義します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views)。 
+
+{{site.data.keyword.at_full_notm}} サービス・プランを、[照会を適用することによるイベントの検索](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2)および[アラートの構成](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-alerts)を行える有料プランにアップグレードします。 
 
 {{site.data.keyword.at_full_notm}} サービス・プランについて詳しくは、[サービス・プラン](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)を参照してください。
 

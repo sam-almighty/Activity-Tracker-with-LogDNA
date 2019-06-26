@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -29,6 +29,13 @@ subcollection: logdnaat
 {:shortdesc}
 
 Por ejemplo, como administrador del servicio, puede suministrar y eliminar instancias del servicio, otorgar a otros usuarios permisos para trabajar con el servicio, archivar registros en una instancia de {{site.data.keyword.cos_full_notm}} (COS), etc. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+
+## Requisitos previos
+{: #iam_manage_events_prereq}
+
+El ID de usuario necesita **permisos de plataforma de administrador** para gestionar el servicio de
+{{site.data.keyword.at_full_notm}}. Póngase en contacto con el administrador de la cuenta. El propietario de la cuenta puede otorgar a otro usuario acceso a la cuenta con fines de gestión del acceso de usuario y de gestión de recursos de la cuenta. [Más información](/docs/iam?topic=iam-userroles).
+
 
 ## Paso 1. Crear un grupo de acceso
 {: #ime_step1}
@@ -68,18 +75,25 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+Al definir la política, necesita seleccionar un rol de plataforma y un rol de servicio:
+* Los roles de gestión de plataforma cubren un rango de acciones, que incluyen la capacidad de crear y suprimir instancias, gestionar alias, enlaces y credenciales y gestionar el acceso. Los roles de plataforma son: administrador, editor, operador y visor. Los roles de gestión de plataforma también se aplican a los servicios de gestión de cuentas que permiten a los usuarios invitar a usuarios, gestionar ID de servicio, acceder a políticas, catalogar entradas y realizar un seguimiento de la facturación y del uso, en función de su rol asignado en un servicio de gestión de cuentas.
+* Los roles de acceso al servicio definen la capacidad de un usuario o servicio de realizar acciones en una instancia de servicio. Los roles de acceso al servicio son el gestor, escritor y lector.
+
+Para gestionar el servicio {{site.data.keyword.at_full_notm}}, un usuario necesita los roles siguientes:
+* Rol de plataforma: **Administrador**. 
+* Rol de servicio: **Gestor**. 
+[Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
+
 Realice los pasos siguientes para asignar una política a un grupo de acceso a través de la interfaz de usuario:
 
 1. En la barra de menús, pulse **Gestionar** &gt; **Acceso (IAM)** y seleccione **Grupos de acceso**.
 2. Seleccione el nombre del grupo al que desea asignar el acceso. 
 3. Pulse **Políticas de acceso**.
 4. Pulse **Asignar acceso**.
-5. Elija asignar acceso por recursos en un grupo de recursos, en recursos individuales disponibles en la cuenta o en servicios de gestión de la cuenta. Por ejemplo, puede elegir cualquiera de las opciones siguientes para otorgar a un usuario un rol de administrador para gestionar una instancia de {{site.data.keyword.at_full_notm}}:
+5. Elija asignar el acceso mediante recursos dentro de un grupo de recursos, o mediante recursos individuales disponibles dentro de la cuenta. Por ejemplo, puede elegir cualquiera de las opciones siguientes para otorgar a un usuario un rol de administrador para gestionar {{site.data.keyword.at_full_notm}}:
 
-### Opción 1. Otorgar permisos a un usuario para que pase a ser un administrador del servicio en la cuenta de {{site.data.keyword.cloud_notm}}
+### Opción 1. Otorgar permisos en el servicio
 {: #admin_account_opt1}
-
-Para otorgar a un usuario el rol de administrador para gestionar el servicio en la cuenta, el usuario debe tener una política de IAM para el servicio {{site.data.keyword.at_full_notm}} con el rol de **Administrador** de la plataforma. Debe asignar a este usuario acceso a un recurso individual de la cuenta. 
 
 Siga los pasos siguientes para asignar a un usuario el rol de administrador sobre el servicio {{site.data.keyword.at_full_notm}} en la cuenta: 
 
@@ -91,10 +105,8 @@ Siga los pasos siguientes para asignar a un usuario el rol de administrador sobr
 6. Seleccione el rol de **Gestor** del servicio.
 7. Pulse **Asignar**.
 
-### Opción 2. Otorgar permisos a un usuario para que pase a ser un administrador del servicio dentro de un grupo de recursos
+### Opción 2. Otorgar permisos dentro del contexto de un grupo de recursos
 {: #admin_account_opt2}
-
-Para otorgar a un usuario el rol de administrador para gestionar instancias dentro de un grupo de recursos en la cuenta, el usuario debe tener una política de IAM para el servicio {{site.data.keyword.at_full_notm}} con el rol de **Administrador** de la plataforma dentro del contexto del grupo de recursos. 
 
 Siga los pasos siguientes para asignar a un usuario el rol de administrador sobre el servicio {{site.data.keyword.at_full_notm}} dentro del contexto de un grupo de recursos: 
 
@@ -111,8 +123,11 @@ Siga los pasos siguientes para asignar a un usuario el rol de administrador sobr
 6. Seleccione el rol de **Gestor** del servicio.
 7. Pulse **Asignar**.
 
-### Opción 3. Otorgar permisos a un usuario para que pase a ser un administrador de una instancia individual del servicio en {{site.data.keyword.cloud_notm}}
+### Opción 3. Otorgar permisos en una ubicación
 {: #admin_account_opt3}
+
+Solo puede suministrar una instancia del servicio {{site.data.keyword.at_full_notm}} por ubicación. Por lo tanto, al otorgar permisos utilizando esta opción, controlará el acceso por ubicación. 
+{: note}
 
 Realice los pasos siguientes para asignar a un usuario el rol de administrador sobre una instancia del servicio {{site.data.keyword.at_full_notm}}: 
 

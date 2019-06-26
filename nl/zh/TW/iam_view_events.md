@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-22"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -28,8 +28,11 @@ subcollection: logdnaat
 {{site.data.keyword.iamlong}} (IAM) 可讓您在 {{site.data.keyword.cloud_notm}} 中，安全地鑑別使用者以及一致地控制對所有雲端資源的存取。請完成下列步驟，授與使用者或服務 ID 使用 {{site.data.keyword.at_full_notm}} 服務的最低許可權：
 {:shortdesc}
 
-比方說，如果您具有付費方案，則可以設定這些最低權限，以授與使用者檢視、搜尋及過濾事件、匯出資料，以及配置警示的存取權。
-[進一步瞭解](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam)。
+## 必要條件
+{: #iam_view_events_prereq}
+
+您的使用者 ID 需要**管理者平台許可權**，才能管理 {{site.data.keyword.at_full_notm}} 服務。請與帳戶管理者聯絡。帳戶擁有者可以授與另一個使用者對於帳戶的存取權，以便管理使用者存取權和管理帳戶資源。[進一步瞭解](/docs/iam?topic=iam-userroles)。
+
 
 
 ## 步驟 1. 建立存取群組
@@ -69,21 +72,29 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 ```
 {: codeblock}
 
+當您定義原則時，需要選取平台角色及服務角色：
+* 平台管理角色涵蓋某個範圍的動作，包括建立及刪除實例、管理別名、連結、認證，以及管理存取權的能力。平台角色包括：管理者、編輯者、操作員、檢視者。平台管理角色也適用於帳戶管理服務，這些服務可讓使用者根據本身在帳戶管理服務上指派的角色邀請使用者、管理服務 ID、存取原則、型錄項目，以及追蹤計費和用量。
+* 服務存取角色會定義使用者或服務能否對服務實例執行動作。服務存取角色包括：管理員、撰寫者和讀者。
+
+若要管理 {{site.data.keyword.at_full_notm}} 服務，使用者需要下列角色：
+* 平台角色：**檢視者**。 
+* 服務角色：**讀者**。[進一步瞭解](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam)。
+
+
+
 請完成下列步驟，透過使用者介面將原則指派給存取群組：
 
 1. 從功能表列中，按一下**管理** &gt; **存取權 (IAM)**，然後選取**存取群組**。
 2. 選取您要指派存取權的群組名稱。 
 3. 按一下**存取原則**。
 4. 按一下**指派存取權**。
-5. 選擇依資源群組內的資源指派存取權、依帳戶內可用的個別資源指派存取權，還是依帳戶管理服務指派存取權。例如，您可以選擇下列任何選項，授與使用者管理 {{site.data.keyword.at_full_notm}} 實例的管理者角色：
+5. 授與許可權。請選擇下列其中一個選項：
 
 
-### 選項 1. 將許可權授與使用者，以變成 {{site.data.keyword.cloud_notm}} 帳戶中服務的管理者
+### 選項 1. 授與對服務的許可權
 {: #user_opt1}
 
-若要授與使用者管理帳戶中服務的管理者角色，使用者必須具有平台角色**管理者**對 {{site.data.keyword.at_full_notm}} 服務的 IAM 原則。您必須將此使用者存取權指派給帳戶中的個別資源。 
-
-請完成下列步驟，將帳戶中 {{site.data.keyword.at_full_notm}} 服務的管理者角色指派給使用者： 
+請完成下列步驟： 
 
 1. 選取**指派對資源的存取權**。
 2. 選取 **IBM Cloud Activity Tracker with LogDNA**。
@@ -93,12 +104,10 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 6. 選取服務角色**讀者**。
 7. 按一下**指派**。
 
-### 選項 2. 將許可權授與使用者，以變成資源群組內服務的管理者
+### 選項 2. 授與資源群組環境定義內的許可權
 {: #user_opt2}
 
-若要將管理者角色授與使用者，以管理帳戶中資源群組內的實例，使用者在資源群組的環境定義內，必須具有平台角色**管理者**對 {{site.data.keyword.at_full_notm}} 服務的 IAM 原則。 
-
-請完成下列步驟，將資源群組環境定義內 {{site.data.keyword.at_full_notm}} 服務的管理者角色指派給使用者： 
+請完成下列步驟： 
 
 1. 選取**指派資源群組內的存取權**。
 2. 選取資源群組。
@@ -113,14 +122,14 @@ ibmcloud iam access-group-policy-create GROUP_NAME {-f, --file @JSON_FILE | --ro
 6. 選取服務角色**讀者**。
 7. 按一下**指派**。
 
-### 選項 3. 將許可權授與使用者，以變成 {{site.data.keyword.cloud_notm}} 中單一服務實例的管理者
+### 選項 3. 授與位置中的許可權
 {: #user_opt3}
 
-請完成下列步驟，將某個 {{site.data.keyword.at_full_notm}} 服務實例的管理者角色指派給使用者： 
+每個位置只能佈建 1 個實例。因此，若要授與檢視地區中事件的許可權，請完成下列步驟： 
 
 1. 選取**指派對資源的存取權**。
 2. 選取 **IBM Cloud Activity Tracker with LogDNA**。
-3. 選取實例。
+3. 選取使用者必須有權查看其事件的地區中的實例。
 4. 選取平台角色**檢視者**。
 5. 選取服務角色**讀者**。
 6. 按一下**指派**。

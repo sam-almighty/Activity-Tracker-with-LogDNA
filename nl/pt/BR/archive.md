@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -25,30 +25,28 @@ subcollection: logdnaat
 # Arquivando eventos no IBM Cloud Object Storage
 {: #archiving}
 
-É possível arquivar eventos de uma instância do {{site.data.keyword.at_full_notm}} em um depósito em uma instância do {{site.data.keyword.cos_full_notm}} (COS).
+É possível arquivar eventos de uma instância do {{site.data.keyword.at_full_notm}} em um depósito em uma instância do {{site.data.keyword.cos_full_notm}} (COS). 
 {:shortdesc}
 
-Para configurar o arquivamento, deve-se ter uma política do IAM com a função de plataforma **Visualizador** e a função de serviço **Gerenciador** para o serviço {{site.data.keyword.at_full_notm}}.
-
-Você arquiva eventos de uma instância do {{site.data.keyword.at_full_notm}} em um depósito em uma instância do {{site.data.keyword.cos_full_notm}} (COS). Cada instância do {{site.data.keyword.at_full_notm}} tem sua própria configuração de arquivamento. 
-
-Os eventos são arquivados automaticamente uma vez por dia em um formato compactado **(.json.gz)**. Cada linha preserva seus metadados.
-
-Os eventos são arquivados de 24 a 48 horas depois a configuração é salva. 
-
-A instância do {{site.data.keyword.cos_full_notm}} é fornecida dentro do contexto de um grupo de recursos. A instância do {{site.data.keyword.at_full_notm}} também é fornecida dentro do contexto de um grupo de recursos. As duas instâncias podem ser agrupadas no mesmo grupo de recursos ou em grupos de recursos diferentes. 
-
-O {{site.data.keyword.at_full_notm}} usa um ID de serviço para se comunicar com o serviço {{site.data.keyword.cos_full_notm}}.
-
-* O ID de serviço que você cria para uma instância do {{site.data.keyword.cos_full_notm}} é usado pelo {{site.data.keyword.at_full_notm}} para autenticar e acessar a instância do {{site.data.keyword.cos_full_notm}}. 
-* É possível designar políticas de acesso específicas para o ID de serviço que restringem as permissões na instância do {{site.data.keyword.cos_full_notm}}. Restrinja o ID de serviço para apenas ter permissões de gravação no depósito em que você planeja arquivar os eventos.
-
-A figura a seguir mostra uma visualização de alto nível de diferentes componentes que são integrados ao arquivar eventos:
-
-![Eventos de arquivamento de visualização de alto nível](images/archive.png "Eventos de arquivamento de visualização de alto nível")
-
-
 Conclua as etapas a seguir para arquivar uma instância do {{site.data.keyword.at_full_notm}} em um depósito em uma instância do {{site.data.keyword.cos_full_notm}}:
+
+## Pré-requisitos
+{: #archiving_prereqs}
+
+* [Saiba mais sobre o arquivamento de eventos](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive).
+
+* **Deve-se ter um plano de serviço pago** para o serviço do {{site.data.keyword.at_full_notm}}. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+
+* Verifique se o seu ID do usuário tem permissões para ativar a IU da web e gerenciar eventos. A tabela a seguir lista as funções mínimas necessárias para que um usuário possa iniciar a IU da web do {{site.data.keyword.at_full_notm}}, visualizar, procurar e filtrar eventos:
+
+| Atribuição                      | Permissão concedida            |
+|---------------------------|-------------------------------|  
+| Função de plataforma: `Viewer`     | Permite que o usuário visualize a lista de instâncias de serviço no painel Observabilidade. |
+| Função do serviço: `Manager`      | Permite que o usuário ative a IU da web e gerencie eventos na IU da web.  |
+{: caption="Tabela 1. Funções do IAM" caption-side="top"} 
+
+Para obter mais informações sobre como configurar políticas para um usuário, consulte [Concedendo permissões de usuário para um usuário ou ID de serviço](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
+
 
 
 ## Etapa 1. Conceder políticas do IAM a um usuário para trabalhar com o {{site.data.keyword.cos_full_notm}}
@@ -132,7 +130,7 @@ Para gerenciar os depósitos, seu usuário deve receber permissões para trabalh
 
 | Serviço                    | Funções                   | Ação                             | 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | Função de plataforma: visualizador   | Permite que o usuário visualize todos os depósitos e liste os objetos dentro deles por meio da IU do {site.data.keyword.Bluemix_notm}}. |
+| `Cloud Object Storage`     | Função de plataforma: visualizador   | Permite que o usuário visualize todos os depósitos e liste os objetos dentro deles. |
 | `Cloud Object Storage`     | Função de serviço: gerenciador   | Permite que o usuário torne os objetos públicos.                                                       |
 | `Cloud Object Storage`     | Funções de serviço: Gerenciador </br>Gravador | Permite que o usuário crie e destrua depósitos e objetos.                         | 
 | `Cloud Object Storage`     | Função de serviço: leitor    | Permite que o usuário liste e faça download de objetos.                                                 |
@@ -166,17 +164,18 @@ Conclua as etapas a seguir para criar um depósito:
     
     Um data center único apenas distribuirá os dados pelos dispositivos dentro de um único site.
 
-    Para obter mais informações, consulte [Selecionar regiões e terminais](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints).
+    Para obter mais informações, consulte [Selecionar regiões e terminais](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints).
 
 6. Escolha o tipo de  * Classe de armazenamento *.
 
-    É possível criar depósitos com diferentes classes de armazenamento. Escolha a classe de armazenamento para seu depósito com base em seus requisitos para recuperar dados. Para obter mais informações, consulte [Usar classes de armazenamento](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes).
+    É possível criar depósitos com diferentes classes de armazenamento. Escolha a classe de armazenamento para seu depósito com base em seus requisitos para recuperar dados. Para obter mais informações, consulte [Usar classes de armazenamento](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes).
 
     **Nota:** não é possível mudar a classe de armazenamento de um depósito depois que ele é criado. Se os objetos precisarem ser reclassificados, será necessário mover os dados para outro depósito com a classe de armazenamento desejada.
 
 7. Opcionalmente, inclua uma chave de proteção para criptografar dados em repouso.
 
-    Todos os objetos são criptografados por padrão usando chaves geradas aleatoriamente e uma transformação do tipo "tudo ou nada". Enquanto esse modelo de criptografia padrão fornece segurança em repouso, algumas cargas de trabalho precisam ser propriedade das chaves de criptografia usadas. Para obter mais informações, consulte  [ Gerenciar criptografia ](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption).
+    Todos os objetos são criptografados por padrão usando chaves geradas aleatoriamente e uma transformação do tipo "tudo ou nada". Enquanto esse modelo de criptografia padrão fornece segurança em repouso, algumas cargas de trabalho precisam ser propriedade das chaves de criptografia usadas. Para obter mais informações, consulte  [ Gerenciar criptografia ](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption).
+
 
 
 
@@ -242,11 +241,9 @@ Um terminal define onde procurar um depósito. Existem diferentes terminais, dep
 
 Conclua as etapas a seguir para obter o terminal para o seu depósito:
 
-1. Efetue login em sua conta do  {{site.data.keyword.cloud_notm}} .
+1. [Efetue login em sua conta do {{site.data.keyword.cloud_notm}} ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/login){:new_window}.
 
-    Clique em [Painel do {{site.data.keyword.cloud_notm}} ![Ícone de link externo](../../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/login){:new_window} para ativar o painel do {{site.data.keyword.cloud_notm}}.
-
-	Após você efetuar login com o seu ID do usuário e senha, o Painel do {{site.data.keyword.cloud_notm}} será aberto.
+	Após você efetuar login, o Painel do {{site.data.keyword.cloud_notm}} será aberto.
 
 2. No Painel, selecione a instância do {{site.data.keyword.cos_full_notm}} na qual você planeja criar o depósito.
 
@@ -266,7 +263,7 @@ A tabela a seguir lista as políticas que um usuário deve ter para configurar o
 | Serviço                              | Atribuição                      | Permissão concedida                  | 
 |--------------------------------------|---------------------------|-------------------------------------|  
 | `{{site.data.keyword.at_full_notm}}` | Função de plataforma: visualizador     | Permite que o usuário visualize a lista de instâncias de serviço no painel Criação de log de Observabilidade. |
-| `{{site.data.keyword.at_full_notm}}` | Função de serviço: gerenciador     | Permite que o usuário ative a UI da web e visualize eventos na UI da web. |
+| `{{site.data.keyword.at_full_notm}}` | Função de serviço: gerenciador     | Permite que o usuário ative a UI da web e visualize eventos na UI da web.                             |
 {: caption="Tabela 2. Políticas do IAM" caption-side="top"} 
 
 [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#iam).
@@ -286,7 +283,7 @@ Conclua as etapas a seguir para designar uma permissão de usuário para arquiva
 6. Selecione  ** IBM Log Analysis com LogDNA **.
 7. Selecione a função de plataforma  ** Visualizador **.
 8. Selecione a função de serviço  ** Gerenciador **.
-9. Clique em **Designar**.
+9. Clique em  ** Designar **.
 
 
 
@@ -296,7 +293,7 @@ Conclua as etapas a seguir para designar uma permissão de usuário para arquiva
 
 Conclua as etapas a seguir para configurar o arquivamento de sua instância do {{site.data.keyword.at_full_notm}} em um depósito do COS:
 
-1. Ative a IU da web do {{site.data.keyword.at_full_notm}}. [Saiba mais](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2).
+1. [Ative a IU da web do {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch).
 
 2. Selecione o ícone **Configuração**. Em seguida, selecione **Arquivamento**. 
 

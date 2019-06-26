@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-01"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -25,30 +25,27 @@ subcollection: logdnaat
 # IBM Cloud Object Storage へのイベントのアーカイブ
 {: #archiving}
 
-{{site.data.keyword.at_full_notm}} インスタンスから {{site.data.keyword.cos_full_notm}} (COS) インスタンス内のバケットにイベントをアーカイブできます。 
-{:shortdesc}
-
-アーカイブを構成するためには、**ビューアー**のプラットフォーム役割と {{site.data.keyword.at_full_notm}} サービスに対する**管理者**のサービス役割を持つ IAM ポリシーが必要です。
-
-{{site.data.keyword.at_full_notm}} インスタンスから {{site.data.keyword.cos_full_notm}} (COS) インスタンス内のバケットにイベントをアーカイブします。 各 {{site.data.keyword.at_full_notm}} インスタンスには、独自のアーカイブ構成があります。 
-
-イベントは、1 日 1 回、圧縮フォーマット **(.json.gz)** で自動的にアーカイブされます。 行ごとにそのメタデータが保持されます。
-
-イベントは、構成の保存後 24 時間から 48 時間以内にアーカイブされます。 
-
-{{site.data.keyword.cos_full_notm}} インスタンスは、リソース・グループのコンテキスト内でプロビジョンされます。 {{site.data.keyword.at_full_notm}} インスタンスも、リソース・グループのコンテキスト内でプロビジョンされます。 両方のインスタンスを同じリソース・グループの下にグループ化することも、別々のリソース・グループに入れることもできます。 
-
-{{site.data.keyword.at_full_notm}} はサービス ID を使用して {{site.data.keyword.cos_full_notm}} サービスと通信します。
-
-* {{site.data.keyword.cos_full_notm}} インスタンス用に作成するサービス ID は、{{site.data.keyword.at_full_notm}} により、{{site.data.keyword.cos_full_notm}} インスタンスの認証とアクセスのために使用されます。 
-* このサービス ID には、{{site.data.keyword.cos_full_notm}} インスタンスに対する許可を制限する特定のアクセス・ポリシーを割り当てることができます。 サービス ID を、イベントのアーカイブ場所として計画しているバケットに対する書き込み許可だけを持つように制限します。
-
-以下の図に、イベントのアーカイブ時に統合されるさまざまなコンポーネントの概略を示します。
-
-![イベントのアーカイブに関する概略](images/archive.png "イベントのアーカイブに関する概略")
-
+{{site.data.keyword.at_full_notm}} インスタンスからのイベントを {{site.data.keyword.cos_full_notm}} (COS) インスタンス内のバケットにアーカイブできます。{:shortdesc}
 
 {{site.data.keyword.at_full_notm}} インスタンスを {{site.data.keyword.cos_full_notm}} インスタンス内のバケットにアーカイブするには、以下のステップを実行します。
+
+## 前提条件
+{: #archiving_prereqs}
+
+* [イベントのアーカイブ方法について確認します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-manage_events#manage_events_archive)。
+
+* {{site.data.keyword.at_full_notm}} サービスの**有料サービス・プランのご利用**が必要です。 [詳細はこちら](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。 
+
+* 自分のユーザー ID に Web UI を起動してイベントを管理するための権限があるか確認します。以下の表は、ユーザーが {{site.data.keyword.at_full_notm}} の Web UI を起動してイベントを表示、検索、フィルタリングするために最低限必要な役割を示しています。
+
+| 役割                      | 付与される許可            |
+|---------------------------|-------------------------------|  
+| プラットフォーム役割: `ビューアー`     | ユーザーが「プログラム識別情報」ダッシュボードでサービス・インスタンスのリストを表示できるようにします。 |
+| サービス役割: `管理者`      | ユーザーが Web UI を起動して Web UI でイベントを管理できるようにします。                             |
+{: caption="表 1. IAM 役割" caption-side="top"} 
+
+ユーザーに対してポリシーを構成する方法について詳しくは、[ユーザー許可をユーザーまたはサービス ID に付与する](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)を参照してください。
+
 
 
 ## ステップ 1. {{site.data.keyword.cos_full_notm}} を操作するための IAM ポリシーをユーザーに付与する
@@ -132,9 +129,9 @@ subcollection: logdnaat
 
 | サービス                    | 役割                   | アクション                             | 
 |----------------------------|-------------------------|------------------------------------|       
-| `Cloud Object Storage`     | プラットフォーム役割: ビューアー   | ユーザーが {site.data.keyword.Bluemix_notm}} UI によりバケットをすべて表示したり、バケット内のオブジェクトをすべてリストできるようにします。 |
+| `Cloud Object Storage`     | プラットフォーム役割: ビューアー   |ユーザーがバケットをすべて表示したり、バケット内のオブジェクトをすべてリストしたりできるようにします。|
 | `Cloud Object Storage`     | サービス役割: 管理者   | ユーザーがオブジェクトを公開できるようにします。                                                       |
-| `Cloud Object Storage`     | サービス役割: 管理者 </br>ライター | ユーザーがバケットやオブジェクトの作成および破棄ができるようにします。                         | 
+| `Cloud Object Storage`     | サービス役割: マネージャー </br>ライター | ユーザーがバケットやオブジェクトの作成および破棄ができるようにします。                         | 
 | `Cloud Object Storage`     | サービス役割: リーダー    | ユーザーがオブジェクトをリストしたりダウンロードしたりできるようにします。                                                 |
 {: caption="表 1. バケットで作業するための役割とアクション" caption-side="top"} 
 
@@ -166,17 +163,18 @@ subcollection: logdnaat
     
     単一データ・センターでは、データは単一サイトのデバイス間のみに分散します。
 
-    詳しくは、[地域とエンドポイントの選択](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints)を参照してください。
+    詳しくは、[地域とエンドポイントの選択](/docs/services/cloud-object-storage?topic=cloud-object-storage-endpoints)を参照してください。
 
 6. *ストレージ・クラス*のタイプを選択します。
 
-    さまざまなストレージ・クラスのバケットを作成できます。 データを取得するための要件に基づいて、バケットのストレージ・クラスを選択します。 詳しくは、[ストレージ・クラスの使用](/docs/services/cloud-object-storage?topic=cloud-object-storage-use-storage-classes#use-storage-classes)を参照してください。
+    さまざまなストレージ・クラスのバケットを作成できます。 データを取得するための要件に基づいて、バケットのストレージ・クラスを選択します。 詳しくは、[ストレージ・クラスの使用](/docs/services/cloud-object-storage?topic=cloud-object-storage-classes)を参照してください。
 
     **注:** バケットがいったん作成されると、そのバケットのストレージ・クラスは変更できません。 オブジェクトを再分類する必要がある場合は、ご希望のストレージ・クラスの別のバケットにデータを移動する必要があります。
 
 7. オプションで、Key Protect キーを追加して、保存されたデータを暗号化します。
 
-    デフォルトでは、すべてのオブジェクトは、ランダムに生成される鍵と AONT (all-or-nothing-transform) を使用して暗号化されます。 保存されたデータのセキュリティーはこのデフォルトの暗号化モデルにより備えられますが、使用する暗号鍵を保有する必要のあるワークロードもあります。 詳しくは、[暗号化の管理](/docs/services/cloud-object-storage?topic=cloud-object-storage-manage-encryption#manage-encryption)を参照してください。
+    デフォルトでは、すべてのオブジェクトは、ランダムに生成される鍵と AONT (all-or-nothing-transform) を使用して暗号化されます。 保存されたデータのセキュリティーはこのデフォルトの暗号化モデルにより備えられますが、使用する暗号鍵を保有する必要のあるワークロードもあります。 詳しくは、[暗号化の管理](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption)を参照してください。
+
 
 
 
@@ -196,7 +194,7 @@ subcollection: logdnaat
 
 2. **「サービス資格情報」**を選択します。 次に、**「新規資格情報」**を選択します。
 
-3. わかりやすい名前を入力します。例えば、`activity-tracker-cos-serviceID` というサービス ID の名前を付けます。 
+3. わかりやすい名前を入力します。 例えば、`activity-tracker-cos-serviceID` というサービス ID の名前を付けます。 
 
 4. **「ライター」**役割を選択します。
 
@@ -204,9 +202,9 @@ subcollection: logdnaat
 
     新しいサービス ID がリストに作成されて追加されます。 
 
-    **注:** {{site.data.keyword.cloud_notm}} で作成され、IAM UI にリストされるサービス ID には総称があります。IAM UI のサービス ID は、COS service ID UI を使用してこの手順で作成した **iam_apikey_name** フィールドの値にマップされます。
+    **注:** {{site.data.keyword.cloud_notm}} で作成され、IAM UI にリストされるサービス ID には総称があります。 IAM UI のサービス ID は、COS service ID UI を使用してこの手順で作成した **iam_apikey_name** フィールドの値にマップされます。
     
-6. [オプション] サービス ID が削除されないようにロックするには、メニュー・バーから**「管理」** &gt; **「アクセス (IAM)」**をクリックします。サービス ID を検索します。次に、アクション**「ロック」**を選択します。
+6. [オプション] サービス ID が削除されないようにロックするには、メニュー・バーから**「管理」** &gt; **「アクセス (IAM)」**をクリックします。 サービス ID を検索します。 次に、アクション**「ロック」**を選択します。
 
 
 作成したばかりのサービス ID について、**「資格情報の表示」**をクリックします。 そのサービス ID に関連した情報を表示できます。 
@@ -242,11 +240,9 @@ subcollection: logdnaat
 
 バケットのエンドポイントを入手するには、以下のステップを実行します。
 
-1. {{site.data.keyword.cloud_notm}} アカウントにログインします。
+1. [{{site.data.keyword.cloud_notm}} アカウントにログイン ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/login){:new_window} します。
 
-    [{{site.data.keyword.cloud_notm}} ダッシュボード ![外部リンク・アイコン](../../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/login){:new_window} をクリックして、{{site.data.keyword.cloud_notm}} ダッシュボードを起動します。
-
-	ユーザー ID とパスワードを使用してログインすると、{{site.data.keyword.cloud_notm}} ダッシュボードが開きます。
+	ログインすると、{{site.data.keyword.cloud_notm}} ダッシュボードが開きます。
 
 2. ダッシュボードから、バケットの作成場所として計画している {{site.data.keyword.cos_full_notm}} インスタンスを選択します。
 
@@ -296,7 +292,7 @@ subcollection: logdnaat
 
 {{site.data.keyword.at_full_notm}} インスタンスの COS バケットへのアーカイブを構成するには、以下のステップを実行します。
 
-1. {{site.data.keyword.at_full_notm}} Web UI を起動します。 [詳細はこちら](/docs/services/Log-Analysis-with-LogDNA/view_logs.html#view_logs_step2)。
+1. [{{site.data.keyword.at_full_notm}} Web UI を起動します](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch)。
 
 2. **「構成」**アイコンを選択します。 次に、**「アーカイブ (Archiving)」**を選択します。 
 

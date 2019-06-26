@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, alerts, events
 
@@ -23,46 +23,30 @@ subcollection: logdnaat
 
 
 # 경보 구성
-{: #alerts.md}
+{: #alerts}
 
-{{site.data.keyword.at_full_notm}} 웹 UI를 통해 검색 및 필터링 기준을 적용하여 사용자 정의 보기를 통해 표시되는 이벤트를 정의할 수 있습니다. 그런 다음, 알림을 받을 보기에 경보를 첨부할 수 있습니다. 하나 이상의 경보를 보기에 첨부할 수 있습니다. 경보에 대한 다중 알림 채널을 정의할 수 있습니다. 경보를 차단할 수 있습니다. 보기에서 경보를 분리할 수 있습니다.
+{{site.data.keyword.at_full_notm}} 웹 UI를 통해 검색 조회를 적용하여 사용자 정의 보기를 통해 표시되는 이벤트를 정의할 수 있습니다. 그런 다음, 조건이 발생하면 알림을 받도록 보기에 경보를 연결할 수 있습니다. 하나 이상의 경보를 보기에 첨부할 수 있습니다. 경보에 대한 다중 알림 채널을 정의할 수 있습니다. 경보를 차단할 수 있습니다. 보기에서 경보를 분리할 수 있습니다.
 {:shortdesc}
 
 
-경보에 대해 다음 조건을 구성할 수 있습니다.
-
-* *시간 빈도*: 경보를 트리거하는 빈도를 지정하십시오. 올바른 값은 30초, 1분, 5분, 15분, 30분, 1시간, 6시간, 12시간, 24시간입니다.
-* *이벤트 행 카운터*: 보기의 필터링 및 검색 기준과 일치하는 이벤트 행의 수를 지정하십시오. 이벤트 행 수에 도달하면 경보가 트리거됩니다.
-
-두 조건을 모두 선택하는지 또는 하나만 선택하는지를 결정할 수 있습니다. 두 조건이 모두 설정되면 임계값 중 하나에 도달했을 때 경보가 트리거됩니다. 
-
-예를 들어, 30초 후에 트리거되거나 보기의 필터링 및 검색 기준과 일치하는 100개의 이벤트 행이 수집될 때 트리거되는 경보를 구성할 수 있습니다.
-
-다중 알림 채널을 구성할 수 있습니다. 올바른 채널은 `email`, `Slack`, `PagerDuty`, `Webhook`, `OpsGenie`, `Datadog`, `AppOptics`, `VictorOps`입니다.
-
-**사전 설정**을 정의할 수도 있습니다. 사전 설정은 임의 수의 보기에 첨부할 수 있는 경보 템플리트입니다. 
-
-이 보기에 경보가 첨부되어 있음을 표시하기 위해 해당 보기와 함께 벨 아이콘이 표시됩니다.
-
-
 ## 전제조건
-{: #views_prereqs}
+{: #alerts_prereqs}
 
-시작하기 전에 사용자 ID에 웹 UI를 실행하고 이벤트를 볼 수 있는 권한이 있는지 확인하십시오. 
+* [경보에 관해 자세히 알아보기](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_alerts).
 
-**참고:** {{site.data.keyword.at_full_notm}} 서비스의 관리자 또는 {{site.data.keyword.at_full_notm}} 인스턴스의 관리자이거나 정책을 관리할 수 있는 계정 IAM 권한이 있어야 합니다.
+* {{site.data.keyword.at_full_notm}} 서비스에 대한 **유료 서비스 플랜이 있어야 합니다**. [자세히 보기](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan).
 
-다음 표에는 사용자가 {{site.data.keyword.at_full_notm}} 웹 UI를 실행하며 이벤트를 보고, 검색하고, 필터링하기 위해 보유해야 하는 최소 정책이 나열되어 있습니다.
+* 사용자 ID에 웹 UI를 실행하고 이벤트를 볼 수 있는 권한이 있는지 확인하십시오. 다음 표에는 사용자가 {{site.data.keyword.at_full_notm}} 웹 UI를 실행하며 이벤트를 보고, 검색하고, 필터링하기 위해 보유해야 하는 최소 역할이 나열되어 있습니다.
 
 |역할                      |부여되는 권한            |
 |---------------------------|-------------------------------|  
 |플랫폼 역할: `뷰어`     |사용자가 관찰 가능성 대시보드에서 서비스 인스턴스 목록을 볼 수 있도록 허용합니다. |
-|서비스 역할: `독자`     |사용자가 웹 UI를 실행하고 웹 UI에서 이벤트를 볼 수 있도록 허용합니다. |
-{: caption="표 1. IAM 정책" caption-side="top"} 
+|서비스 역할: `독자`      |사용자가 웹 UI를 실행하고 웹 UI에서 이벤트를 볼 수 있도록 허용합니다.  |
+{: caption="표 1. IAM 역할" caption-side="top"} 
 
-사용자를 위해 이러한 정책을 구성하는 방법에 대한 자세한 정보는 [사용자 또는 서비스 ID에 사용자 권한 부여](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)를 참조하십시오.
+사용자에 맞게 정책을 구성하는 방법에 대한 자세한 정보는 [사용자 또는 서비스 ID에 사용자 권한 부여](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)를 참조하십시오.
 
-{{site.data.keyword.at_full_notm}} 서비스에 대한 **유료 서비스 플랜이 있어야 합니다**. [자세히 보기](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+ 
 
 
 ## 1단계. 웹 UI로 이동
@@ -74,7 +58,7 @@ subcollection: logdnaat
 ## 2단계. 보기 작성
 {: #alerts_step2}
 
-[보기를 작성하십시오](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md).
+[보기를 작성하십시오](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views).
 
 
 
@@ -89,20 +73,22 @@ subcollection: logdnaat
 1. 웹 UI에서 **구성** 아이콘 ![구성 아이콘 ](images/admin.png "관리 아이콘")을 선택하십시오.
 2. **경보**를 선택하십시오.
 3. **사전 설정 경보 추가**를 선택하십시오.
-4. 알림 채널을 선택하십시오. 
-5. 임계값 조건을 정의하십시오.
+4. 알림 채널을 선택하십시오. 지원되는 채널 목록은 [경보 알림 채널](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels)을 참조하십시오.
+5. 경고 유형을 선택합니다. 보기에 표시되는 이벤트 수가 예상보다 많으면 알리도록 **존재 경보** 유형을 선택하십시오. 보기에 표시되는 이벤트 수가 예상보다 적으면 알리도록 **부재 경보** 유형을 선택하십시오. 
+5. 알림 채널을 선택하십시오. 지원되는 채널 목록은 [경보 알림 채널](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-channels)을 참조하십시오.
+6. 임계값 조건을 정의하십시오.
 
-    1. 시간 빈도를 선택하십시오(예: 12시간).
+    1. 시간 빈도를 선택하십시오 (예: 12시간).
 
     2. 경보가 트리거될 이벤트 행 수를 입력하십시오.
 
     3. 두 조건을 모두 선택할지 아니면 하나만 선택할지를 선택하십시오.
 
-6. 선택한 알림 채널에 대한 세부사항을 추가하십시오.
+7. 선택한 알림 채널에 대한 세부사항을 추가하십시오.
 
     예를 들어, 이메일 알림 채널의 경우 하나 이상의 수신인 및 선택적으로 시간대를 추가하십시오.
 
-7. **경보 저장**을 클릭하십시오.
+8. **경보 저장**을 클릭하십시오.
 
 
 
@@ -133,19 +119,20 @@ subcollection: logdnaat
 2. 보기 이름을 클릭하십시오. 그런 다음 **경보 첨부**를 선택하십시오.
 3. **보기 특정 경보**를 선택하십시오.
 4. 알림 채널을 선택하십시오. 
-5. 임계값 조건을 정의하십시오.
+5. 경고 유형을 선택합니다. 보기에 표시되는 이벤트 수가 예상보다 많으면 알리도록 **존재 경보** 유형을 선택하십시오. 보기에 표시되는 이벤트 수가 예상보다 적으면 알리도록 **부재 경보** 유형을 선택하십시오. 
+6. 임계값 조건을 정의하십시오.
 
-    1. 시간 빈도를 선택하십시오(예: 12시간).
+    1. 시간 빈도를 선택하십시오 (예: 12시간).
 
     2. 경보가 트리거될 이벤트 행 수를 입력하십시오.
 
     3. 두 조건을 모두 선택할지 아니면 하나만 선택할지를 선택하십시오.
 
-6. 선택한 알림 채널에 대한 세부사항을 추가하십시오.
+7. 선택한 알림 채널에 대한 세부사항을 추가하십시오.
 
     예를 들어, 이메일 알림 채널의 경우 하나 이상의 수신인 및 선택적으로 시간대를 추가하십시오.
 
-7. **경보 저장**을 클릭하십시오.
+8. **경보 저장**을 클릭하십시오.
 
 
 

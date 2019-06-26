@@ -56,15 +56,19 @@ Siga los pasos siguientes para iniciar la interfaz de usuario web:
 
 	Después de iniciar sesión con su ID de usuario y su contraseña, se abre el panel de control de {{site.data.keyword.cloud_notm}}.
 
-2. En el menú de navegación, seleccione **Observabilidad**. 
+2. Pulse el icono de **Menú** ![icono de Menú](../icons/icon_hamburger.svg) > **Observabilidad**. 
 
 3. Seleccione **Activity Tracker**. 
 
-    Se muestra la lista de instancias que están disponibles en {{site.data.keyword.cloud_notm}}.
+    Se muestra la lista de instancias de {{site.data.keyword.at_full_notm}}.
 
-4. Seleccione una instancia. A continuación, pulse **Ver LogDNA**.
+    Hay una instancia por región.
+    {: important}
 
-Se abre la interfaz de usuario web.
+4. Seleccione la región donde desee ver los sucesos. A continuación, pulse **Ver LogDNA**.
+
+Se abre la interfaz de usuario web de {{site.data.keyword.at_full_notm}} y muestra la vista **Todo**. A través de esta vista, puede ver los sucesos de su cuenta para la región que haya seleccionado.
+
 
 
 ## Obtención del URL de la interfaz de usuario web desde {{site.data.keyword.cloud_notm}}

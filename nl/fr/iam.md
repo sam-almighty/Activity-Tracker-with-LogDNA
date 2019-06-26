@@ -25,12 +25,12 @@ subcollection: logdnaat
 # Gestion des accès utilisateur à l'aide d'IAM
 {: #iam}
 
-{{site.data.keyword.iamlong}} (IAM) vous permet d'authentifier de manière sécurisée les utilisateurs et de contrôler de manière cohérente l'accès à toutes les ressources de cloud dans {{site.data.keyword.cloud_notm}}.
+{{site.data.keyword.iamlong}} (IAM) vous permet d'authentifier de manière sécurisée les utilisateurs et de contrôler de manière cohérente l'accès à toutes les ressources de cloud dans {{site.data.keyword.cloud_notm}}. 
 {:shortdesc}
 
 **Une règle d'accès avec un rôle utilisateur IAM doit être affectée à chaque utilisateur disposant d'un accès au service {{site.data.keyword.at_full_notm}}.** La règle détermine les actions que l'utilisateur peut exécuter dans le contexte du service ou de l'instance que vous sélectionnez. Les actions autorisées sont personnalisées et définies en tant qu'opérations exécutables sur le service. Les actions sont ensuite mappées à des rôles utilisateur IAM.
 
-Les *règles* permettent d'accorder l'accès à différents niveaux. Certaines des options sont les suivantes :  
+Les *règles* permettent d'accorder l'accès à différents niveaux. Certaines des options sont les suivantes : 
 
 * Accès à tous les services activés par IAM dans votre compte
 * Accès à toutes les instances du service dans une région unique dans votre compte
@@ -39,7 +39,7 @@ Les *règles* permettent d'accorder l'accès à différents niveaux. Certaines d
 * Accès à toutes les instances du service dans une région unique dans le cadre d'un groupe de ressources
 * Accès à tous les services activés par IAM dans le cadre d'un groupe de ressources
 
-Les *rôles* définissent les actions qu'un utilisateur ou un ID de service peut exécuter. Il existe différents types de rôles dans {{site.data.keyword.cloud_notm}} : 
+Les *rôles* définissent les actions qu'un utilisateur ou un ID de service peut exécuter. Il existe différents types de rôles dans {{site.data.keyword.cloud_notm}} :
 
 * Les *rôles de gestion de plateforme* permettent aux utilisateurs d'effectuer des tâches sur des ressources de service au niveau de la plateforme, par exemple d'affecter un accès utilisateur pour le service, de créer ou supprimer des ID de service, de créer des instances, d'affecter des règles pour votre service à d'autres utilisateurs et de lier des instances à des applications.
 * Les *rôles d'accès à un service* permettent d'affecter divers niveaux de droits aux utilisateurs pour appeler l'API du service.
@@ -54,7 +54,7 @@ En savoir plus grâce aux tutoriels suivants :
 ## Gestion des accès à l'aide de groupes d'accès
 {: #groups}
 
-Pour gérer les accès ou affecter un nouvel accès à des utilisateurs à l'aide de groupes d'accès, vous devez être le propriétaire du compte, l'administrateur ou l'éditeur sur tous les services avec l'offre Identity and Access activée dans le compte, ou être l'administrateur ou l'éditeur affecté pour le service Groupes d'accès IAM.  
+Pour gérer les accès ou affecter un nouvel accès à des utilisateurs à l'aide de groupes d'accès, vous devez être le propriétaire du compte, l'administrateur ou l'éditeur sur tous les services avec l'offre Identity and Access activée dans le compte, ou être l'administrateur ou l'éditeur affecté pour le service Groupes d'accès IAM. 
 
 Sélectionnez l'une des actions suivantes pour gérer les groupes d'accès dans {{site.data.keyword.cloud_notm}} :
 
@@ -70,7 +70,7 @@ Pour gérer les accès ou affecter un nouvel accès à des utilisateurs à l'aid
 Sélectionnez l'une des actions suivantes pour gérer les règles IAM dans {{site.data.keyword.cloud_notm}} :
 
 * Pour modifier les droits d'un utilisateur, voir [Edition d'un accès existant](/docs/iam?topic=iam-iammanidaccser#edit_existing).
-* Pour accorder des droits à un utilisateur, voir [Affectation d'un nouvel accès](/docs/iam?topic=iam-iammanidaccser#assign_new_access). 
+* Pour accorder des droits à un utilisateur, voir [Affectation d'un nouvel accès](/docs/iam?topic=iam-iammanidaccser#assign_new_access).
 * Pour révoquer des droits d'accès, voir [Retrait de l'accès](/docs/iam?topic=iam-iammanidaccser#removing_access).
 * Pour consulter les droits d'un utilisateur, voir [Révision des accès affectés](/docs/iam?topic=iam-iammanidaccser#review_your_access).
 
@@ -79,16 +79,17 @@ Sélectionnez l'une des actions suivantes pour gérer les règles IAM dans {{sit
 ## Rôles de plateforme {{site.data.keyword.cloud_notm}}
 {: #platform}
 
-Utilisez le tableau suivant pour identifier le rôle de plateforme que vous pouvez accorder à un utilisateur dans {{site.data.keyword.cloud_notm}} afin d'exécuter l'une des actions de plateforme suivantes : 
+Utilisez le tableau suivant pour identifier le rôle de plateforme que vous pouvez accorder à un utilisateur dans {{site.data.keyword.cloud_notm}} afin d'exécuter l'une des actions de plateforme suivantes :
 
 | Actions de plateforme                                                        | Rôles de plateforme {{site.data.keyword.cloud_notm}}    | 
 |-------------------------------------------------------------------------|------------------------------------------------------|
-| `Accorder à d'autres membres du compte un accès leur permettant d'utiliser le service`           |Administrateur                    | 
-| `Mettre à disposition une instance de service`                                          |Editeur | 
-| `Supprimer une instance de service`                                             |Administrateur                    </br>Editeur | 
-| `Créer un ID de service`                                                   |Administrateur                    </br>Editeur |
-| `Afficher les détails d'une instance de service`                                    |Administrateur                    </br>Editeur </br>Opérateur</br>Visualiseur  | 
-| `Afficher les instances de service dans le tableau de bord Observabilité d'Activity Tracker`   |Administrateur                    </br>Editeur </br>Opérateur</br>Visualiseur  | 
+| `Accorder à d'autres membres du compte un accès leur permettant d'utiliser le service`           | Administrateur                                        | 
+| `Mettre à disposition une instance de service`                                          | Editeur                            | 
+| `Supprimer une instance de service`                                             | Administrateur </br>Editeur                            | 
+| `Créer un ID de service`                                                   | Administrateur </br>Editeur                            |
+| `Afficher les détails d'une instance de service`                                    | Administrateur </br>Editeur </br>Opérateur </br>Afficheur  | 
+| `Afficher des instances de service dans le tableau de bord de journalisation d'observabilité`         | Administrateur </br>Editeur </br>Opérateur </br>Afficheur  | 
+| `Afficher la clé d'ingestion sur la console {{site.data.keyword.cloud_notm}}` | Administrateur                                        | 
 {: caption="Tableau 1. Actions et rôles utilisateur IAM" caption-side="top"}
 
 
@@ -100,13 +101,17 @@ Utilisez le tableau suivant pour identifier le rôle de service que vous pouvez 
 
 | Actions                                                                 | Rôles de service {{site.data.keyword.cloud_notm}}     | 
 |-------------------------------------------------------------------------|------------------------------------------------------|
-| `Archiver les événements`                                                        | Responsable                                             |
-| `Configurer des alertes`                                                      | Responsable                                             </br>Lecteur                                  | 
-| `Filtrer et rechercher des données`                                                | Responsable                                             </br>Lecteur                                  |
-| `Créer des vues`                                                          | Responsable                                             </br>Lecteur                                  |
-| `Exporter des événements`                                                         | Responsable                                             </br>Lecteur                                  |
-| `Configurer des préférences utilisateur dans l'interface utilisateur Web LogDNA`                       | Responsable                                             </br>Lecteur                                  |
-| `Afficher des événements via l'interface utilisateur Web LogDNA`                                 | Responsable                                             </br>Lecteur                                  | 
+| `Gérer les clés d'ingestion via l'interface utilisateur Web logDNA`                       | Responsable                                              |
+| `Gérer des clés de service`                                                   | Responsable                                              |
+| `Archiver les événements`                                                        | Responsable                                              |
+| `Définir des règles d'exclusion`                                                | Responsable                                              |
+| `Configurer des alertes`                                                      | Responsable </br>Lecteur                                  | 
+| `Filtrer et rechercher des données`                                                | Responsable </br>Lecteur                                  |
+| `Créer des vues`                                                          | Responsable </br>Lecteur                                  |
+| `Gérer des vues`                                                          | Responsable </br>Lecteur                                  |
+| `Exporter des données de journal`                                                       | Responsable </br>Lecteur                                  |
+| `Configurer des préférences utilisateur dans l'interface utilisateur Web LogDNA`                       | Responsable </br>Lecteur                                  |
+| `Afficher des événements via l'interface utilisateur Web LogDNA`                                 | Responsable </br>Lecteur                                  | 
 {: caption="Tableau 2. Actions et rôles utilisateur IAM" caption-side="top"}
 
 

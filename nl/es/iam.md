@@ -88,7 +88,8 @@ Utilice la tabla siguiente para identificar el rol de la plataforma que puede ot
 | `Suprimir una instancia de servicio`                                             | Administrador </br>Editor                            | 
 | `Crear un ID de servicio`                                                   | Administrador </br>Editor                            |
 | `Ver los detalles de una instancia de servicio`                                    | Administrador </br>Editor </br>Operador </br>Visor  | 
-| `Ver instancias de servicio en el panel de control de Observability Activity Tracker`   | Administrador </br>Editor </br>Operador </br>Visor  | 
+| `Ver instancias de servicio en el panel de control Registro de observabilidad`         | Administrador </br>Editor </br>Operador </br>Visor  | 
+| `Ver la clave de ingestión en la consola de {{site.data.keyword.cloud_notm}}` | Administrador                                        | 
 {: caption="Tabla 1. Roles de usuario y acciones de IAM" caption-side="top"}
 
 
@@ -100,11 +101,15 @@ Utilice la tabla siguiente para identificar los roles de servicio que puede otor
 
 | Acciones                                                                 | Roles de servicio de {{site.data.keyword.cloud_notm}}     | 
 |-------------------------------------------------------------------------|------------------------------------------------------|
+| `Gestionar claves de ingestión mediante la interfaz de usuario web de logDNA`                       | Gestor                                              |
+| `Gestionar claves de servicio`                                                   | Gestor                                              |
 | `Archivar sucesos`                                                        | Gestor                                              |
+| `Definir reglas de exclusión`                                                | Gestor                                              |
 | `Configurar alertas`                                                      | Gestor </br>Lector                                  | 
 | `Filtrar y buscar datos`                                                | Gestor </br>Lector                                  |
 | `Crear vistas`                                                          | Gestor </br>Lector                                  |
-| `Exportar sucesos`                                                         | Gestor </br>Lector                                  |
+| `Gestionar vistas`                                                          | Gestor </br>Lector                                  |
+| `Exportar datos de registro`                                                       | Gestor </br>Lector                                  |
 | `Configurar preferencias de usuario en la interfaz de usuario web de LogDNA`                       | Gestor </br>Lector                                  |
 | `Ver sucesos a través de la interfaz de usuario web de LogDNA`                                 | Gestor </br>Lector                                  | 
 {: caption="Tabla 2. Roles de usuario y acciones de IAM" caption-side="top"}

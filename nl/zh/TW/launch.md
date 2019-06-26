@@ -55,15 +55,19 @@ subcollection: logdnaat
 
 	在使用您的使用者 ID 和密碼登入之後，{{site.data.keyword.cloud_notm}} 儀表板即會開啟。
 
-2. 在導覽功能表中，選取**觀察**。 
+2. 按一下**功能表**圖示 ![「功能表」圖示](../icons/icon_hamburger.svg) > **觀察**。 
 
 3. 選取 **Activity Tracker**。 
 
-    即會顯示 {{site.data.keyword.cloud_notm}} 上可用的實例清單。
+    即會顯示 {{site.data.keyword.at_full_notm}} 實例的清單。
 
-4. 選取一個實例。然後，按一下**檢視 LogDNA**。
+    每個地區都會有 1 個實例。
+    {: important}
 
-Web 使用者介面即會開啟。
+4. 在您要檢視事件的地區中選取實例。然後，按一下**檢視 LogDNA**。
+
+{{site.data.keyword.at_full_notm}} Web 使用者介面即會開啟，並顯示**所有項目**視圖。透過此視圖，您可以針對已選取的地區查看帳戶中的事件。
+
 
 
 ## 從 {{site.data.keyword.cloud_notm}} 取得 Web 使用者介面 URL

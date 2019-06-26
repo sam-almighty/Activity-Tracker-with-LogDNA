@@ -63,7 +63,7 @@ subcollection: logdnaat
 
 3. 设置在其中供应该实例的资源组。运行以下命令：[`ibmcloud target`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_target)
 
-    缺省情况下，已设置*缺省*资源组。
+    缺省情况下，已设置 *default* 资源组。
 
 4. 除去该实例。运行 [`ibmcloud resource service-instance-delete`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_commands_resource#ibmcloud_resource_service_instance_delete) 命令：
 

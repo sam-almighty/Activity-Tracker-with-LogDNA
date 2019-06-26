@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,71 +23,83 @@ subcollection: logdnaat
 
 
 # 查看事件
-{: #view_events.md}
+{: #view_events}
 
 在 {{site.data.keyword.cloud_notm}} 中供应 {{site.data.keyword.at_full_notm}} 服务的实例后，可以通过 {{site.data.keyword.at_full_notm}} Web UI 来查看事件。
+您可以使用本地时间查看事件。
 {:shortdesc}
 
 
-## 先决条件
-{: #view_events_prereqs}
-
-开始之前，请检查用户标识是否有权启动 Web UI 和查看事件。 
-
-**注：**您必须是 {{site.data.keyword.at_full_notm}} 服务的管理员或 {{site.data.keyword.at_full_notm}} 实例的管理员，或者具有管理策略的帐户 IAM 许可权。
-
-下表列出了用户要能够启动 {{site.data.keyword.at_full_notm}} Web UI 并查看事件而必须具有的最基本策略：
-
-| 角色                      | 授予的许可权       |
-|---------------------------|-------------------------------|  
-| 平台角色：`查看者`     | 允许用户在“可观察性”仪表板中查看服务实例的列表。|
-| 服务角色：`读取者`     | 允许用户启动 Web UI 并在 Web UI 中查看事件。|
-{: caption="表 1. IAM 策略" caption-side="top"} 
-
-有关如何为用户配置这些策略的更多信息，请参阅[授予用户对用户或服务标识的许可权](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
-
-
-## 通过 Web UI 查看事件
+## 查看事件
 {: #view_events_step1}
 
-要启动 {{site.data.keyword.at_full_notm}} Web UI，请完成以下步骤：
+要查看事件，请完成以下步骤：
 
-1. [登录到 {{site.data.keyword.cloud_notm}} 帐户 ![外部链接图标](../../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/login){:new_window}。
+1. 检查用户标识是否有权启动 Web UI 和查看事件。 
 
-	使用用户标识和密码登录后，{{site.data.keyword.cloud_notm}} *仪表板*即会打开。
+    下表列出了用户要能够启动 {{site.data.keyword.at_full_notm}} Web UI 以及查看、搜索和过滤事件而必须具有的最基本角色：
 
-2. 转至“菜单”图标 ![“菜单”图标](../../icons/icon_hamburger.svg)，然后选择**可观察性**。 
+    <table>
+      <caption>表 1. IAM 角色</caption>
+      <tr>
+        <th>角色</th>
+        <th> 授予的许可权       </th>
+      </tr>
+      <tr>
+        <td>平台角色：`查看者`</td>     <td>允许用户在*可观察性*仪表板中查看服务实例的列表。</td>
+      </tr>
+      <tr>
+        <td>服务角色：`读取者`</td>     <td>允许用户启动 Web UI 并在 Web UI 中查看、搜索和过滤事件。</td>
+      </tr>
+    </table>
 
-3. 选择 **Activity Tracker**。 
+    有关如何为用户配置策略的更多信息，请参阅[授予用户对用户或服务标识的许可权](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events)。
 
-    这将显示 {{site.data.keyword.at_full_notm}} 实例的列表。
+2. [转至 Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
 
-    **注：**每个区域有 1 个实例。
+3. 单击**视图**图标 ![“配置”图标](images/views.png)。
 
-4. 选择要查看事件的区域中的实例。然后，单击**查看 LogDNA**。
+4. 选择**所有内容**以查看所有事件，或选择一个视图。 
 
-这将打开 {{site.data.keyword.at_full_notm}} Web UI，并显示**所有内容**视图。通过此视图，您可以在您的帐户中查看所选区域的事件。
-
-**注：**如果您拥有`轻量`套餐，并且看不到您要查找的事件，那么可能需要升级到付费套餐以启用对较旧事件的搜索功能。事件可供搜索的天数取决于您选择的套餐。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan)。
+可以通过所选视图来查看事件。
 
 
-## 定制缺省视图
+
+## 通过应用搜索查询来查看事件子集
 {: #view_events_step2}
 
-在**用户首选项**部分中，可以修改每行显示的数据字段的顺序。
+可以应用搜索查询来选择通过视图显示的事件。可以保存该视图以供日后复用。[了解更多信息](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2)。
 
-要修改事件行的格式，请完成以下步骤：
+ 
 
-1. 在 Web UI 中，单击**配置**图标 ![“配置”图标](images/admin.png "“管理员”图标")。
-2. 选择**用户首选项**。这将打开一个新窗口。
-3. 选择**日志格式**。
-4. 修改*行格式*部分以匹配您的需求。拖动各个框。
 
+## 通过应用时间范围来查看事件子集
+{: #view_events_step3}
+
+可以应用时间范围来选择通过视图显示的事件。
+
+可以通过指定绝对时间、相对时间或时间范围来应用时间戳记。
+
+要跳转至特定时间，请完成以下步骤：
+1. [转至 Web UI](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)。
+2. 单击**视图**图标 ![“配置”图标](images/views.png)。
+3. 选择**所有内容**或某个视图。
+4. 输入时间查询。选择以下任一选项：
+
+    * 输入绝对时间以跳转至事件中的某个时间点，例如 `May 20 7:00pm`。
+    
+    * 输入相对时间，例如 `2 days ago`、`today at 12am` 或 `an hour ago`。
+
+    * 输入时间范围，例如 `yesterday 10am to yesterday 11am`、`last fri 4:30pm to 11/12 1 AM`、`last wed 4:30pm to 23/05 1 AM` 或 `May 20 10am to May 22 10am`。确保包含 `to` 以分隔初始时间戳记与结束时间戳记。
+
+5. 单击 **ENTER** 键。
+
+    您可能会收到以下错误消息：`请求用时比预期要长，请稍后尝试刷新浏览器，我们将尽快处理请求。请重试。`指定的时间范围内没有任何事件可供显示时，您可能会收到此错误。请更改时间查询，然后重试。
 
 
 
 ## 在上下文中查看事件
-{: #view_events_step3}
+{: #view_events_step4}
 
 您可以随时在上下文中查看每个事件行。
 
@@ -106,9 +118,8 @@ subcollection: logdnaat
 
 
 
-
 ## 将事件复制到剪贴板
-{: #view_events_step4}
+{: #view_events_step5}
 
 
 要将事件复制到剪贴板，请完成以下步骤： 

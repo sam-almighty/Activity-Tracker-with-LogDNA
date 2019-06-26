@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-04-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, event fields
 
@@ -34,9 +34,9 @@ Les événements {{site.data.keyword.at_full_notm}} sont conformes à la norme C
 
 Le tableau suivant répertorie les zones communes disponibles pour un événement {{site.data.keyword.at_full_notm}} :
 
-|Nom de zone | Description |Valeur|
+| Nom de zone | Description | Valeur |
 |------------|-------------|-------|
-| `initiator.id` | ID de l'initiateur de l'action. </br></br>Les types d'initiateur valides sont `IBMID`, `serviceID` et `Cloud Foundry (CF) user ID`. | Exemple d'IBMID : `IBMid-000000XXX2` </br>Exemple d'ID de service : `iam-ServiceId-12345678-0165-4c89-847d-9660b1632e14` </br>Exemple d'ID utilisateur CF : `7666666b-23ae-4a34-8569-cu75tgdr4da3` |
+| `initiator.id` | ID de l'initiateur de l'action. </br></br>Types d'initiateur valides : `IBMID`, `serviceID` et `Cloud Foundry (CF) user ID`. | Exemple d'IBMid : `IBMid-000000XXX2` </br>Exemple d'ID de service : `iam-ServiceId-12345678-0165-4c89-847d-9660b1632e14` </br>Exemple d'ID utilisateur CF : `7666666b-23ae-4a34-8569-cu75tgdr4da3` |
 | `initiator.name` | Nom de l'utilisateur qui a initié l'action. | Par exemple, une adresse e-mail. |
 | `initiator.typeURI` | Type de la source de l'événement. | Les valeurs valides sont *service/security/account/user*, *service/security/clientid* et *service/security/account/serviceid*. |
 | `initiator.credential.type` | Type de données d'identification de l'ID initiateur. | Les valeurs valides sont *user*, *token* et *apikey*. |
@@ -49,9 +49,9 @@ Le tableau suivant répertorie les zones communes disponibles pour un événemen
 
 Le tableau suivant répertorie les zones cible communes disponibles pour un événement {{site.data.keyword.at_full_notm}} :
 
-|Nom de zone | Description |Valeur|
+| Nom de zone | Description | Valeur |
 |------------|-------------|-------|
-| `target.id` | Nom de ressource de cloud (CRN) sur laquelle l'action est exécutée. </br>Pour plus d'informations, voir [Format CRN](/docs/overview?topic=overview-format-crn#format). | Par exemple, `crn:v1:bluemix:public:cloud-object-storage:global:a/12345678e6232019c6567c9123456789:fr56et47-befb-440a-a223c-12345678dae1:bucket:bucket1` |
+| `target.id` | Nom de ressource de cloud (CRN) sur laquelle l'action est exécutée. </br>Pour plus d'informations, voir [Format CRN](/docs/overview?topic=overview-crn#format-crn). | Par exemple, `crn:v1:bluemix:public:cloud-object-storage:global:a/12345678e6232019c6567c9123456789:fr56et47-befb-440a-a223c-12345678dae1:bucket:bucket1` |
 | `target.name` | Nom lisible de la ressource de cloud sur laquelle l'action est exécutée. |  |
 | `target.typeURI` | Type de la ressource de cloud sur laquelle l'action est exécutée. </br>Le format de cette zone est **serviceName/objectType**, où `serviceName` correspond au nom du service. | Par exemple, `iam-am/policy` ou `cloud-object-storage/bucket/acl` |
 {: caption="Tableau 2. Zones cible communes" caption-side="top"} 
@@ -63,7 +63,7 @@ Le tableau suivant répertorie les zones cible communes disponibles pour un év�
 
 Le tableau suivant répertorie les zones d'action communes disponibles pour un événement {{site.data.keyword.at_full_notm}} :
 
-|Nom de zone | Description |Valeur|
+| Nom de zone | Description | Valeur |
 |------------|-------------|-------|
 | `action` | Action qui déclenche l'événement. </br>Le format de cette zone est **serviceName.objectType.action**, où `serviceName` correspond au nom du service. </br>Pour plus d'informations sur les valeurs d'action d'événements générés par un service, voir <a href="/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-cloud_services#cloud_services">Services Cloud</a> | Par exemple, `iam-identity.serviceid-apikey.login` |
 | `eventTime` | Indique la date et l'heure de création de l'événement. </br>La date est représentée en Temps Universel Coordonné (UTC). </br>Le format respecte la norme ISO 8601. | Par exemple, `2017-10-19T19:07:50.32+0000` |
@@ -76,7 +76,7 @@ Le tableau suivant répertorie les zones d'action communes disponibles pour un �
 
 Le tableau suivant répertorie les zones de résultat communes disponibles pour un événement {{site.data.keyword.at_full_notm}} :
 
-|Nom de zone | Description |Valeur|
+| Nom de zone | Description | Valeur |
 |------------|-------------|-------|
 | `outcome` | Résultat de l'action. | Les valeurs valides sont *success*, *failure* et *pending*. |
 | `reason.reasonCode` | Zone numérique qui inclut le code de réponse HTTP. | Par exemple, *200* pour un succès. |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-03"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, provision instance
 
@@ -24,16 +24,16 @@ subcollection: logdnaat
 # Provisionando uma instância
 {: #provision}
 
-Antes que seja possível monitorar e gerenciar dados do evento com o {{site.data.keyword.at_full_notm}}, deve-se primeiro provisionar uma instância do serviço no {{site.data.keyword.cloud_notm}}.
+Antes de poder monitorar e gerenciar dados do evento com o {{site.data.keyword.at_full_notm}}, deve-se provisionar uma instância do serviço no {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
-Para fornecer uma instância do {{site.data.keyword.at_full_notm}} em uma região do Cloud Public, deve-se selecionar o plano de serviço que está associado à instância, a região em que seus logs são coletados e o plano que determina o período de retenção para os logs. É possível escolher entre os períodos de retenção de 7, 14 ou 30 dias.
+Para provisionar uma instância do {{site.data.keyword.at_full_notm}} em uma região de Nuvem pública, considere as informações a seguir:
+* Deve-se selecionar o plano de serviço que está associado à instância, a região na qual os seus logs são coletados e o plano que determina o período de retenção para os seus logs. É possível escolher entre os períodos de retenção de 7, 14 ou 30 dias. Como alternativa, o {{site.data.keyword.at_full_notm}} oferece um plano `Lite` que é possível usar para visualizar seus eventos à medida que eles passam pelo sistema. É possível visualizar eventos usando tailing de eventos. Também é possível projetar filtros para se preparar para fazer upgrade para um plano de período de retenção mais longo. Esse plano tem um período de retenção de 0 dias.
+* O seu ID do usuário deve ter permissões para provisionar um serviço em um grupo de recursos. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups).
 
-Como alternativa, o {{site.data.keyword.at_full_notm}} oferece um plano `Lite` que é possível usar para visualizar seus eventos à medida que eles passam pelo sistema. É possível visualizar eventos usando tailing de eventos. Também é possível projetar filtros para se preparar para fazer upgrade para um plano de período de retenção mais longo. Esse plano tem um período de retenção de 0 dias.
 
-Para fornecer uma instância de serviço, seu ID do usuário deve ter permissões para provisionar um serviço em um grupo de recursos. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam#groups).
-{: tip}
-
+É possível provisionar somente uma instância do serviço por região do {{site.data.keyword.cloud_notm}}.
+{: important}
 
 ## Fornecendo uma instância por meio do painel Observabilidade
 {: #provision_ui}
@@ -50,7 +50,7 @@ Para fornecer uma instância por meio do painel Observabilidade no {{site.data.k
 
 4. Insira um nome para a instância de serviço.
 
-5. Selecione a região na qual você planeja provisionar a instância.
+5. Selecione a [localização](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions) na qual você planeja provisionar a instância. 
 
 6. Selecione um grupo de recursos. 
 
@@ -66,7 +66,7 @@ Para fornecer uma instância por meio do painel Observabilidade no {{site.data.k
 
 Depois de provisionar uma instância, o painel *Activity Tracker* será aberto. 
 
-Em seguida, acesse a UI da web para gerenciar eventos em sua conta. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events.md#view_events.md).
+Em seguida, acesse a IU da web para visualizar os eventos em sua conta. [ Saiba mais ](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events).
 
 
 
@@ -87,17 +87,21 @@ Para provisionar uma instância do {{site.data.keyword.at_full_notm}} por meio d
 
 5. Insira um nome para a instância de serviço.
 
-6. Selecione um grupo de recursos. 
+6. Selecione a localização na qual você planeja provisionar a instância. 
+
+    Para obter a lista mais recente de locais disponíveis para o serviço {{site.data.keyword.at_full_notm}}, consulte [Locais](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
+
+7. Selecione um grupo de recursos. 
 
     Por padrão, o grupo de recursos **Padrão** é configurado.
 
     **Nota:** se você não puder selecionar um grupo de recursos, verifique se tem permissões de edição no grupo de recursos no qual você deseja provisionar a instância.
 
-7. Selecione o plano de serviço `Lite`. 
+8. Selecione o plano de serviço `Lite`. 
 
     Por padrão, o plano Lite é configurado.
 
-8. Clique em **Criar**.
+9. Clique em **Criar**.
 
 Depois de provisionar uma instância, o painel *Activity Tracker* será aberto. 
 
@@ -113,7 +117,9 @@ Para provisionar uma instância do {{site.data.keyword.at_full_notm}} por meio d
 
    Se a CLI estiver instalada, continue com a próxima etapa.
 
-2. Efetue login na região no {{site.data.keyword.cloud_notm}} na qual você deseja provisionar a instância. Execute o comando a seguir: [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+2. Efetue login na localização no {{site.data.keyword.cloud_notm}} na qual você deseja provisionar a instância. Execute o comando a seguir: [`ibmcloud login`](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_login)
+
+    Para obter a lista mais recente de locais disponíveis para o serviço {{site.data.keyword.at_full_notm}}, consulte [Locais](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
 
 3. Configure o grupo de recursos no qual você deseja provisionar a instância. Execute o comando a seguir:  [ ` ibmcloud target ` ](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_target)
 
@@ -134,7 +140,7 @@ Para provisionar uma instância do {{site.data.keyword.at_full_notm}} por meio d
 
     * SERVICE_PLAN_NAME é o tipo de plano. Os valores válidos são *lite*, *7-days*, *14-days* e *30-days*
     
-    * LOCATION é a região em que a instância de LogDNA é criada. Por exemplo, um valor válido é *us-south*
+    * LOCATION é a região em que a instância de LogDNA é criada. Para obter a lista mais recente de locais disponíveis para o serviço {{site.data.keyword.at_full_notm}}, consulte [Locais](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-regions).
 
     
 Por exemplo, para fornecer uma instância com o plano de retenção de 7 dias, execute o comando a seguir:

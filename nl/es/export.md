@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, export
 
@@ -25,37 +25,26 @@ subcollection: logdnaat
 # Exportación de sucesos
 {: #export}
 
-Puede exportar datos en formato JSONL de una instancia de {{site.data.keyword.at_full_notm}} a un archivo local. Puede exportar registros mediante programación o desde la interfaz de usuario web de IBM Log Analysis. 
+Puede exportar datos en formato JSONL de una instancia de {{site.data.keyword.at_full_notm}} a un archivo local. Puede exportar registros mediante programación utilizando la API REST LogDNA o a través de la interfaz de usuario web. 
 {:shortdesc}
-
-Tenga en cuenta la información siguiente al exportar datos de registro:
-* Exporte un conjunto de entradas de sucesos. Para definir el conjunto de datos que desea exportar, puede aplicar filtros y búsquedas. También puede especificar el intervalo de tiempo. 
-* Desde la interfaz de usuario web, al exportar sucesos, recibe un correo electrónico enviado a su dirección de correo electrónico, con un enlace a un archivo comprimido que incluye los datos. Para obtener los datos, debe pulsar en enlace y descargar el archivo comprimido.
-* Al exportar sucesos mediante programación, puede elegir enviar un correo electrónico o transmitir los sucesos a su terminal.
-* El archivo comprimido que contiene los datos que desea exportar está disponible durante un máximo de 48 horas. 
-* El número máximo de líneas que puede exportar es de 10 000.
-
 
 
 ## Requisitos previos
 {: #export_prereqs}
 
-Antes de empezar, compruebe que el ID de usuario tenga permisos para iniciar la interfaz de usuario web y para ver los sucesos. A continuación, [vaya a la interfaz de usuario web](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch).
+* [Obtenga más información sobre cómo exportar sucesos](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-monitor_events#mon_export).
 
-**Nota:** debe ser un administrador del servicio {{site.data.keyword.at_full_notm}} o un administrador de la instancia de {{site.data.keyword.at_full_notm}} o debe tener permisos de IAM de la cuenta para gestionar políticas.
+* **Debe tener un plan de servicio de pago** para el servicio {{site.data.keyword.at_full_notm}}. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
 
-En la tabla siguiente se muestran las políticas mínimas que debe tener un usuario para poder iniciar la interfaz de usuario web de {{site.data.keyword.at_full_notm}} y visualizar sucesos:
+* Compruebe que el ID de usuario tenga permisos para iniciar la interfaz de usuario web y para ver los sucesos. En la tabla siguiente se muestran los roles mínimos que debe tener un usuario para poder iniciar la interfaz de usuario web de {{site.data.keyword.at_full_notm}} y visualizar sucesos:
 
 | Rol                      | Permiso otorgado            |
 |---------------------------|-------------------------------|  
 | Rol de la plataforma: `Visor`     | Permite al usuario ver la lista de instancias de servicio en el panel de control Observabilidad. |
 | Rol de servicio: `Lector`      | Permite que el usuario pueda iniciar la interfaz de usuario web y ver sucesos en la interfaz de usuario web.  |
-{: caption="Tabla 1. Políticas de IAM" caption-side="top"} 
+{: caption="Tabla 1. Roles de IAM" caption-side="top"} 
 
-Para obtener más información sobre cómo configurar estas políticas para un usuario, consulte [Cómo otorgar permisos de usuario a un usuario o ID de servicio](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
-**Debe tener un plan de servicio de pago** para el servicio {{site.data.keyword.at_full_notm}}. [Más información](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
-
+Para obtener más información sobre cómo configurar las políticas para un usuario, consulte [Cómo otorgar permisos de usuario a un usuario o ID de servicio](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
 
 ## Paso 1. Acceder a la interfaz de usuario web
@@ -67,7 +56,7 @@ Para obtener más información sobre cómo configurar estas políticas para un u
 ## Paso 2. Crear una vista
 {: #export_step2}
 
-[Cree una vista](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views.md#views.md).
+[Cree una vista](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views).
 
 
 ## Paso 3. Exportar datos
@@ -99,7 +88,7 @@ Realice los pasos siguientes para exportar sucesos mediante programación:
 
     **Nota:** debe tener el rol **gestor** para el servicio o la instancia de {{site.data.keyword.at_full_notm}} para poder completar este paso.
 
-    1. Inicie la interfaz de usuario web de {{site.data.keyword.at_full_notm}}. Para obtener más información, consulte [Acceder a la interfaz de usuario web de {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
+    1. [Inicie la interfaz de usuario web de {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch_step2).
 
     2. Seleccione el icono **Configuración** ![Icono Configuración](images/admin.png). A continuación, seleccione **Organización**. 
 
@@ -107,9 +96,7 @@ Realice los pasos siguientes para exportar sucesos mediante programación:
 
         Puede ver las claves de servicio que ha creado. 
 
-    4. Pulse **Generar clave de servicio**.
-
-        Se añade una nueva clave a la lista. Copie esta clave.
+    4. Pulse **Generar clave de servicio**. Se añade una nueva clave a la lista. Copie esta clave.
 
 2. Exporte sucesos. Ejecute el siguiente mandato cURL:
 
