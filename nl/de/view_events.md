@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-25"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, view events
 
@@ -23,106 +23,118 @@ subcollection: logdnaat
 
 
 # Ereignisse anzeigen
-{: #view_events.md}
+{: #view_events}
 
-Nachdem Sie eine Instanz des {{site.data.keyword.at_full_notm}}-Service in der {{site.data.keyword.cloud_notm}} bereitgestellt haben, können Sie Ereignisse über die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle anzeigen.
+Nachdem Sie eine Instanz des {{site.data.keyword.at_full_notm}}-Service in der {{site.data.keyword.cloud_notm}} bereitgestellt haben, können Sie Ereignisse über die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle anzeigen. Sie können Ereignisse in Ihrer Ortszeit anzeigen.
 {:shortdesc}
 
 
-## Voraussetzungen
-{: #view_events_prereqs}
-
-Prüfen Sie zunächst, dass Ihre Benutzer-ID über die Berechtigungen zum Starten der Webbenutzerschnittstelle und zum Anzeigen von Ereignissen verfügt.  
-
-**Hinweis:** Sie müssen ein Administrator des {{site.data.keyword.at_full_notm}}-Service sein, ein Administrator der {{site.data.keyword.at_full_notm}}-Instanz sein oder über IAM-Berechtigungen für das Konto verfügen, um Richtlinien verwalten zu können. 
-
-In der folgenden Tabelle sind die mindestens erforderlichen Richtlinien aufgeführt, über die ein Benutzer verfügen muss, um die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle zu starten und um Ereignisse anzuzeigen. 
-
-| Rolle                      | Erteilte Berechtigung            |
-|---------------------------|-------------------------------|  
-| Plattformrolle: `Anzeigeberechtigter`     | Ermöglicht dem Benutzer, die Liste von Serviceinstanzen im Dashboard 'Beobachtbarkeit' anzuzeigen. |
-| Servicerolle: `Leseberechtigter`      | Ermöglicht dem Benutzer, die Webbenutzerschnittstelle zu starten und Ereignisse in der Webbenutzerschnittstelle anzuzeigen.                             |
-{: caption="Tabelle 1. IAM-Richtlinien" caption-side="top"} 
-
-Weitere Informationen zum Konfigurieren dieser Richtlinien für einen Benutzer finden Sie unter [Einem Benutzer oder einer Service-ID Benutzerberechtigungen erteilen](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events). 
-
-
-## Ereignisse über die Webbenutzerschnittstelle anzeigen
+## Ereignisse anzeigen
 {: #view_events_step1}
 
-Führen Sie die folgenden Schritte aus, um die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle zu starten: 
+Führen Sie die folgenden Schritte aus, um Ereignisse anzuzeigen:
 
-1. [Melden Sie sich bei Ihrem {{site.data.keyword.cloud_notm}}-Konto ![Symbol für externen Link](../../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/login){:new_window} an. 
+1. Prüfen Sie, dass Ihre Benutzer-ID über die Berechtigungen zum Starten der Webbenutzerschnittstelle und zum Anzeigen von Ereignissen verfügt. 
 
-	Nachdem Sie sich mit Ihrer Benutzer-ID und Ihrem Kennwort angemeldet haben, wird das {{site.data.keyword.cloud_notm}}*-Dashboard* geöffnet. 
+    In der folgenden Tabelle sind die mindestens erforderlichen Rollen aufgeführt, die ein Benutzer aufweisen muss, um die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle zu starten und um Ereignisse anzuzeigen, zu suchen und zu filtern.
 
-2. Navigieren Sie zum Menüsymbol ![Menüsymbol](../../icons/icon_hamburger.svg) und wählen Sie **Beobachtbarkeit** aus.  
+    <table>
+      <caption>Tabelle 1. IAM-Rollen</caption>
+      <tr>
+        <th>Rolle</th>
+        <th>Erteilte Berechtigung</th>
+      </tr>
+      <tr>
+        <td>Plattformrolle: `Anzeigeberechtigter`</td>
+        <td>Ermöglicht dem Benutzer, die Liste von Serviceinstanzen im Dashboard *Beobachtbarkeit* anzuzeigen.</td>
+      </tr>
+      <tr>
+        <td>Servicerolle: `Leseberechtigter`</td>
+        <td>Ermöglicht dem Benutzer, die Webbenutzerschnittstelle zu starten und Ereignisse in der Webbenutzerschnittstelle anzuzeigen, zu durchsuchen und zu filtern.</td>
+      </tr>
+    </table>
 
-3. Wählen Sie **Activity Tracker** aus.  
+    Weitere Informationen zum Konfigurieren von Richtlinien für einen Benutzer finden Sie unter [Einem Benutzer oder einer Service-ID Benutzerberechtigungen erteilen](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
 
-    Die Liste von {{site.data.keyword.at_full_notm}}-Instanzen wird angezeigt. 
+2. [Zur Webbenutzerschnittstelle wechseln](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)
 
-    **Hinweis:** Es gibt eine Instanz pro Region. 
+3. Klicken Sie auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png).
 
-4. Wählen Sie die Instanz in der Region aus, in der Sie Ereignisse anzeigen möchten. Klicken Sie dann auf **LogDNA anzeigen**. 
+4. Wählen Sie **Alles** aus, um alle Ereignisse anzuzeigen, oder wählen Sie eine Ansicht aus. 
 
-Die {{site.data.keyword.at_full_notm}}-Webbenutzerschnittstelle wird mit der Ansicht **Alles** geöffnet. In dieser Ansicht können Sie die Ereignisse in Ihrem Konto für ausgewählte Region sehen. 
-
-**Hinweis:** Wenn Sie einen Plan `Lite` haben und die gesuchten Ereignisse nicht finden können, müssen Sie unter Umständen auf einen bezahlten Plan upgraden, um auch nach älteren Ereignissen suchen zu können. Die Anzahl der Tage, in denen nach Ereignissen gesucht werden kann, hängt von dem ausgewählten Plan ab. [Weitere Informationen](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-service_plan#service_plan). 
+Sie können Ereignisse über die von Ihnen ausgewählte Ansicht anzeigen.
 
 
-## Standardansicht anpassen
+
+## Teilmenge der Ereignisse durch Anwendungen einer Suchabfrage anzeigen
 {: #view_events_step2}
 
-Im Abschnitt **BENUTZERVORGABEN** können Sie die Reihenfolge der Datenfelder ändern, die in einer Zeile angezeigt werden. 
+Sie können die Ereignisse auswählen, die in einer Ansicht angezeigt werden, indem Sie eine Suchabfrage anwenden. Sie können diese Ansicht für eine spätere Wiederverwendung speichern. [Weitere Informationen](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-views#views_step2).
 
-Führen Sie die folgenden Schritte aus, um das Format einer Ereigniszeile zu ändern: 
+ 
 
-1. Klicken Sie in der Webbenutzerschnittstelle auf das Symbol **Konfiguration** ![Konfigurationssymbol](images/admin.png "Administratorsymbol"). 
-2. Wählen Sie **BENUTZERVORGABEN** aus. Ein neues Fenster wird geöffnet. 
-3. Wählen Sie **Protokollformat** aus. 
-4. Ändern Sie den Abschnitt *Zeilenformat* Ihren Anforderungen entsprechend. Ziehen Sie die Felder. 
 
+## Teilmenge der Ereignisse durch Anwendungen eines Zeitrahmens anzeigen
+{: #view_events_step3}
+
+Sie können die Ereignisse auswählen, die in einer Ansicht angezeigt werden, indem Sie einen Zeitrahmen anwenden.
+
+Sie können eine Zeitmarke anwenden, indem Sie eine absolute Zeit, eine relative Zeit oder einen Zeitbereich angeben.
+
+Führen Sie die folgenden Schritte aus, um zu einer bestimmten Zeit zu wechseln:
+1. [Zur Webbenutzerschnittstelle wechseln](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-launch#launch)
+2. Klicken Sie auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png).
+3. Wählen Sie **Alles** oder eine Ansicht aus.
+4. Geben Sie eine Zeitabfrage ein. Sie haben die Auswahl zwischen den folgenden Optionen:
+
+    * Geben Sie eine absolute Zeit ein, um zu einem Zeitpunkt in Ihren Ereignissen zu wechseln, z. B. `May 20 7:00pm`.
+    
+    * Geben Sie eine relative Zeit ein, beispielsweise `2 days ago`, `today at 12am` oder `an hour ago`. 
+
+    * Geben Sie einen Zeitraum ein, beispielsweise `yesterday 10am to yesterday 11am`, `last fri 4:30pm to 11/12 1 AM`, `last wed 4:30pm to 23/05 1 AM` oder `May 20 10am to May 22 10am`. Stellen Sie sicher, dass die Angabe `to` enthalten ist, um die Anfangszeitmarke von der Endzeitmarke zu trennen. 
+
+5. Drücken Sie die Eingabetaste.
+
+    Möglicherweise wird die folgende Fehlernachricht angezeigt: `Die Anforderung nimmt mehr Zeit in Anspruch als erwartet. Warten Sie einige Minuten, während die Anforderung weiter verarbeitet wird, und aktualisieren Sie dann den Browser. Wiederholen Sie den Vorgang. ` Dieser Fehler wird möglicherweise ausgegeben, wenn für den von Ihnen angegebenen Zeitrahmen keine anzuzeigenden Ereignisse verfügbar sind. Ändern Sie die Zeitabfrage und wiederholen Sie den Vorgang.
 
 
 
 ## Ereignis im Kontext anzeigen
-{: #view_events_step3}
+{: #view_events_step4}
 
-Sie können die Ereigniszeilen jederzeit im Kontext anzeigen. 
+Sie können die Ereigniszeilen jederzeit im Kontext anzeigen.
 
-Führen Sie die folgenden Schritte aus:  
+Führen Sie die folgenden Schritte aus: 
 
-1. Klicken Sie in der Webbenutzerschnittstelle auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png "Konfigurationssymbol"). 
-2. Wählen Sie **Alles** oder eine angepasste Ansicht aus. 
-3. Geben Sie eine Zeile an, die Sie untersuchen möchten. 
-4. Erweitern Sie die Ereigniszeile.  
+1. Klicken Sie in der Webbenutzerschnittstelle auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png "Konfigurationssymbol").
+2. Wählen Sie **Alles** oder eine angepasste Ansicht aus.
+3. Geben Sie eine Zeile an, die Sie untersuchen möchten.
+4. Erweitern Sie die Ereigniszeile. 
 
-    Informationen zu Zeilenkennungen, Tags und Bezeichnungen werden angezeigt. 
+    Informationen zu Zeilenkennungen, Tags und Bezeichnungen werden angezeigt.
 
-5. Klicken Sie auf **In Kontext anzeigen**, um die Ereigniszeile im Kontext anderer Einträge von diesem Host, dieser App oder beiden anzuzeigen. 
+5. Klicken Sie auf **In Kontext anzeigen**, um die Ereigniszeile im Kontext anderer Einträge von diesem Host, dieser App oder beiden anzuzeigen.
 
-Wenn Sie das Ereignis abschließend untersucht haben, klicken Sie auf **Schließen**, um die Zeile zu schließen. 
-
+Wenn Sie das Ereignis abschließend untersucht haben, klicken Sie auf **Schließen**, um die Zeile zu schließen.
 
 
 
 ## Ereignis in Zwischenablage kopieren
-{: #view_events_step4}
+{: #view_events_step5}
 
 
-Führen Sie die folgenden Schritte aus, um ein Ereignis in die Zwischenablage zu kopieren:  
+Führen Sie die folgenden Schritte aus, um ein Ereignis in die Zwischenablage zu kopieren: 
 
-1. Klicken Sie in der Webbenutzerschnittstelle auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png "Konfigurationssymbol"). 
-2. Wählen Sie **Alles** oder eine angepasste Ansicht aus. 
-3. Geben Sie eine Zeile an, die Sie untersuchen möchten. 
-4. Erweitern Sie die Ereigniszeile.  
+1. Klicken Sie in der Webbenutzerschnittstelle auf das Symbol **Ansichten** ![Konfigurationssymbol](images/views.png "Konfigurationssymbol").
+2. Wählen Sie **Alles** oder eine angepasste Ansicht aus.
+3. Geben Sie eine Zeile an, die Sie untersuchen möchten.
+4. Erweitern Sie die Ereigniszeile. 
 
-    Informationen zu Zeilenkennungen, Tags und Bezeichnungen werden angezeigt. 
+    Informationen zu Zeilenkennungen, Tags und Bezeichnungen werden angezeigt.
 
-5. Klicken Sie auf **In Zwischenablage kopieren**, um das Ereignis in die Zwischenablage zu kopieren. 
+5. Klicken Sie auf **In Zwischenablage kopieren**, um das Ereignis in die Zwischenablage zu kopieren.
 
-Wenn Sie das Ereignis abschließend untersucht haben, klicken Sie auf **Schließen**, um die Zeile zu schließen. 
+Wenn Sie das Ereignis abschließend untersucht haben, klicken Sie auf **Schließen**, um die Zeile zu schließen.
 
 
 

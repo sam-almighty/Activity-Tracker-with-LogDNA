@@ -35,20 +35,20 @@ Sie haben für eine {{site.data.keyword.at_full_notm}}-Instanz die Wahl zwischen
 | `Lite`                  |
 {: caption="Tabelle 1. Liste von Serviceplänen" caption-side="top"} 
 
-{{site.data.keyword.at_full_notm}} bietet einen Plan `Lite` an, den Sie zum Anzeigen Ihrer Ereignisse auf ihrem Weg durch das System verwenden können. Sie können Protokolle mithilfe von Protokoll-Tailing anzeigen. Sie können außerdem Filter zur Vorbereitung von Upgrades auf einen Plan mit längeren Aufbewahrungszeiträumen konzipieren. Dieser Plan hat einen Aufbewahrungsdauer von 0 Tagen. 
+{{site.data.keyword.at_full_notm}} bietet einen Plan `Lite` an, den Sie zum Anzeigen Ihrer Ereignisse auf ihrem Weg durch das System verwenden können. Sie können Protokolle mithilfe von Protokoll-Tailing anzeigen. Sie können außerdem Filter zur Vorbereitung von Upgrades auf einen Plan mit längeren Aufbewahrungszeiträumen konzipieren. Dieser Plan hat einen Aufbewahrungsdauer von 0 Tagen.
 
 
 ## Features nach Plan
 {: #svcplan_features}
 
-In der folgenden Tabelle sind die verschiedenen Features ausgeführt, die in den einzelnen Plänen enthalten sind: 
+In der folgenden Tabelle sind die verschiedenen Features ausgeführt, die in den einzelnen Plänen enthalten sind:
 
-| Feature                          | Plan `30 Tage Protokollsuche` | Plan `14 Tage Protokollsuche`   | Plan `7 Tage Protokollsuche     | `Plan 'Lite' | 
+| Feature                          | Plan `30 Tage Protokollsuche` | Plan `14 Tage Protokollsuche`    | Plan `7 Tage Protokollsuche     | `Plan 'Lite' | 
 |----------------------------------|-------------------------|-------------------------------|-----------------------------|--------------|
-| `Protokolle werden gespeichert und sind durchsuchbar` | Ja - für 30 Tage       | Ja - für 14 Tage       | Ja - für 7 Tage       | Nein           |
-| `Live-Streaming-Tail`            | Ja                     | Ja                     | Ja                     | Ja                     |
-| `Archivierung`                      | Ja                     | Ja                     | Ja                     | Nein           |
-| `Mehrkanal-Alerting`         | Ja                     | Ja                     | Ja                     | Nein           | 
+| `Protokolle werden gespeichert und sind durchsuchbar` | Ja - für 30 Tage       | Ja - für 14 Tage             | Ja - für 7 Tage            | Nein           |
+| `Live-Streaming-Tail`            | Ja                     | Ja                           | Ja                         | Ja          |
+| `Archivierung`                      | Ja                     | Ja                           | Ja                         | Nein           |
+| `Mehrkanal-Alerting`         | Ja                     | Ja                           | Ja                         | Nein           | 
 {: caption="Tabelle 2. Liste von Features, die in den einzelnen Serviceplänen verfügbar sind" caption-side="top"} 
 
 
