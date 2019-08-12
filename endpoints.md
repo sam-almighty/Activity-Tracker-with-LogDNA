@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-07-17"
+lastupdated: "2019-08-12"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, endpoints
 
@@ -24,14 +24,25 @@ subcollection: logdnaat
 # Endpoints
 {: #endpoints}
 
-The following table lists the endpoints per region:
+The following table lists the endpoints per region for the {{site.data.keyword.at_full}} service:
 {:shortdesc}
 
 
-| Region                | Endpoint                                          |
-|-----------------------|---------------------------------------------------|
-| `Dallas (us-south)`   | `https://api.us-south.logging.cloud.ibm.com`      |
-| `Frankfurt (eu-de)`   | `https://api.eu-de.logging.cloud.ibm.com`         |
-| `London (eu-gb)`      | `https://api.eu-gb.logging.cloud.ibm.com`         |
-| `Tokyo (jp-tok)`      | `https://api.jp-tok.logging.cloud.ibm.com`        |
-{: caption="Endpoints per region" caption-side="top"} 
+## API endpoints
+{: #endpoints_api}
+
+The following table shows the API endpoints:
+
+| Region                   |  Public Endpoint                                   |
+|--------------------------|----------------------------------------------------|
+| `Dallas (us-south)`      | `https://api.us-south.logging.cloud.ibm.com`       |
+| `Frankfurt (eu-de)`      | `https://api.eu-de.logging.cloud.ibm.com`          |
+| `London (eu-gb)`         | `https://api.eu-gb.logging.cloud.ibm.com`          |
+| `Tokyo (jp-tok)`         | `https://api.jp-tok.logging.cloud.ibm.com`         |
+{: caption="Table 1. Lists of public API endpoints for interacting with {{site.data.keyword.at_full_notm}} over {{site.data.keyword.cloud_notm}}'s public network" caption-side="top"}
+
+
+
+
+
+
