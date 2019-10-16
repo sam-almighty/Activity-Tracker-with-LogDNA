@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-08-12"
+lastupdated: "2019-09-27"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, regions
 subcollection: logdnaat
@@ -27,17 +27,22 @@ subcollection: logdnaat
 {:shortdesc}
 
 
-![The image shows the locations where the {{site.data.keyword.at_full_notm}} service is available.](images/world-map_min.svg)
+![The image shows the locations where the {{site.data.keyword.at_full_notm}} service is available.](images/world-map_min.png)
 {: caption="Figure 1. Displays the regions where you can create and manage {{site.data.keyword.at_full_notm}} resources." caption-side="bottom"}
 
 
-| Geography             | Region                  | `EU-Supported` |
-|-----------------------|-------------------------|----------------|
-| `Asia Pacific`        | `Tokyo (jp-tok)`        | `N/A`          |
-| `Europe`              | `Frankfurt (eu-de) (*)` | `YES`          |
-| `Europe`              | `London (eu-gb)`        | `NO`           |
-| `North America`       | `Dallas (us-south)`     | `N/A`          |
-{: caption="Table 1. List of locations where the service is available" caption-side="top"} 
+
+| Geography             | Region                   | EU-Supported | HA Status |
+|-----------------------|--------------------------|--------------|-----------|
+| `Asia Pacific`        | `Tokyo (jp-tok)`         | `N/A`        | `MZR`     |
+| `Asia Pacific`        | `Seoul (kr-seo)`         | `N/A`        | `SZR`     |
+| `Europe`              | `Frankfurt (eu-de) (*)`  | `YES`        | `MZR`     |
+| `Europe`              | `London (eu-gb)`         | `NO`         | `MZR`     |
+| `North America`       | `Dallas (us-south)`      | `N/A`        | `MZR`     |
+| `Sydney`              | `Sydney (au-syd)`        | `N/A`        | `MZR`     |
+{: caption="Table 1. List of locations where the service is available" caption-side="top"} {: #end-api-table-1}
+
+
 
 Where
 * A *geography* is a geographic area or larger political body that contains one or more regions.
