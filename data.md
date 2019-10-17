@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-16"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, data
 
