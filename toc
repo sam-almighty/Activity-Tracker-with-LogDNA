@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="logdnaat" audience="service" arm="4379776" href="/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started" path="services/Activity-Tracker-with-LogDNA"}
+{: .toc subcollection="logdnaat" audience="service" category="dev_ops" arm="4379776" href="/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started" path="services/Activity-Tracker-with-LogDNA"}
 IBM Cloud Activity Tracker with LogDNA
 
     {: .navgroup id="learn"}
@@ -63,6 +63,7 @@ IBM Cloud Activity Tracker with LogDNA
         at_events_rc.md
 
     [LogDNA Product Page](https://logdna.com/)
+    [LogDNA Documentation](https://docs.logdna.com/docs)
     [LogDNA Blog](https://blog.logdna.com/)
     {: .navgroup-end}
 
