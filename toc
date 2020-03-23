@@ -6,18 +6,30 @@ IBM Cloud Activity Tracker with LogDNA
 
     {: .navgroup id="learn"}
     getting-started.md
-    cloud_services.md
-    event.md
     data.md
-    iam.md
-    monitor_events.md
-    manage_events.md
-    iam_manage_login.md
 
     {: .topicgroup}
-    Compliance
+    Cloud services
+        cloud_services.md
+        cloud_services_locations.md
+
+    {: .topicgroup}
+    Events
+        event.md
+        event_types.md
+        manage_events.md
         manage_eu_acc.md
 
+    {: .topicgroup}
+    Security and compliance
+        adoption.md
+        iam.md
+
+    {: .topicgroup}
+    Monitoring activity
+        monitor_events.md
+        iam_manage_login.md
+        
     {: .topicgroup}
     Tutorials
         tutorial_iam_apikeys.md
