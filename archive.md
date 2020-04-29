@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-04-27"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, archive logs, COS, cloud object storage
 
@@ -28,6 +28,8 @@ subcollection: logdnaat
 You can archive events from an {{site.data.keyword.at_full_notm}} instance into a bucket in an {{site.data.keyword.cos_full_notm}} (COS) instance. 
 {:shortdesc}
 
+
+
 Complete the following steps to archive an {{site.data.keyword.at_full_notm}} instance into a bucket in an {{site.data.keyword.cos_full_notm}} instance:
 
 ## Prerequisites
@@ -46,7 +48,6 @@ Complete the following steps to archive an {{site.data.keyword.at_full_notm}} in
 {: caption="Table 1. IAM roles" caption-side="top"} 
 
 For more information on how to configure policies for a user, see [Granting user permissions to a user or service ID](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-iam_view_events#iam_view_events).
-
 
 
 ## Step 1. Grant IAM policies to a user to work with {{site.data.keyword.cos_full_notm}}
@@ -75,10 +76,7 @@ The following table lists the roles that a user can have to complete the actions
 
 Complete the following steps to assign a user administrator role to the {{site.data.keyword.cos_full_notm}} service within the context of a resource group: 
 
-1. [Log in to your {{site.data.keyword.cloud_notm}} account ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/login){:new_window}.
-
-	After you log in with your user ID and password, the {{site.data.keyword.cloud_notm}} UI opens.
-    
+1. [Log in to your {{site.data.keyword.cloud_notm}} account ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/login){:new_window}.    
 2. From the menu bar, click **Manage** &gt; **Access (IAM)**, and then select **Users**.
 3. From the row for the user that you want to assign access, select the **Actions** menu, and then click **Assign access**.
 4. Select **Assign access within a resource group**.
@@ -146,6 +144,8 @@ Complete the following steps to create a bucket:
 
 3. Select **Buckets**. Then, click **Create Bucket**.
 
+    If you are configuring **archiving in an EU-managed location**, you must configure a bucket that complies with the EU-managed and GDPR regulations.
+
 4. Enter a bucket name for the *Unique bucket name* field.
 
     **Note:** All buckets in all regions across the globe share a single namespace. 
@@ -186,7 +186,7 @@ A service ID identifies a service similar to how a user ID identifies a user. Se
 
 You must create a service ID for your {{site.data.keyword.cos_full_notm}} instance. This service ID is used by the {{site.data.keyword.at_full_notm}} instance to authenticate with your {{site.data.keyword.cos_full_notm}} instance. 
 
-You must assign specific access policies to the service ID that restrict permissions for using specific services, or even combine permissions for accessing different services. For example, to restrict access to a single bucket, ensure that the service ID doesn't have any instance level policies using either the console or CLI.
+You must assign specific access policies to the service ID that restrict permissions for using specific services, or even combine permissions for accessing different services. 
 
 
 Complete the following steps to create a service ID with writing permissions for the {{site.data.keyword.cos_full_notm}} instance:
@@ -197,7 +197,7 @@ Complete the following steps to create a service ID with writing permissions for
 
 3. Enter a name that it is easy to recognize. For example, you can name the service ID `activity-tracker-cos-serviceID`. 
 
-4. Select the **Writer** role.
+4. Select the **Reader** role.
 
 5. Click **Add**.
 
@@ -280,7 +280,7 @@ Complete the following steps to assign a user permission to archive events:
     
     You can select **No access**, if you want the user to only have access to the {{site.data.keyword.at_full_notm}} service in the resource group.
 
-6. Select **IBM Log Analysis with LogDNA**.
+6. Select **{{site.data.keyword.at_full_notm}}**.
 7. Select the platform role **Viewer**.
 8. Select the service role **Manager**.
 9. Click **Assign**.
@@ -330,5 +330,7 @@ Complete the following steps to configure archiving of your {{site.data.keyword.
 
 After you save the configuration, events are archived once a day.
 
+Notice that when you save the configuration, you can get a message that informs you that the configuration has been saved successfully. When you get this message, the integration between the LogDNA instance and the bucket is verified. A test to upload and delete an object from the bucket is completed successfully. 
 
+If you get an error when you save the configuration, the verification process fails. Check your configuration and retry again. 
 
