@@ -2,7 +2,7 @@
 
 copyright:
   years: 2019, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-04-28"
 
 keywords: IBM Cloud, LogDNA, Activity Tracker, iam, manage user access, viewer
 
@@ -136,7 +136,7 @@ You can only provision 1 instance per location. Therefore, to grant permissions 
 6. Click **Assign**.
 
 
-## Step 3. Add a user to the access group
+## Step 3. Add users and service IDs to the access group
 {: #iam_view_events_step3}
 
 Continue to set up your group by adding users or service IDs.
