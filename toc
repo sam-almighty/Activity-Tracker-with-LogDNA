@@ -6,7 +6,6 @@ IBM Cloud Activity Tracker with LogDNA
 
     {: .navgroup id="learn"}
     getting-started.md
-    data.md
 
     {: .topicgroup}
     Cloud services
@@ -23,7 +22,6 @@ IBM Cloud Activity Tracker with LogDNA
     {: .topicgroup}
     Security and compliance
         adoption.md
-        iam.md
 
     {: .topicgroup}
     Monitoring activity
@@ -60,6 +58,13 @@ IBM Cloud Activity Tracker with LogDNA
     {: .topicgroup}
     Export logs
         export.md
+
+    {: .topicgroup}
+    Enhancing security for IBM Cloud Activity Tracker with LogDNA
+        data-security.md
+        iam.md
+        service-connection.md
+        architecture-workload-isolation.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
